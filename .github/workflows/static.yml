@@ -47,8 +47,12 @@ jobs:
           # Remplacer v=2.0 par v=$VERSION dans index.html
           sed -i "s/v=2\.0/v=$VERSION/g" index.html
           
-          # Remplacer CACHE_VERSION = 'v2.0' par CACHE_VERSION = 'v$VERSION' dans service-worker.js
-          sed -i "s/CACHE_VERSION = 'v2\.0'/CACHE_VERSION = 'v$VERSION'/g" service-worker.js
+          # Remplacer CACHE_VERSION = 'v2.0' par CACHE_VERSION = 'v$VERSION' dans service-worker.js (si présent)
+          if [ -f service-worker.js ]; then
+            sed -i "s/CACHE_VERSION = 'v2\.0'/CACHE_VERSION = 'v$VERSION'/g" service-worker.js
+          else
+            echo "ℹ️ service-worker.js introuvable, étape ignorée"
+          fi
           
           echo "✅ Version numbers updated to: $VERSION"
           
