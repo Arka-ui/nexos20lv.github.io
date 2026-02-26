@@ -296,7 +296,13 @@ body.modal-open * {
     .carousel-track { grid-template-columns: 1fr; }
     .carousel-item { min-height: 320px; }
     .carousel-item.active { transform: none !important; }
-    .discord-card { bottom: 1rem; left: 1rem; }
+    .discord-card {
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        width: auto;
+        max-width: none;
+    }
     
     /* Mobile Modal Tweaks */
     .modal-content {
@@ -730,7 +736,106 @@ footer {
     * { cursor: auto !important; }
     .card-3d { transform: none !important; }
     
+    .container { padding: 0 1.25rem; }
+    header { padding: 1.1rem 0; }
+    header.scrolled { padding: 0.8rem 0; }
     .logo { font-size: 1.2rem; }
-    .nav-links { display: none; } /* Hide nav on mobile for simplicity */
-    .nav-right { margin-left: auto; }
+    nav {
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+    .nav-right {
+        margin-left: auto;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+    }
+    .nav-links {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .nav-links a {
+        font-size: 0.72rem;
+        letter-spacing: 1.2px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 8.5rem 0 4rem;
+        align-items: flex-start;
+    }
+    .hero-content { padding: 0 1.25rem; }
+    h1 {
+        font-size: clamp(2.1rem, 11vw, 3.2rem);
+        margin-bottom: 1.1rem;
+    }
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    .cta-group {
+        flex-direction: column;
+        gap: 0.8rem;
+        width: 100%;
+    }
+    .cta-group .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .skill-word { font-size: 2.2rem; }
+    .track { gap: 2rem; }
+
+    .section {
+        padding: 5rem 0;
+    }
+    .section-header {
+        margin-bottom: 2rem;
+    }
+    .section-title { font-size: 2rem; }
+    .project-title { font-size: 1.45rem; }
+
+    .big-text {
+        font-size: 1.2rem;
+        line-height: 1.7;
+    }
+
+    .glass-panel { padding: 1.25rem; }
+
+    .footer-cta {
+        padding: 6rem 0 3rem;
+    }
+    .email-display {
+        font-size: clamp(1.2rem, 7vw, 2rem);
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 600px) {
+    .container { padding: 0 1rem; }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-right {
+        width: 100%;
+        align-items: flex-start;
+    }
+    .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 0.8rem;
+    }
+    .lang-switch {
+        align-self: flex-start;
+    }
+
+    .btn {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.95rem;
+    }
 }
