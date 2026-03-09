@@ -62,6 +62,11 @@ jobs:
           if [ -n "${{ secrets.DISCORD_WEBHOOK }}" ]; then
             sed -i "s|{{DISCORD_WEBHOOK}}|${{ secrets.DISCORD_WEBHOOK }}|g" js/config.js
             echo "✅ Discord Webhook injected"
+            # Debug: Check if replacement happened (without showing secret)
+            if grep -q "{{DISCORD_WEBHOOK}}" js/config.js; then
+              echo "❌ ERROR: Placeholder {{DISCORD_WEBHOOK}} still exists in js/config.js"
+              exit 1
+            fi
           else
             echo "⚠️ DISCORD_WEBHOOK secret not found, skipping injection"
           fi
