@@ -299,32 +299,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 3. Parse Availability Sync (Manual or External JSON)
-        const updateHeroFromJSON = async () => {
-             const heroTag = document.getElementById('hero-availability');
-             if (!heroTag) return;
-
-             try {
-                 // Fetch status.json (add timestamp to bypass cache)
-                 const res = await fetch(`js/status.json?t=${Date.now()}`);
-                 const data = await res.json();
-                 
-                 if (data.activeProjects > 0) {
-                     heroTag.textContent = t('hero.status.busy').replace('{count}', data.activeProjects);
-                 } else {
-                     heroTag.textContent = t('hero.status.available');
-                 }
-             } catch (e) {
-                 // Fallback to i18n manual config
-                 const config = i18n.config;
-                 if (config.activeProjects > 0) {
-                     heroTag.textContent = t('hero.status.busy').replace('{count}', config.activeProjects);
-                 } else {
-                     heroTag.textContent = t('hero.status.available');
-                 }
-             }
-        };
-
         updateHeroFromJSON();
+    }
+
+    // Availability sync logic (Exported to run on init and on presence update)
+    async function updateHeroFromJSON() {
+        const heroTag = document.getElementById('hero-availability');
+        if (!heroTag) return;
+
+        try {
+            const res = await fetch(`js/status.json?t=${Date.now()}`);
+            const data = await res.json();
+            
+            if (data.isAvailable === false) {
+                if (data.activeProjects > 0) {
+                    heroTag.textContent = t('hero.status.busy').replace('{count}', data.activeProjects);
+                } else {
+                    heroTag.textContent = t('hero.status.busy_general');
+                }
+            } else {
+                if (data.activeProjects > 0) {
+                    heroTag.textContent = t('hero.status.available_busy').replace('{count}', data.activeProjects);
+                } else {
+                    heroTag.textContent = t('hero.status.available');
+                }
+            }
+        } catch (e) {
+            // Fallback to i18n manual config
+            const config = i18n.config;
+            if (config.isAvailable === false) {
+                if (config.activeProjects > 0) {
+                    heroTag.textContent = t('hero.status.busy').replace('{count}', config.activeProjects);
+                } else {
+                    heroTag.textContent = t('hero.status.busy_general');
+                }
+            } else {
+                if (config.activeProjects > 0) {
+                    heroTag.textContent = t('hero.status.available_busy').replace('{count}', config.activeProjects);
+                } else {
+                    heroTag.textContent = t('hero.status.available');
+                }
+            }
+        }
     }
 
     function renderSpotify(spotify) {
@@ -779,4 +795,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     console.log("System Initialized: Ultra Modern Portfolio V3");
+    
+    // Initial fetch of availability
+    updateHeroFromJSON();
 });

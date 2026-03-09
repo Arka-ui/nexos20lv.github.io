@@ -24,7 +24,9 @@ export const i18n = {
             cta: { projects: 'Voir les projets', contact: 'Me contacter' },
             status: {
                 available: ' Disponible pour des projets',
-                busy: ' Travaille sur {count} projets actifs',
+                available_busy: ' Disponible ({count} projets en cours)',
+                busy: ' Occupé sur {count} projets',
+                busy_general: ' Actuellement occupé sur des projets',
                 loading: ' Synchronisation du statut...'
             }
         },
@@ -238,7 +240,9 @@ export const i18n = {
             cta: { projects: 'View projects', contact: 'Contact me' },
             status: {
                 available: ' Available for projects',
-                busy: ' Working on {count} active projects',
+                available_busy: ' Available ({count} projects going on)',
+                busy: ' Busy on {count} projects',
+                busy_general: ' Currently busy on projects',
                 loading: ' Synchronizing status...'
             }
         },
