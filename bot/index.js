@@ -20,13 +20,16 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', async (message) => {
-    // Only listen to the target channel and ignore bots
-    if (message.channelId !== process.env.DISCORD_STATUS_CHANNEL_ID || message.author.bot) return;
+    // 1. Safety Checks: Only listen to the target channel, ignore bots, and VERIFY AUTHOR
+    const isTargetChannel = message.channelId === process.env.DISCORD_STATUS_CHANNEL_ID;
+    const isAllowedUser = message.author.id === process.env.ALLOWED_USER_ID;
+
+    if (!isTargetChannel || message.author.bot || !isAllowedUser) return;
 
     const content = message.content.toLowerCase();
 
     try {
-        // 1. Fetch current state to handle partial updates
+        // 2. Fetch current state to handle partial updates
         const { data: currentStatus } = await supabase
             .from('portfolio_status')
             .select('*')
@@ -36,10 +39,12 @@ client.on('messageCreate', async (message) => {
         let activeProjects = currentStatus ? currentStatus.active_projects : 0;
         let isAvailable = currentStatus ? currentStatus.is_available : true;
 
-        // 2. Parse content for changes
-        const projectsMatch = content.match(/[0-9]+/);
+        // 3. Parse content for changes
+        // Use a more specific regex to avoid accidental matches
+        const projectsMatch = content.match(/\b([0-9]+)\b/);
         if (projectsMatch) {
-            activeProjects = parseInt(projectsMatch[0]);
+            const parsed = parseInt(projectsMatch[1]);
+            if (!isNaN(parsed)) activeProjects = parsed;
         }
 
         if (content.includes('indisponible') || content.includes('busy') || content.includes('occupé') || content.includes('full') || content.includes('indispo')) {
@@ -50,7 +55,7 @@ client.on('messageCreate', async (message) => {
 
         console.log(`📝 Updating status: ${activeProjects} projects, Available: ${isAvailable}`);
 
-        // 3. Upsert to Supabase
+        // 4. Upsert to Supabase
         const { error } = await supabase
             .from('portfolio_status')
             .upsert({

@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.querySelectorAll('[data-i18n-html]').forEach((element) => {
-            element.innerHTML = t(element.dataset.i18nHtml);
+            const raw = t(element.dataset.i18nHtml);
+            // Basic sanitization for trusted but dynamic content
+            element.innerHTML = raw.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gim, "");
         });
 
         document.querySelectorAll('[data-i18n-content]').forEach((element) => {
@@ -359,7 +361,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        heroTag.innerHTML = `${icon} ${text}`;
+        const span = document.createElement('span');
+        span.textContent = text;
+        heroTag.innerHTML = '';
+        heroTag.insertAdjacentHTML('afterbegin', icon);
+        heroTag.appendChild(span);
     }
 
     // Availability sync logic (Old logic replaced by Supabase)
@@ -414,19 +420,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const current = Date.now() - spotify.timestamps.start;
         const progress = Math.min((current / total) * 100, 100);
 
-        activityContainer.innerHTML = `
-            <div class="activity-row">
-                <img src="${spotify.album_art_url}" class="activity-icon" alt="Album Art">
-                <div class="activity-info">
-                    <span class="act-name">${t('discord.listening')}</span>
-                    <span class="act-details" style="color:#1db954; font-weight:600">${spotify.song}</span>
-                    <span class="act-state">${t('discord.by')} ${spotify.artist}</span>
-                    <div class="spotify-bar">
-                        <div class="spotify-progress" style="width: ${progress}%"></div>
-                    </div>
-                </div>
-            </div>
-        `;
+        const activityRow = document.createElement('div');
+        activityRow.className = 'activity-row';
+
+        const img = document.createElement('img');
+        img.src = spotify.album_art_url;
+        img.className = 'activity-icon';
+        img.alt = 'Album Art';
+
+        const info = document.createElement('div');
+        info.className = 'activity-info';
+
+        const name = document.createElement('span');
+        name.className = 'act-name';
+        name.textContent = t('discord.listening');
+
+        const details = document.createElement('span');
+        details.className = 'act-details';
+        details.style.color = '#1db954';
+        details.style.fontWeight = '600';
+        details.textContent = spotify.song;
+
+        const state = document.createElement('span');
+        state.className = 'act-state';
+        state.textContent = `${t('discord.by')} ${spotify.artist}`;
+
+        const bar = document.createElement('div');
+        bar.className = 'spotify-bar';
+        const progressEl = document.createElement('div');
+        progressEl.className = 'spotify-progress';
+        progressEl.style.width = `${progress}%`;
+        bar.appendChild(progressEl);
+
+        info.append(name, details, state, bar);
+        activityRow.append(img, info);
+
+        activityContainer.innerHTML = '';
+        activityContainer.appendChild(activityRow);
     }
 
     function renderGame(game) {
@@ -440,24 +470,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        activityContainer.innerHTML = `
-             <div class="activity-row">
-                <img src="${iconUrl}" class="activity-icon" alt="Game Icon">
-                <div class="activity-info">
-                    <span class="act-name">${game.name}</span>
-                    <span class="act-details">${game.details || t('discord.playing')}</span>
-                    <span class="act-state">${game.state || ''}</span>
-                </div>
-            </div>
-        `;
+        const activityRow = document.createElement('div');
+        activityRow.className = 'activity-row';
+
+        const img = document.createElement('img');
+        img.src = iconUrl;
+        img.className = 'activity-icon';
+        img.alt = 'Game Icon';
+
+        const info = document.createElement('div');
+        info.className = 'activity-info';
+
+        const name = document.createElement('span');
+        name.className = 'act-name';
+        name.textContent = game.name;
+
+        const details = document.createElement('span');
+        details.className = 'act-details';
+        details.textContent = game.details || t('discord.playing');
+
+        const state = document.createElement('span');
+        state.className = 'act-state';
+        state.textContent = game.state || '';
+
+        info.append(name, details, state);
+        activityRow.append(img, info);
+
+        activityContainer.innerHTML = '';
+        activityContainer.appendChild(activityRow);
     }
 
     function renderIdle() {
-        activityContainer.innerHTML = `
-             <div class="activity-placeholder mono" style="font-size:0.8rem; opacity:0.7">
-                     <span style="color:var(--primary)">></span> ${t('discord.awaitingInput')}
-             </div>
-        `;
+        activityContainer.innerHTML = '';
+        const placeholder = document.createElement('div');
+        placeholder.className = 'activity-placeholder mono';
+        placeholder.style.fontSize = '0.8rem';
+        placeholder.style.opacity = '0.7';
+
+        const prompt = document.createElement('span');
+        prompt.style.color = 'var(--primary)';
+        prompt.textContent = '> ';
+
+        placeholder.appendChild(prompt);
+        placeholder.append(t('discord.awaitingInput'));
+
+        activityContainer.appendChild(placeholder);
     }
 
     // Start WebSocket
