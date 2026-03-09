@@ -69,28 +69,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const loader = document.getElementById('loader');
         const logsContainer = document.getElementById('loader-logs');
         const progressBar = document.querySelector('.loader-bar');
-        
+
         if (!loader || !logsContainer || !progressBar) return;
 
         const logKeys = ['kernel', 'mem', 'network', 'mesh', 'experience', 'projects', 'supabase', 'database', 'i18n', 'ready'];
         const totalLogs = logKeys.length;
-        
+
         // Initial delay
         await new Promise(r => setTimeout(r, 400));
 
         for (let i = 0; i < totalLogs; i++) {
             const key = logKeys[i];
             const logContent = t(`loader.${key}`);
-            
+
             const line = document.createElement('div');
             line.className = 'terminal-line';
             line.textContent = logContent;
             logsContainer.appendChild(line);
-            
+
             // Update bar
             const progress = ((i + 1) / totalLogs) * 100;
             progressBar.style.width = `${progress}%`;
-            
+
             // Random processing delay
             await new Promise(r => setTimeout(r, 300 + Math.random() * 300));
         }
@@ -134,17 +134,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let mx = 0, my = 0, rx = 0, ry = 0;
 
     if (dot && ring && window.matchMedia("(pointer: fine)").matches) {
-        document.addEventListener('mousemove', e => { 
-            mx = e.clientX; 
-            my = e.clientY; 
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX;
+            my = e.clientY;
         });
 
         function animCursor() {
-            dot.style.left = mx + 'px'; 
+            dot.style.left = mx + 'px';
             dot.style.top = my + 'px';
-            rx += (mx - rx) * 0.12; 
+            rx += (mx - rx) * 0.12;
             ry += (my - ry) * 0.12;
-            ring.style.left = rx + 'px'; 
+            ring.style.left = rx + 'px';
             ring.style.top = ry + 'px';
             requestAnimationFrame(animCursor);
         }
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     const reveals = document.querySelectorAll('.reveal');
-    
+
     // Intersection Observer for Reveals
     const revealObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updatePresence(data) {
         // Handle sync vs update structure
-        const presence = data.activities ? data : data; 
+        const presence = data.activities ? data : data;
 
         // 1. Update Avatar & Indicator
         if (presence.discord_user) {
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Global Status Text & Color
         const status = presence.discord_status || 'offline';
         lastDiscordStatus = status;
-        
+
         if (statusIndicator) {
             statusIndicator.style.backgroundColor = colors[status] || colors.offline;
             statusIndicator.style.boxShadow = `0 0 10px ${colors[status] || colors.offline}`;
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 text = t('hero.status.available');
             }
         }
-        
+
         heroTag.innerHTML = `${icon} ${text}`;
     }
 
@@ -366,43 +366,43 @@ document.addEventListener('DOMContentLoaded', () => {
     async function updateHeroFromJSON() {
         // We now keep this as a fallback if Supabase is not configured
         if (config.supabaseUrl.includes('{{')) {
-             const heroTag = document.getElementById('hero-availability');
-             if (!heroTag) return;
+            const heroTag = document.getElementById('hero-availability');
+            if (!heroTag) return;
 
-             try {
-                 const res = await fetch(`js/status.json?t=${Date.now()}`);
-                 const data = await res.json();
-                 
-                 if (data.isAvailable === false) {
-                     if (data.activeProjects > 0) {
-                         heroTag.textContent = t('hero.status.busy').replace('{count}', data.activeProjects);
-                     } else {
-                         heroTag.textContent = t('hero.status.busy_general');
-                     }
-                 } else {
-                     if (data.activeProjects > 0) {
-                         heroTag.textContent = t('hero.status.available_busy').replace('{count}', data.activeProjects);
-                     } else {
-                         heroTag.textContent = t('hero.status.available');
-                     }
-                 }
-             } catch (e) {
-                 // Fallback to i18n manual config
-                 const conf = i18n.config;
-                 if (conf.isAvailable === false) {
-                     if (conf.activeProjects > 0) {
-                         heroTag.textContent = t('hero.status.busy').replace('{count}', conf.activeProjects);
-                     } else {
-                         heroTag.textContent = t('hero.status.busy_general');
-                     }
-                 } else {
-                     if (conf.activeProjects > 0) {
-                         heroTag.textContent = t('hero.status.available_busy').replace('{count}', conf.activeProjects);
-                     } else {
-                         heroTag.textContent = t('hero.status.available');
-                     }
-                 }
-             }
+            try {
+                const res = await fetch(`js/status.json?t=${Date.now()}`);
+                const data = await res.json();
+
+                if (data.isAvailable === false) {
+                    if (data.activeProjects > 0) {
+                        heroTag.textContent = t('hero.status.busy').replace('{count}', data.activeProjects);
+                    } else {
+                        heroTag.textContent = t('hero.status.busy_general');
+                    }
+                } else {
+                    if (data.activeProjects > 0) {
+                        heroTag.textContent = t('hero.status.available_busy').replace('{count}', data.activeProjects);
+                    } else {
+                        heroTag.textContent = t('hero.status.available');
+                    }
+                }
+            } catch (e) {
+                // Fallback to i18n manual config
+                const conf = i18n.config;
+                if (conf.isAvailable === false) {
+                    if (conf.activeProjects > 0) {
+                        heroTag.textContent = t('hero.status.busy').replace('{count}', conf.activeProjects);
+                    } else {
+                        heroTag.textContent = t('hero.status.busy_general');
+                    }
+                } else {
+                    if (conf.activeProjects > 0) {
+                        heroTag.textContent = t('hero.status.available_busy').replace('{count}', conf.activeProjects);
+                    } else {
+                        heroTag.textContent = t('hero.status.available');
+                    }
+                }
+            }
         } else {
             updateHeroFromSupabase();
         }
@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = projectData?.title || item.querySelector('.project-title').textContent;
         const meta = projectData?.meta || item.querySelector('.project-meta').textContent;
         const repo = projectData?.repo;
-        
+
         // Data extraction
         const detailsClone = item.querySelector('.hidden-details').cloneNode(true);
         detailsClone.style.display = 'block';
@@ -537,19 +537,65 @@ document.addEventListener('DOMContentLoaded', () => {
         modalStats.innerHTML = '';
         if (repo) {
             try {
-                const res = await fetch(`https://api.github.com/repos/${repo}`);
-                const data = await res.json();
-                if (data.stargazers_count !== undefined) {
-                    modalStats.innerHTML = `
-                        <div class="gh-modal-stat">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                            <span>${data.stargazers_count} stars</span>
-                        </div>
-                        <div class="gh-modal-stat">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.2 13.3l-6.2-1.3V3c0-.6-.4-1-1-1S10 2.4 10 3v9l-6.2 1.3c-.6.1-1 .7-.9 1.3.1.6.7 1 1.3.9l5.8-1.2v5.6l-2.3 2.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l1.9-1.9 1.9 1.9c.4.4 1 .4 1.4 0s.4-1 0-1.4l-2.3-2.3v-5.6l5.8 1.2c.6.1 1.2-.3 1.3-.9.1-.6-.3-1.2-.9-1.3z"/></svg>
-                            <span>${data.forks_count} forks</span>
+                // Fetch basic stats
+                const repoRes = await fetch(`https://api.github.com/repos/${repo}`);
+                const repoData = await repoRes.json();
+
+                // Fetch languages
+                const langRes = await fetch(`https://api.github.com/repos/${repo}/languages`);
+                const languages = await langRes.json();
+
+                if (repoData.stargazers_count !== undefined) {
+                    const colors = {
+                        'JavaScript': '#f7df1e', 'TypeScript': '#3178c6', 'PHP': '#777bb3',
+                        'Python': '#3776ab', 'HTML': '#e34c26', 'CSS': '#563d7c',
+                        'SCSS': '#c6538c', 'C++': '#f34b7d', 'Java': '#b07219',
+                        'Godot': '#478cbf', 'GDScript': '#478cbf', 'Shell': '#89e051',
+                        'Vue': '#41b883', 'Batchfile': '#C1F12E'
+                    };
+
+                    let statsHTML = `
+                        <div class="gh-modal-meta-stats">
+                            <div class="gh-modal-stat">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <span>${repoData.stargazers_count} stars</span>
+                            </div>
+                            <div class="gh-modal-stat">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.2 13.3l-6.2-1.3V3c0-.6-.4-1-1-1S10 2.4 10 3v9l-6.2 1.3c-.6.1-1 .7-.9 1.3.1.6.7 1 1.3.9l5.8-1.2v5.6l-2.3 2.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l1.9-1.9 1.9 1.9c.4.4 1 .4 1.4 0s.4-1 0-1.4l-2.3-2.3v-5.6l5.8 1.2c.6.1 1.2-.3 1.3-.9.1-.6-.3-1.2-.9-1.3z"/></svg>
+                                <span>${repoData.forks_count} forks</span>
+                            </div>
                         </div>
                     `;
+
+                    // Add Language Bar
+                    const totalBytes = Object.values(languages).reduce((a, b) => a + b, 0);
+                    if (totalBytes > 0) {
+                        statsHTML += `<div class="gh-modal-languages">
+                            <div class="gh-lang-bar-container" style="height: 6px; margin: 1rem 0 0.5rem 0;">`;
+
+                        Object.entries(languages).forEach(([lang, bytes]) => {
+                            const percent = (bytes / totalBytes) * 100;
+                            const color = colors[lang] || '#8b5cf6';
+                            statsHTML += `<div class="gh-lang-bar-segment" style="width: ${percent}%; background-color: ${color};"></div>`;
+                        });
+
+                        statsHTML += `</div><div class="gh-lang-labels" style="justify-content: flex-start; gap: 1rem;">`;
+
+                        Object.entries(languages).slice(0, 4).forEach(([lang, bytes]) => {
+                            const percent = (bytes / totalBytes) * 100;
+                            const color = colors[lang] || '#8b5cf6';
+                            statsHTML += `
+                                <div class="gh-lang-label">
+                                    <span class="gh-lang-dot" style="background-color: ${color}"></span>
+                                    <span>${lang}</span>
+                                    <span style="opacity: 0.5; font-size: 0.7rem;">${Math.round(percent)}%</span>
+                                </div>
+                            `;
+                        });
+                        statsHTML += `</div></div>`;
+                    }
+
+                    modalStats.innerHTML = statsHTML;
                 }
             } catch (e) { console.error('Error fetching modal repo stats:', e); }
         }
@@ -634,7 +680,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchModal = document.getElementById('search-modal');
         const searchInput = document.getElementById('projects-search');
         const resultsContainer = document.getElementById('search-results');
-        
+
         if (!searchModal || !searchInput || !resultsContainer) return;
 
         const toggleSearch = (show) => {
@@ -676,7 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function renderSearchResults(query) {
             resultsContainer.innerHTML = '';
             const q = query.toLowerCase().trim();
-            
+
             // --- Command Palette Logic ---
             if (q.startsWith('>')) {
                 const cmd = q.substring(1).trim();
@@ -685,12 +731,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const projects = i18n[currentLang].projects;
-            
+
             const matches = Object.keys(projects)
                 .filter(key => !isNaN(key))
                 .map(key => ({ id: key, ...projects[key] }))
-                .filter(p => 
-                    p.title.toLowerCase().includes(q) || 
+                .filter(p =>
+                    p.title.toLowerCase().includes(q) ||
                     p.desc.toLowerCase().includes(q) ||
                     p.meta.toLowerCase().includes(q)
                 );
@@ -801,18 +847,21 @@ document.addEventListener('DOMContentLoaded', () => {
             reposEl.textContent = totalRepos;
             starsEl.textContent = totalStars;
 
+            // Fetch language bytes for all repos
             const langMap = {};
-            repos.forEach(repo => {
-                if (repo.language) {
-                    langMap[repo.language] = (langMap[repo.language] || 0) + 1;
+            const langPromises = repos.map(async (repo) => {
+                try {
+                    const res = await fetch(repo.languages_url);
+                    const languages = await res.json();
+                    Object.keys(languages).forEach(lang => {
+                        langMap[lang] = (langMap[lang] || 0) + languages[lang];
+                    });
+                } catch (e) {
+                    console.error(`Error fetching languages for ${repo.name}:`, e);
                 }
             });
 
-            const topLangs = Object.entries(langMap)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 5);
-
-            const totalLangCount = topLangs.reduce((acc, l) => acc + l[1], 0);
+            await Promise.all(langPromises);
 
             const colors = {
                 'JavaScript': '#f7df1e',
@@ -821,16 +870,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Python': '#3776ab',
                 'HTML': '#e34c26',
                 'CSS': '#563d7c',
+                'SCSS': '#c6538c',
                 'C++': '#f34b7d',
                 'Java': '#b07219',
-                'Godot': '#478cbf'
+                'Godot': '#478cbf',
+                'GDScript': '#478cbf',
+                'Shell': '#89e051',
+                'Vue': '#41b883',
+                'Batchfile': '#C1F12E'
             };
+
+            const sortedLangs = Object.entries(langMap)
+                .sort((a, b) => b[1] - a[1]);
+
+            const topLangs = sortedLangs.slice(0, 6);
+            const totalBytes = sortedLangs.reduce((acc, l) => acc + l[1], 0);
 
             langBar.innerHTML = '';
             langLabels.innerHTML = '';
 
-            topLangs.forEach(([lang, count]) => {
-                const percent = (count / totalLangCount) * 100;
+            topLangs.forEach(([lang, bytes]) => {
+                const percent = (bytes / totalBytes) * 100;
                 const color = colors[lang] || '#8b5cf6';
 
                 const segment = document.createElement('div');
@@ -903,7 +963,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = await fetch(functionUrl, {
                     method: 'POST',
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${config.supabaseAnonKey}`
                     },
@@ -935,7 +995,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     console.log("System Initialized: Ultra Modern Portfolio V3");
-    
+
     // 10. Reading Progress Bar
     const initReadingProgress = () => {
         const progressBar = document.getElementById('reading-progress');
