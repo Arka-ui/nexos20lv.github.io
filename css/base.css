@@ -122,6 +122,12 @@ a {
     padding: 0 2rem;
 }
 
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+}
+
 .mono {
     font-family: var(--font-mono);
 }
@@ -245,7 +251,7 @@ header {
     top: 0;
     width: 100%;
     padding: 2rem 0;
-    z-index: 100;
+    z-index: 1000; /* Increased to be above everything */
     transition: all 0.4s ease;
 }
 

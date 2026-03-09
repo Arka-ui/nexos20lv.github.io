@@ -19,6 +19,16 @@
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+@media (max-width: 768px) {
+    .discord-card {
+        bottom: 1rem;
+        left: 1rem;
+        width: calc(100% - 2rem); /* Full width but with margins to look like a floating bar */
+        max-width: 350px;
+        padding: 0.8rem;
+    }
+}
+
 .discord-card:hover {
     border-color: rgba(189, 0, 255, 0.5);
     transform: translateY(-5px);
@@ -94,6 +104,14 @@
     margin-top: 3.5rem;
 }
 
+@media (max-width: 768px) {
+    .carousel-track {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        margin-top: 2rem;
+    }
+}
+
 .carousel-item {
     border: 1px solid rgba(255, 255, 255, 0.08); /* Finer border */
     border-radius: 24px; padding: 2.5rem; /* Larger padding and radius */
@@ -104,6 +122,13 @@
     position: relative; overflow: hidden;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .carousel-item {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
 }
 
 .carousel-item::before {
@@ -807,7 +832,7 @@ body.perf-mode .card-3d {
 }
 
 h1 {
-    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-size: clamp(2.8rem, 10vw, 8rem);
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.04em;
@@ -1208,7 +1233,10 @@ h1 .highlight-text {
   width: 1px;
   background: linear-gradient(to bottom, var(--violet), transparent);
 }
-.tl-item { position: relative; margin-bottom: 3rem; text-align: left; }
+.tl-item { position: relative; margin-bottom: 4.5rem; text-align: left; }
+@media (max-width: 768px) {
+    .tl-item { margin-bottom: 3.5rem; }
+}
 .tl-item::before {
   content: '';
   position: absolute; left: -2.4rem; top: .35rem;
@@ -1320,7 +1348,7 @@ h1 .highlight-text {
     color: #fff;
     text-decoration: underline;
     text-decoration-color: var(--primary);
-    text-underline-offset: 6px;
+    text-underline-offset: 10px; /* More offset for cleaner look */
     font-weight: 600;
 }
 
@@ -1376,78 +1404,96 @@ footer {
     .card-3d { transform: none !important; }
     
     .container { padding: 0 1.25rem; }
-    header { padding: 1.1rem 0; }
+    header { 
+        padding: 1.1rem 0;
+        background: rgba(5, 2, 9, 0.95);
+        backdrop-filter: blur(30px);
+        border-bottom: 1px solid var(--border);
+    }
     header.scrolled { padding: 0.8rem 0; }
     .logo { font-size: 1.2rem; }
     nav {
         gap: 0.75rem;
-        align-items: flex-start;
+        align-items: center;
+        flex-direction: row; /* Keep logo and nav actions on same line if possible */
+        justify-content: space-between;
     }
     .nav-right {
         margin-left: auto;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 0.5rem;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
     }
     .nav-links {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: flex-end;
+        display: none; /* Hide menu on mobile */
     }
-    .nav-links a {
-        font-size: 0.72rem;
-        letter-spacing: 1.2px;
-    }
-
+    
     .hero {
-        min-height: auto;
-        padding: 8.5rem 0 4rem;
-        align-items: flex-start;
+        min-height: 100vh;
+        padding: 15rem 0 10rem; /* Even more room at the top */
+        display: flex;
+        align-items: center;
     }
     .hero-content { padding: 0 1.25rem; }
     h1 {
-        font-size: clamp(2.1rem, 11vw, 3.2rem);
-        margin-bottom: 1.1rem;
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        margin-bottom: 1.5rem;
     }
     .hero p {
-        font-size: 1rem;
-        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        margin-bottom: 6rem; /* Massive space for hero desc */
+        line-height: 1.8; 
+        color: var(--text-muted);
     }
     .cta-group {
         flex-direction: column;
-        gap: 0.8rem;
+        gap: 1rem;
         width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
     }
     .cta-group .btn {
         width: 100%;
         justify-content: center;
     }
 
-    .skill-word { font-size: 2.2rem; }
-    .track { gap: 2rem; }
-
     .section {
-        padding: 5rem 0;
+        padding: 18rem 0; /* Massive increase from 12rem */
     }
     .section-header {
-        margin-bottom: 2rem;
+        margin-bottom: 8rem; /* More room after headers */
     }
-    .section-title { font-size: 2rem; }
-    .project-title { font-size: 1.45rem; }
+    .section-tag {
+        margin-bottom: 4rem; 
+    }
+    .section-title { 
+        font-size: 2.8rem; 
+        margin-bottom: 6rem;
+    }
+    .project-title { font-size: 1.6rem; }
+
+    /* Disable some complex hover effects on touch for performance */
+    .carousel-item:hover {
+        transform: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .skill-item:hover {
+        transform: none;
+    }
 
     .big-text {
-        font-size: 1.2rem;
-        line-height: 1.7;
+        font-size: 1.25rem;
+        line-height: 2; /* Extremely airy text */
+        margin-bottom: 4rem; /* Huge paragraph gaps */
     }
 
-    .glass-panel { padding: 1.25rem; }
+    .glass-panel { padding: 1.5rem; }
 
     .footer-cta {
-        padding: 6rem 0 3rem;
+        padding: 10rem 0 8rem; 
     }
     .email-display {
-        font-size: clamp(1.2rem, 7vw, 2rem);
+        font-size: clamp(1.5rem, 8vw, 2.5rem);
         word-break: break-word;
         overflow-wrap: anywhere;
     }
@@ -1457,24 +1503,30 @@ footer {
     .container { padding: 0 1rem; }
 
     nav {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
     }
     .nav-right {
-        width: 100%;
-        align-items: flex-start;
+        width: auto;
+        align-items: center;
     }
     .nav-links {
-        width: 100%;
-        justify-content: flex-start;
-        gap: 0.8rem;
+        display: none;
     }
     .lang-switch {
-        align-self: flex-start;
+        align-self: center;
+        margin-left: 0.5rem; /* Small gap from performance btn */
     }
 
     .btn {
         padding: 0.9rem 1.2rem;
         font-size: 0.95rem;
+    }
+
+    .timeline {
+        padding-left: 1.5rem;
+    }
+    .tl-item::before {
+        left: -1.9rem;
     }
 }

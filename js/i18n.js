@@ -1,6 +1,6 @@
 export const i18n = {
     config: {
-        activeProjects: 0, 
+        activeProjects: 0,
         isAvailable: true,
         syncWithDiscord: true // New: Sync with Discord custom status
     },
@@ -11,10 +11,16 @@ export const i18n = {
         },
         loader: {
             init: '> INITIALISATION DU SYSTÈME...',
+            kernel: '> CHARGEMENT DU NOYAU V2.1.0-STABLE...',
+            mem: '> VÉRIFICATION DE LA MÉMOIRE VIVE... [OK]',
+            network: '> TEST DE LA CONNECTIVITÉ RÉSEAU... [21ms]',
             mesh: '> CONFIGURATION DU MESH GÉOMÉTRIQUE...',
-            experience: '> RÉCUPÉRATION DU PARCOURS...',
+            experience: '> RÉCUPÉRATION DU PARCOURS (GITHUB API)...',
             projects: '> CHARGEMENT DES RÉALISATIONS...',
-            ready: '> SYSTÈME OPÉRATIONNEL.'
+            supabase: '> AUTHENTIFICATION SUPABASE... [SUCCÈS]',
+            database: '> RÉCUPÉRATION DES ÉTATS TEMPS RÉEL...',
+            i18n: '> CHARGEMENT DES MODULES LINGUISTIQUES...',
+            ready: '> SYSTÈME OPÉRATIONNEL. BIENVENUE.'
         },
         nav: { projects: 'Projets', about: 'À propos', experience: 'Expérience', contact: 'Contact' },
         hero: {
@@ -192,7 +198,7 @@ export const i18n = {
                 }
             }
         },
-        contact: { 
+        contact: {
             title: 'Un projet en tête ?',
             name: 'Votre nom',
             email: 'Votre email',
@@ -227,10 +233,16 @@ export const i18n = {
         },
         loader: {
             init: '> SYSTEM INITIALIZING...',
+            kernel: '> LOADING KERNEL V2.1.0-STABLE...',
+            mem: '> CHECKING SYSTEM MEMORY... [OK]',
+            network: '> TESTING NETWORK CONNECTIVITY... [21ms]',
             mesh: '> CONFIGURING GEOMETRIC MESH...',
-            experience: '> RETRIEVING JOURNEY DATA...',
+            experience: '> RETRIEVING JOURNEY DATA (GITHUB API)...',
             projects: '> LOADING ACHIEVEMENTS...',
-            ready: '> SYSTEM OPERATIONAL.'
+            supabase: '> SUPABASE AUTHENTICATION... [SUCCESS]',
+            database: '> RETRIEVING REAL-TIME STATES...',
+            i18n: '> LOADING LANGUAGE MODULES...',
+            ready: '> SYSTEM OPERATIONAL. WELCOME.'
         },
         nav: { projects: 'Projects', about: 'About', experience: 'Experience', contact: 'Contact' },
         hero: {
@@ -408,7 +420,7 @@ export const i18n = {
                 }
             }
         },
-        contact: { 
+        contact: {
             title: 'Have a project in mind?',
             name: 'Your name',
             email: 'Your email',

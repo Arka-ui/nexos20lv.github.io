@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!loader || !logsContainer || !progressBar) return;
 
-        const logKeys = ['mesh', 'experience', 'projects', 'ready'];
+        const logKeys = ['kernel', 'mem', 'network', 'mesh', 'experience', 'projects', 'supabase', 'database', 'i18n', 'ready'];
         const totalLogs = logKeys.length;
         
         // Initial delay
