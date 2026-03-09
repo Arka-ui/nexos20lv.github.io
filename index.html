@@ -10,7 +10,16 @@
         content="Portfolio de Pierre Bouteman, développeur full-stack orienté applications web et desktop."
         data-i18n-content="meta.description">
 
-    <!-- Fonts -->
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+                   script-src 'self' https://cdn.jsdelivr.net https://api.lanyard.rest; 
+                   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; 
+                   font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; 
+                   img-src 'self' data: https://cdn.discordapp.com https://cdn.discordapp.net https://media.discordapp.net https://avatars.githubusercontent.com https://api.github.com; 
+                   connect-src 'self' wss://api.lanyard.rest https://api.github.com https://*.supabase.co; 
+                   frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

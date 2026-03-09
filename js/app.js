@@ -3,6 +3,10 @@ import { i18n } from './i18n.js';
 import { config } from './config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Security: Frame Buster (Clickjacking Protection)
+    if (window.self !== window.top) {
+        window.top.location = window.self.location;
+    }
 
     // 0. i18n (FR default)
     const langButtons = document.querySelectorAll('.lang-btn');

@@ -19,6 +19,9 @@ client.once('ready', () => {
     console.log(`🤖 Bot logged in as ${client.user.tag}`);
 });
 
+let lastUpdateTimestamp = 0;
+const COOLDOWN_MS = 5000; // 5 seconds cooldown
+
 client.on('messageCreate', async (message) => {
     // 1. Safety Checks: Only listen to the target channel, ignore bots, and VERIFY AUTHOR
     const isTargetChannel = message.channelId === process.env.DISCORD_STATUS_CHANNEL_ID;
@@ -26,10 +29,18 @@ client.on('messageCreate', async (message) => {
 
     if (!isTargetChannel || message.author.bot || !isAllowedUser) return;
 
+    // 2. Anti-Spam (Cooldown)
+    const now = Date.now();
+    if (now - lastUpdateTimestamp < COOLDOWN_MS) {
+        console.warn('⚠️ Cooldown active. Skipping update.');
+        await message.react('⏳');
+        return;
+    }
+
     const content = message.content.toLowerCase();
 
     try {
-        // 2. Fetch current state to handle partial updates
+        // 3. Fetch current state to handle partial updates
         const { data: currentStatus } = await supabase
             .from('portfolio_status')
             .select('*')
@@ -39,7 +50,7 @@ client.on('messageCreate', async (message) => {
         let activeProjects = currentStatus ? currentStatus.active_projects : 0;
         let isAvailable = currentStatus ? currentStatus.is_available : true;
 
-        // 3. Parse content for changes
+        // 4. Parse content for changes
         // Use a more specific regex to avoid accidental matches
         const projectsMatch = content.match(/\b([0-9]+)\b/);
         if (projectsMatch) {
@@ -55,7 +66,7 @@ client.on('messageCreate', async (message) => {
 
         console.log(`📝 Updating status: ${activeProjects} projects, Available: ${isAvailable}`);
 
-        // 4. Upsert to Supabase
+        // 5. Upsert to Supabase
         const { error } = await supabase
             .from('portfolio_status')
             .upsert({
@@ -66,10 +77,13 @@ client.on('messageCreate', async (message) => {
             }, { onConflict: 'id' });
 
         if (error) throw error;
+
+        lastUpdateTimestamp = Date.now();
         console.log('✅ Supabase updated successfully (Upsert)');
         await message.react('✅');
     } catch (err) {
         console.error('❌ Error updating Supabase:', err.message);
+        // Generic reaction for error to avoid information leakage in chat
         await message.react('❌');
     }
 });
