@@ -624,48 +624,76 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Unity': '#222c37', 'PostScript': '#da291c', 'ActionScript': '#882B0F'
                     };
 
-                    let statsHTML = `
-                        <div class="gh-modal-meta-stats">
-                            <div class="gh-modal-stat">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <span>${repoData.stargazers_count} stars</span>
-                            </div>
-                            <div class="gh-modal-stat">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.2 13.3l-6.2-1.3V3c0-.6-.4-1-1-1S10 2.4 10 3v9l-6.2 1.3c-.6.1-1 .7-.9 1.3.1.6.7 1 1.3.9l5.8-1.2v5.6l-2.3 2.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l1.9-1.9 1.9 1.9c.4.4 1 .4 1.4 0s.4-1 0-1.4l-2.3-2.3v-5.6l5.8 1.2c.6.1 1.2-.3 1.3-.9.1-.6-.3-1.2-.9-1.3z"/></svg>
-                                <span>${repoData.forks_count} forks</span>
-                            </div>
-                        </div>
-                    `;
+                    modalStats.innerHTML = '';
 
-                    // Add Language Bar
+                    const metaStats = document.createElement('div');
+                    metaStats.className = 'gh-modal-meta-stats';
+
+                    const starsDiv = document.createElement('div');
+                    starsDiv.className = 'gh-modal-stat';
+                    starsDiv.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';
+                    const starsSpan = document.createElement('span');
+                    starsSpan.textContent = `${repoData.stargazers_count} stars`;
+                    starsDiv.appendChild(starsSpan);
+
+                    const forksDiv = document.createElement('div');
+                    forksDiv.className = 'gh-modal-stat';
+                    forksDiv.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.2 13.3l-6.2-1.3V3c0-.6-.4-1-1-1S10 2.4 10 3v9l-6.2 1.3c-.6.1-1 .7-.9 1.3.1.6.7 1 1.3.9l5.8-1.2v5.6l-2.3 2.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l1.9-1.9 1.9 1.9c.4.4 1 .4 1.4 0s.4-1 0-1.4l-2.3-2.3v-5.6l5.8 1.2c.6.1 1.2-.3 1.3-.9.1-.6-.3-1.2-.9-1.3z"/></svg>';
+                    const forksSpan = document.createElement('span');
+                    forksSpan.textContent = `${repoData.forks_count} forks`;
+                    forksDiv.appendChild(forksSpan);
+
+                    metaStats.append(starsDiv, forksDiv);
+                    modalStats.appendChild(metaStats);
+
                     const totalBytes = Object.values(languages).reduce((a, b) => a + b, 0);
                     if (totalBytes > 0) {
-                        statsHTML += `<div class="gh-modal-languages">
-                            <div class="gh-lang-bar-container" style="height: 6px; margin: 1rem 0 0.5rem 0;">`;
+                        const langContainer = document.createElement('div');
+                        langContainer.className = 'gh-modal-languages';
+
+                        const langBar = document.createElement('div');
+                        langBar.className = 'gh-lang-bar-container';
+                        langBar.style.cssText = 'height: 6px; margin: 1rem 0 0.5rem 0;';
+
+                        const labelsDiv = document.createElement('div');
+                        labelsDiv.className = 'gh-lang-labels';
+                        labelsDiv.style.cssText = 'justify-content: flex-start; gap: 1rem;';
 
                         Object.entries(languages).forEach(([lang, bytes]) => {
                             const percent = (bytes / totalBytes) * 100;
                             const color = colors[lang] || '#8b5cf6';
-                            statsHTML += `<div class="gh-lang-bar-segment" style="width: ${percent}%; background-color: ${color};"></div>`;
+                            const segment = document.createElement('div');
+                            segment.className = 'gh-lang-bar-segment';
+                            segment.style.width = `${percent}%`;
+                            segment.style.backgroundColor = color;
+                            langBar.appendChild(segment);
                         });
-
-                        statsHTML += `</div><div class="gh-lang-labels" style="justify-content: flex-start; gap: 1rem;">`;
 
                         Object.entries(languages).slice(0, 4).forEach(([lang, bytes]) => {
                             const percent = (bytes / totalBytes) * 100;
                             const color = colors[lang] || '#8b5cf6';
-                            statsHTML += `
-                                <div class="gh-lang-label">
-                                    <span class="gh-lang-dot" style="background-color: ${color}"></span>
-                                    <span>${lang}</span>
-                                    <span style="opacity: 0.5; font-size: 0.7rem;">${Math.round(percent)}%</span>
-                                </div>
-                            `;
-                        });
-                        statsHTML += `</div></div>`;
-                    }
 
-                    modalStats.innerHTML = statsHTML;
+                            const label = document.createElement('div');
+                            label.className = 'gh-lang-label';
+
+                            const dot = document.createElement('span');
+                            dot.className = 'gh-lang-dot';
+                            dot.style.backgroundColor = color;
+
+                            const nameSpan = document.createElement('span');
+                            nameSpan.textContent = lang;
+
+                            const percentSpan = document.createElement('span');
+                            percentSpan.style.cssText = 'opacity: 0.5; font-size: 0.7rem;';
+                            percentSpan.textContent = `${Math.round(percent)}%`;
+
+                            label.append(dot, nameSpan, percentSpan);
+                            labelsDiv.appendChild(label);
+                        });
+
+                        langContainer.append(langBar, labelsDiv);
+                        modalStats.appendChild(langContainer);
+                    }
                 }
             } catch (e) { console.error('Error fetching modal repo stats:', e); }
         }
@@ -812,20 +840,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
 
             if (matches.length === 0) {
-                resultsContainer.innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--text-muted);">${t('search.noResults')}</div>`;
+                const noResults = document.createElement('div');
+                noResults.style.cssText = 'padding: 2rem; text-align: center; color: var(--text-muted);';
+                noResults.textContent = t('search.noResults');
+                resultsContainer.appendChild(noResults);
                 return;
             }
 
             matches.forEach(p => {
                 const item = document.createElement('div');
                 item.className = 'search-item';
-                item.innerHTML = `
-                    <div class="search-icon">${getProjectIcon(p.id)}</div>
-                    <div class="search-info">
-                        <strong>${p.title}</strong>
-                        <span>${p.meta} — ${p.desc}</span>
-                    </div>
-                `;
+
+                const icon = document.createElement('div');
+                icon.className = 'search-icon';
+                icon.textContent = getProjectIcon(p.id);
+
+                const info = document.createElement('div');
+                info.className = 'search-info';
+
+                const title = document.createElement('strong');
+                title.textContent = p.title;
+
+                const metaDesc = document.createElement('span');
+                metaDesc.textContent = `${p.meta} — ${p.desc}`;
+
+                info.append(title, metaDesc);
+                item.append(icon, info);
+
                 item.addEventListener('click', () => {
                     toggleSearch(false);
                     openModal(parseInt(p.id) - 1);
@@ -849,20 +890,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const matches = commands.filter(c => c.id.includes(cmd) || c.label.toLowerCase().includes(cmd));
 
             if (matches.length === 0) {
-                resultsContainer.innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--text-muted);">No command found starting with "${cmd}"</div>`;
+                const noResult = document.createElement('div');
+                noResult.style.cssText = 'padding: 2rem; text-align: center; color: var(--text-muted);';
+                noResult.textContent = `No command found starting with "${cmd}"`;
+                resultsContainer.appendChild(noResult);
                 return;
             }
 
             matches.forEach(c => {
                 const item = document.createElement('div');
                 item.className = 'search-item';
-                item.innerHTML = `
-                    <div class="search-icon">${c.icon}</div>
-                    <div class="search-info">
-                        <strong>${c.label}</strong>
-                        <span>Command: >${c.id}</span>
-                    </div>
-                `;
+
+                const icon = document.createElement('div');
+                icon.className = 'search-icon';
+                icon.textContent = c.icon;
+
+                const info = document.createElement('div');
+                info.className = 'search-info';
+
+                const label = document.createElement('strong');
+                label.textContent = c.label;
+
+                const cmdText = document.createElement('span');
+                cmdText.textContent = `Command: >${c.id}`;
+
+                info.append(label, cmdText);
+                item.append(icon, info);
+
                 item.addEventListener('click', () => {
                     toggleSearch(false);
                     c.action();
@@ -971,11 +1025,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const label = document.createElement('div');
                 label.className = 'gh-lang-label';
-                label.innerHTML = `
-                    <span class="gh-lang-dot" style="background-color: ${color}"></span>
-                    <span>${lang}</span>
-                    <span style="opacity: 0.5; font-size: 0.7rem;">${Math.round(percent)}%</span>
-                `;
+
+                const dot = document.createElement('span');
+                dot.className = 'gh-lang-dot';
+                dot.style.backgroundColor = color;
+
+                const langName = document.createElement('span');
+                langName.textContent = lang;
+
+                const langPercent = document.createElement('span');
+                langPercent.style.cssText = 'opacity: 0.5; font-size: 0.7rem;';
+                langPercent.textContent = `${Math.round(percent)}%`;
+
+                label.append(dot, langName, langPercent);
                 langLabels.appendChild(label);
 
                 setTimeout(() => segment.style.width = `${percent}%`, 100);
@@ -1126,29 +1188,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyLanguage('en');
                 return 'Language switched to English.';
             },
-            neofetch: () => `
-                <div style="display:flex; gap: 2rem;">
-                    <div style="color:var(--primary); font-family:var(--font-mono); white-space:pre;">
+            neofetch: () => {
+                const container = document.createElement('div');
+                container.style.display = 'flex';
+                container.style.gap = '2rem';
+
+                const art = document.createElement('div');
+                art.style.cssText = 'color:var(--primary); font-family:var(--font-mono); white-space:pre;';
+                art.textContent = `
    #####
   #######
   ##O#O##
   #######
   #######
-  #######
-                    </div>
-                    <div>
-                        <b style="color:var(--primary)">pierre@bouteman.dev</b><br>
-                        ---------------------<br>
-                        <b>OS:</b> Portfolio OS V3<br>
-                        <b>Kernel:</b> 2.1.0-stable<br>
-                        <b>Uptime:</b> ${Math.round(performance.now() / 1000)}s<br>
-                        <b>Shell:</b> pierre-sh 1.0<br>
-                        <b>Resolution:</b> ${window.innerWidth}x${window.innerHeight}<br>
-                        <b>Stack:</b> HTML, CSS, Vanilla JS
-                    </div>
-                </div>`,
+  #######`;
+
+                const info = document.createElement('div');
+
+                const userHost = document.createElement('b');
+                userHost.style.color = 'var(--primary)';
+                userHost.textContent = 'pierre@bouteman.dev';
+
+                const separator = document.createElement('div');
+                separator.textContent = '---------------------';
+
+                const list = document.createElement('div');
+                const fields = [
+                    { label: 'OS', value: 'Portfolio OS V3' },
+                    { label: 'Kernel', value: '2.1.0-stable' },
+                    { label: 'Uptime', value: `${Math.round(performance.now() / 1000)}s` },
+                    { label: 'Shell', value: 'pierre-sh 1.0' },
+                    { label: 'Resolution', value: `${window.innerWidth}x${window.innerHeight}` },
+                    { label: 'Stack', value: 'HTML, CSS, Vanilla JS' }
+                ];
+
+                fields.forEach(f => {
+                    const row = document.createElement('div');
+                    const b = document.createElement('b');
+                    b.textContent = `${f.label}: `;
+                    row.appendChild(b);
+                    row.append(f.value);
+                    list.appendChild(row);
+                });
+
+                info.append(userHost, separator, list);
+                container.append(art, info);
+                return container;
+            },
             clear: () => {
-                content.innerHTML = '<div class="terminal-welcome">Type \'help\' for available commands.</div>';
+                content.innerHTML = '';
+                const welcome = document.createElement('div');
+                welcome.className = 'terminal-welcome';
+                welcome.textContent = "Type 'help' for available commands.";
+                content.appendChild(welcome);
                 return '';
             },
             exit: () => {
@@ -1174,7 +1266,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (result) {
                         const resLine = document.createElement('div');
                         resLine.className = 'terminal-line';
-                        resLine.innerHTML = result;
+                        if (typeof result === 'string') {
+                            resLine.textContent = result;
+                        } else {
+                            resLine.appendChild(result);
+                        }
                         content.appendChild(resLine);
                     }
                 }
