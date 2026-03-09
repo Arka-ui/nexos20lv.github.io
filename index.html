@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <link rel="apple-touch-icon" href="assets/logo.svg">
-    <meta name="description" content="Portfolio de Pierre Bouteman, développeur full-stack orienté applications web et desktop." data-i18n-content="meta.description">
+    <meta name="description"
+        content="Portfolio de Pierre Bouteman, développeur full-stack orienté applications web et desktop."
+        data-i18n-content="meta.description">
 
     <!-- Fonts -->
     <!-- Fonts & Icons -->
@@ -15,7 +17,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
@@ -47,7 +49,7 @@
 
     <!-- Canvas Background (Old) -->
     <!-- <canvas id="bg-canvas"></canvas> -->
-    
+
     <!-- Mesh Background (New) -->
     <div class="mesh"></div>
 
@@ -59,14 +61,21 @@
                 </a>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a href="#about"><i class="bi bi-person-fill"></i> <span data-i18n="nav.about">À propos</span></a></li>
-                        <li><a href="#experience"><i class="bi bi-briefcase-fill"></i> <span data-i18n="nav.experience">Expérience</span></a></li>
-                        <li><a href="#projects"><i class="bi bi-code-slash"></i> <span data-i18n="nav.projects">Projets</span></a></li>
-                        <li><a href="#contact"><i class="bi bi-envelope-at-fill"></i> <span data-i18n="nav.contact">Contact</span></a></li>
+                        <li><a href="#about"><i class="bi bi-person-fill"></i> <span data-i18n="nav.about">À
+                                    propos</span></a></li>
+                        <li><a href="#experience"><i class="bi bi-briefcase-fill"></i> <span
+                                    data-i18n="nav.experience">Expérience</span></a></li>
+                        <li><a href="#projects"><i class="bi bi-code-slash"></i> <span
+                                    data-i18n="nav.projects">Projets</span></a></li>
+                        <li><a href="#contact"><i class="bi bi-envelope-at-fill"></i> <span
+                                    data-i18n="nav.contact">Contact</span></a></li>
                     </ul>
                     <div class="nav-actions">
                         <button type="button" class="perf-btn" id="perfToggle" title="Toggle High Performance Mode">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                            </svg>
                         </button>
                         <div class="lang-switch" role="group" aria-label="Language switcher">
                             <button type="button" class="lang-btn active" data-lang="fr">FR</button>
@@ -90,8 +99,9 @@
                     <div id="status-indicator"></div>
                 </div>
                 <div class="user-info">
-                    <span class="username">Pierre</span>
-                    <span id="discord-status-text" class="status-text-scroller" data-i18n="discord.initializing">INITIALISATION...</span>
+                    <span class="username">NeXoS_20</span>
+                    <span id="discord-status-text" class="status-text-scroller"
+                        data-i18n="discord.initializing">INITIALISATION...</span>
                 </div>
             </div>
             <div id="discord-activity" class="activity-content">
@@ -99,413 +109,532 @@
             </div>
         </div>
 
-        
-            <section class="hero">
-                <div class="hero-content">
-                    <div class="hero-tag reveal" id="hero-availability" data-i18n="hero.status.loading"><i class="bi bi-arrow-repeat spin"></i> Synchronisation du statut...</div>
-                    <h1 class="reveal">
-                        <span class="line dim" data-i18n="hero.title.prefix">Développeur</span>
-                        <span class="line glow-word" data-i18n="hero.title.highlight">Full-Stack</span>
-                        <span class="line dim" data-i18n="hero.title.suffix">& Créatif</span>
-                    </h1>
-                    <p class="hero-sub reveal" data-i18n="hero.desc">Je conçois des architectures complètes et des interfaces immersives. Ma priorité reste l’ingénierie logicielle robuste, avec l’IA comme accélérateur ponctuel.</p>
-                    <div class="hero-actions reveal">
-                        <a href="#projects" class="btn btn-primary"><i class="bi bi-grid-fill"></i> <span data-i18n="hero.cta.projects">Voir les projets</span></a>
-                        <a href="#contact" class="btn btn-secondary"><i class="bi bi-chat-dots-fill"></i> <span data-i18n="hero.cta.contact">Me contacter</span></a>
-                    </div>
-                </div>
-            </section>
 
-            <!-- Marquee Skills -->
-            <div class="marquee">
-                <div class="marquee-content marquee-anim">
-                    <div class="skill-item"><i class="devicon-javascript-plain colored"></i><span class="skill-name">JavaScript</span></div>
-                    <div class="skill-item"><i class="devicon-electron-original colored"></i><span class="skill-name">Electron</span></div>
-                    <div class="skill-item"><i class="devicon-php-plain colored"></i><span class="skill-name">PHP</span></div>
-                    <div class="skill-item"><i class="devicon-tailwindcss-plain colored"></i><span class="skill-name">Tailwind</span></div>
-                    <div class="skill-item"><i class="devicon-mysql-plain colored"></i><span class="skill-name">MySQL</span></div>
-                    <div class="skill-item"><i class="devicon-docker-plain colored"></i><span class="skill-name">Docker</span></div>
-                    <div class="skill-item"><i class="devicon-github-original"></i><span class="skill-name">GitHub</span></div>
-                    <div class="skill-item"><i class="devicon-supabase-plain colored"></i><span class="skill-name">Supabase</span></div>
-                    <div class="skill-item"><i class="bi bi-layout-wtf colored"></i><span class="skill-name">UI Engineering</span></div>
-                    <div class="skill-item"><i class="devicon-fastapi-plain colored"></i><span class="skill-name">FastAPI</span></div>
-                    <div class="skill-item"><i class="devicon-python-plain colored"></i><span class="skill-name">Python</span></div>
-                    <!-- Clone for seamless loop -->
-                    <div class="skill-item"><i class="devicon-javascript-plain colored"></i><span class="skill-name">JavaScript</span></div>
-                    <div class="skill-item"><i class="devicon-electron-original colored"></i><span class="skill-name">Electron</span></div>
-                    <div class="skill-item"><i class="devicon-php-plain colored"></i><span class="skill-name">PHP</span></div>
-                    <div class="skill-item"><i class="devicon-tailwindcss-plain colored"></i><span class="skill-name">Tailwind</span></div>
-                    <div class="skill-item"><i class="devicon-mysql-plain colored"></i><span class="skill-name">MySQL</span></div>
-                    <div class="skill-item"><i class="devicon-docker-plain colored"></i><span class="skill-name">Docker</span></div>
-                    <div class="skill-item"><i class="devicon-github-original"></i><span class="skill-name">GitHub</span></div>
-                    <div class="skill-item"><i class="devicon-supabase-plain colored"></i><span class="skill-name">Supabase</span></div>
-                    <div class="skill-item"><i class="bi bi-layout-wtf colored"></i><span class="skill-name">UI Engineering</span></div>
-                    <div class="skill-item"><i class="devicon-fastapi-plain colored"></i><span class="skill-name">FastAPI</span></div>
-                    <div class="skill-item"><i class="devicon-python-plain colored"></i><span class="skill-name">Python</span></div>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-tag reveal" id="hero-availability" data-i18n="hero.status.loading"><i
+                        class="bi bi-arrow-repeat spin"></i> Synchronisation du statut...</div>
+                <h1 class="reveal">
+                    <span class="line dim" data-i18n="hero.title.prefix">Développeur</span>
+                    <span class="line glow-word" data-i18n="hero.title.highlight">Full-Stack</span>
+                    <span class="line dim" data-i18n="hero.title.suffix">& Créatif</span>
+                </h1>
+                <p class="hero-sub reveal" data-i18n="hero.desc">Je conçois des architectures complètes et des
+                    interfaces immersives. Ma priorité reste l’ingénierie logicielle robuste, avec l’IA comme
+                    accélérateur ponctuel.</p>
+                <div class="hero-actions reveal">
+                    <a href="#projects" class="btn btn-primary"><i class="bi bi-grid-fill"></i> <span
+                            data-i18n="hero.cta.projects">Voir les projets</span></a>
+                    <a href="#contact" class="btn btn-secondary"><i class="bi bi-chat-dots-fill"></i> <span
+                            data-i18n="hero.cta.contact">Me contacter</span></a>
                 </div>
             </div>
+        </section>
 
-            <!-- Moved Sections Above Projects -->
-            <section id="about" class="section container">
-                <div class="bio-grid">
-                    <div class="reveal">
-                        <span class="section-tag" data-i18n="sections.about.tag">01 / À PROPOS</span>
-                        <p class="big-text">
-                            <span data-i18n-html="about.p1">Je suis <span class="highlight">Pierre Bouteman</span>, développeur polyvalent (Front & Back) basé en France.</span>
-                            <br><br>
-                            <span data-i18n-html="about.p2">Je suis actuellement en <strong>Première STI2D</strong>, et je développe en parallèle des projets concrets pour renforcer mes compétences techniques.</span>
-                            <br><br>
-                    <span data-i18n="about.p3">Mon approche repose sur des bases solides : architecture, qualité de code, performance et maintenabilité. J’utilise les outils IA de manière ciblée pour accélérer certaines étapes, sans jamais remplacer l’analyse technique et les bonnes pratiques d’ingénierie.</span>
-                </p>
+        <!-- Marquee Skills -->
+        <div class="marquee">
+            <div class="marquee-content marquee-anim">
+                <div class="skill-item"><i class="devicon-javascript-plain colored"></i><span
+                        class="skill-name">JavaScript</span></div>
+                <div class="skill-item"><i class="devicon-electron-original colored"></i><span
+                        class="skill-name">Electron</span></div>
+                <div class="skill-item"><i class="devicon-php-plain colored"></i><span class="skill-name">PHP</span>
+                </div>
+                <div class="skill-item"><i class="devicon-tailwindcss-plain colored"></i><span
+                        class="skill-name">Tailwind</span></div>
+                <div class="skill-item"><i class="devicon-mysql-plain colored"></i><span class="skill-name">MySQL</span>
+                </div>
+                <div class="skill-item"><i class="devicon-docker-plain colored"></i><span
+                        class="skill-name">Docker</span></div>
+                <div class="skill-item"><i class="devicon-github-original"></i><span class="skill-name">GitHub</span>
+                </div>
+                <div class="skill-item"><i class="devicon-supabase-plain colored"></i><span
+                        class="skill-name">Supabase</span></div>
+                <div class="skill-item"><i class="bi bi-layout-wtf colored"></i><span class="skill-name">UI
+                        Engineering</span></div>
+                <div class="skill-item"><i class="devicon-fastapi-plain colored"></i><span
+                        class="skill-name">FastAPI</span></div>
+                <div class="skill-item"><i class="devicon-python-plain colored"></i><span
+                        class="skill-name">Python</span></div>
+                <!-- Clone for seamless loop -->
+                <div class="skill-item"><i class="devicon-javascript-plain colored"></i><span
+                        class="skill-name">JavaScript</span></div>
+                <div class="skill-item"><i class="devicon-electron-original colored"></i><span
+                        class="skill-name">Electron</span></div>
+                <div class="skill-item"><i class="devicon-php-plain colored"></i><span class="skill-name">PHP</span>
+                </div>
+                <div class="skill-item"><i class="devicon-tailwindcss-plain colored"></i><span
+                        class="skill-name">Tailwind</span></div>
+                <div class="skill-item"><i class="devicon-mysql-plain colored"></i><span class="skill-name">MySQL</span>
+                </div>
+                <div class="skill-item"><i class="devicon-docker-plain colored"></i><span
+                        class="skill-name">Docker</span></div>
+                <div class="skill-item"><i class="devicon-github-original"></i><span class="skill-name">GitHub</span>
+                </div>
+                <div class="skill-item"><i class="devicon-supabase-plain colored"></i><span
+                        class="skill-name">Supabase</span></div>
+                <div class="skill-item"><i class="bi bi-layout-wtf colored"></i><span class="skill-name">UI
+                        Engineering</span></div>
+                <div class="skill-item"><i class="devicon-fastapi-plain colored"></i><span
+                        class="skill-name">FastAPI</span></div>
+                <div class="skill-item"><i class="devicon-python-plain colored"></i><span
+                        class="skill-name">Python</span></div>
             </div>
-                    <div class="glass-panel reveal" data-tilt>
-                        <h4 style="margin-bottom: 1.5rem; color: #fff; font-size: 1.2rem;" data-i18n="about.expertise.title">Expertise Technique</h4>
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <div>
-                                <strong style="color: #fff; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i class="bi bi-window-fullscreen" style="color: var(--primary);"></i> <span data-i18n="about.expertise.1.title">Applications Desktop & Web</span></strong>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.1.desc">JavaScript, Electron, HTML/CSS et architecture front-end pour des apps desktop et des interfaces web interactives.</p>
-                            </div>
-                            <div>
-                                <strong style="color: #fff; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i class="bi bi-database-fill-gear" style="color: var(--primary);"></i> <span data-i18n="about.expertise.2.title">Back-End PHP & Écosystème Minecraft</span></strong>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.2.desc">PHP, MySQL et intégrations Azuriom/Paper API pour des outils communautaires (launcher, plugin WebMap, services web).</p>
-                            </div>
-                            <div>
-                                <strong style="color: #fff; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i class="bi bi-shield-check" style="color: var(--primary);"></i> <span data-i18n="about.expertise.3.title">Qualité & Livraison</span></strong>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.3.desc">Utilisation avancée des LLMs pour accélérer certaines tâches, avec validation manuelle. Utilisation de Git, releases GitHub et automatisations CI pour livrer des versions stables.</p>
-                            </div>
+        </div>
+
+        <!-- Moved Sections Above Projects -->
+        <section id="about" class="section container">
+            <div class="bio-grid">
+                <div class="reveal">
+                    <span class="section-tag" data-i18n="sections.about.tag">01 / À PROPOS</span>
+                    <p class="big-text">
+                        <span data-i18n-html="about.p1">Je suis <span class="highlight">Pierre Bouteman</span>,
+                            développeur polyvalent (Front & Back) basé en France.</span>
+                        <br><br>
+                        <span data-i18n-html="about.p2">Je suis actuellement en <strong>Première STI2D</strong>, et je
+                            développe en parallèle des projets concrets pour renforcer mes compétences
+                            techniques.</span>
+                        <br><br>
+                        <span data-i18n="about.p3">Mon approche repose sur des bases solides : architecture, qualité de
+                            code, performance et maintenabilité. J’utilise les outils IA de manière ciblée pour
+                            accélérer certaines étapes, sans jamais remplacer l’analyse technique et les bonnes
+                            pratiques d’ingénierie.</span>
+                    </p>
+                </div>
+                <div class="glass-panel reveal" data-tilt>
+                    <h4 style="margin-bottom: 1.5rem; color: #fff; font-size: 1.2rem;"
+                        data-i18n="about.expertise.title">Expertise Technique</h4>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div>
+                            <strong
+                                style="color: #fff; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i
+                                    class="bi bi-window-fullscreen" style="color: var(--primary);"></i> <span
+                                    data-i18n="about.expertise.1.title">Applications Desktop & Web</span></strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.1.desc">
+                                JavaScript, Electron, HTML/CSS et architecture front-end pour des apps desktop et des
+                                interfaces web interactives.</p>
                         </div>
-                    </div>
-                    <div class="glass-panel reveal github-card" data-tilt style="margin-top: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem;">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="color: var(--violet-light);"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                            <span class="mono" style="color: #fff; font-size: 1rem; letter-spacing: 0.1em;">GITHUB METRICS</span>
+                        <div>
+                            <strong
+                                style="color: #fff; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i
+                                    class="bi bi-database-fill-gear" style="color: var(--primary);"></i> <span
+                                    data-i18n="about.expertise.2.title">Back-End PHP & Écosystème
+                                    Minecraft</span></strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.2.desc">
+                                PHP, MySQL et intégrations Azuriom/Paper API pour des outils communautaires (launcher,
+                                plugin WebMap, services web).</p>
                         </div>
-                        <div class="gh-stats-grid">
-                            <div class="gh-stat-item">
-                                <span class="gh-stat-value" id="gh-repos">--</span>
-                                <span class="gh-stat-label">Repos</span>
-                            </div>
-                            <div class="gh-stat-item">
-                                <span class="gh-stat-value" id="gh-stars">--</span>
-                                <span class="gh-stat-label">Stars</span>
-                            </div>
-                        </div>
-                        <div class="gh-languages">
-                            <div class="gh-lang-bar-container" id="gh-lang-bar"></div>
-                            <div id="gh-lang-labels" class="gh-lang-labels"></div>
+                        <div>
+                            <strong
+                                style="color: #fff; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i
+                                    class="bi bi-shield-check" style="color: var(--primary);"></i> <span
+                                    data-i18n="about.expertise.3.title">Qualité & Livraison</span></strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.3.desc">
+                                Utilisation avancée des LLMs pour accélérer certaines tâches, avec validation manuelle.
+                                Utilisation de Git, releases GitHub et automatisations CI pour livrer des versions
+                                stables.</p>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <section id="experience" class="section container">
-                <div class="section-tag reveal" data-i18n="sections.experience.tag">02 / EXPÉRIENCE</div>
-                <h2 class="section-title reveal" data-i18n="sections.experience.title">Mon parcours</h2>
-                <div class="timeline">
-                    <!-- Project Experience -->
-                    <div class="tl-item reveal">
-                        <div class="tl-meta">
-                            <span class="tl-date" data-i18n="experience.1.date">2024 — Présent</span>
-                            <span class="tl-company" data-i18n="experience.1.company">Projets Personnels</span>
-                        </div>
-                        <div class="tl-role" data-i18n="experience.1.title">Développeur Full-Stack</div>
-                        <div class="tl-desc" data-i18n="experience.1.desc">Développement d'applications complexes comme Home Assistant Desktop et Nexaria Launcher. Focus sur la performance et l'expérience utilisateur.</div>
+                <div class="glass-panel reveal github-card" data-tilt style="margin-top: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem;">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"
+                            style="color: var(--violet-light);">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        <span class="mono" style="color: #fff; font-size: 1rem; letter-spacing: 0.1em;">GITHUB
+                            METRICS</span>
                     </div>
-                    <!-- Lycée -->
-                    <div class="tl-item reveal">
-                        <div class="tl-meta">
-                            <span class="tl-date" data-i18n="experience.2.date">2024 — Présent</span>
-                            <span class="tl-company" data-i18n="experience.2.company">Lycée Paul Duez (Cambrai)</span>
+                    <div class="gh-stats-grid">
+                        <div class="gh-stat-item">
+                            <span class="gh-stat-value" id="gh-repos">--</span>
+                            <span class="gh-stat-label">Repos</span>
                         </div>
-                        <div class="tl-role" data-i18n="experience.2.title">Lycéen | Première STI2D</div>
-                        <div class="tl-desc" data-i18n="experience.2.desc">Actuellement en classe de Première STI2D pour approfondir mes connaissances technologiques.</div>
-                    </div>
-                    <!-- Stage 2nde -->
-                    <div class="tl-item reveal">
-                        <div class="tl-meta">
-                            <span class="tl-date" data-i18n="experience.4.date">2025</span>
-                            <span class="tl-company" data-i18n="experience.4.company">Déclic Info</span>
+                        <div class="gh-stat-item">
+                            <span class="gh-stat-value" id="gh-stars">--</span>
+                            <span class="gh-stat-label">Stars</span>
                         </div>
-                        <div class="tl-role" data-i18n="experience.4.title">Stagiaire Seconde</div>
-                        <div class="tl-desc" data-i18n="experience.4.desc">Stage d'observation et d'immersion dans le milieu de la maintenance et du service informatique.</div>
                     </div>
-                    <!-- Stage 3ème -->
-                    <div class="tl-item reveal">
-                        <div class="tl-meta">
-                            <span class="tl-date" data-i18n="experience.5.date">2024</span>
-                            <span class="tl-company" data-i18n="experience.5.company">ASC Computer</span>
-                        </div>
-                        <div class="tl-role" data-i18n="experience.5.title">Stagiaire 3ème</div>
-                        <div class="tl-desc" data-i18n="experience.5.desc">Premier contact avec le monde professionnel de l'informatique.</div>
-                    </div>
-                    <!-- Collège -->
-                    <div class="tl-item reveal">
-                        <div class="tl-meta">
-                            <span class="tl-date" data-i18n="experience.3.date">2020 — 2024</span>
-                            <span class="tl-company" data-i18n="experience.3.company">Collège Paul Duez (Cambrai)</span>
-                        </div>
-                        <div class="tl-role" data-i18n="experience.3.title">Collégien</div>
-                        <div class="tl-desc" data-i18n="experience.3.desc">Études secondaires terminées avec succès.</div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="projects" class="section container">
-                <div class="section-header reveal">
-                    <span class="section-tag" data-i18n="sections.projects.tag">03 / PROJETS</span>
-                    <h2 class="section-title" data-i18n="sections.projects.title">Ce que j'ai construit</h2>
-                </div>
-
-                <!-- 3D Carousel Container -->
-                <div class="carousel-container">
-                    <div class="carousel-track">
-                        <!-- Project 1 -->
-                        <article class="carousel-item reveal" data-index="0">
-                            <div class="card-content">
-                                <i class="bi bi-calendar-check-fill"></i>
-                                <div class="project-meta" data-i18n="projects.1.meta">APPLICATION WEB</div>
-                                <h3 class="project-title" data-i18n="projects.1.title">Conférences Orientation</h3>
-                                <p class="project-desc" data-i18n="projects.1.desc">Plateforme d’inscription et de suivi pour conférences scolaires.</p>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">PHP</span>
-                                    <span class="tech-pill">MySQL</span>
-                                </div>
-                                <div class="hidden-details">
-                                    <p data-i18n="projects.1.details.1">Application web conçue pour le lycée Paul Duez afin de centraliser toute l’organisation des conférences : inscription des élèves, suivi des présences par les enseignants et export administratif en quelques clics.</p>
-                                    <p data-i18n-html="projects.1.details.2"><strong>Défi technique :</strong> garantir la fiabilité des créneaux en forte affluence et générer des exports PDF dynamiques en temps réel.</p>
-                                    <a href="https://conferencesorientationpdz.eclozionmc.ovh/" target="_blank" class="btn btn-primary" data-i18n="projects.1.action">Accès Interne</a>
-                                </div>
-                                <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span data-i18n="projects.learnMore">En savoir plus</span></button>
-                            </div>
-                        </article>
-
-                        <!-- Project 2 -->
-                        <article class="carousel-item reveal" data-index="1">
-                            <div class="card-content">
-                                <i class="bi bi-box-seam-fill"></i>
-                                <div class="project-meta" data-i18n="projects.2.meta">ÉCOSYSTÈME MINECRAFT</div>
-                                <h3 class="project-title" data-i18n="projects.2.title">Nexaria</h3>
-                                <p class="project-desc" data-i18n="projects.2.desc">Écosystème complet autour d’un serveur survie communautaire.</p>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">Paper API</span>
-                                    <span class="tech-pill">Azuriom</span>
-                                </div>
-                                <div class="hidden-details">
-                                    <p data-i18n="projects.2.details.1">Mise en place d’une infrastructure full-stack pour l’univers Nexaria : expérience de jeu, services web et outils communautaires réunis dans une plateforme cohérente.</p>
-                                    <p data-i18n-html="projects.2.details.2"><strong>Stack :</strong> Paper API pour la partie serveur Minecraft, Azuriom pour le site (boutique, classement, espace communauté).</p>
-                                    <a href="https://nexaria.netlib.re" target="_blank" class="btn btn-primary" data-i18n="projects.2.action">Voir le site</a>
-                                </div>
-                                <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span data-i18n="projects.learnMore">En savoir plus</span></button>
-                            </div>
-                        </article>
-
-                        <!-- Project 3 -->
-                        <article class="carousel-item reveal" data-index="2">
-                            <div class="card-content">
-                                <i class="bi bi-controller"></i>
-                                <div class="project-meta" data-i18n="projects.3.meta">DÉVELOPPEMENT JEU</div>
-                                <h3 class="project-title" data-i18n="projects.3.title">Guerre Des Capsules</h3>
-                                <p class="project-desc" data-i18n="projects.3.desc">Fast-FPS multijoueur avec gameplay nerveux et compétitif.</p>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">Godot</span>
-                                    <span class="tech-pill">GDScript</span>
-                                </div>
-                                <div class="hidden-details">
-                                    <p data-i18n="projects.3.details.1">Prototype de shooter rapide où les joueurs contrôlent des capsules spatiales dans des affrontements dynamiques orientés skill et mobilité.</p>
-                                    <p data-i18n-html="projects.3.details.2"><strong>Points clés :</strong> synchronisation réseau via ENet, comportements physiques personnalisés et boucle de jeu pensée pour le fun immédiat.</p>
-                                    <a href="https://github.com/nexos20lv/La-Guerre-Des-Capsules" target="_blank"
-                                        class="btn btn-primary" data-i18n="projects.github">Voir sur GitHub</a>
-                                </div>
-                                <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span data-i18n="projects.learnMore">En savoir plus</span></button>
-                            </div>
-                        </article>
-
-                        <!-- Project 4 -->
-                        <article class="carousel-item reveal" data-index="3">
-                            <div class="card-content">
-                                <i class="bi bi-window-sidebar"></i>
-                                <div class="project-meta" data-i18n="projects.4.meta">FRONT-END</div>
-                                <h3 class="project-title" data-i18n="projects.4.title">Portfolio</h3>
-                                <p class="project-desc" data-i18n="projects.4.desc">Version actuelle de mon portfolio, pensée pour une expérience moderne et immersive.</p>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">JavaScript</span>
-                                    <span class="tech-pill">UI Engineering</span>
-                                </div>
-                                <div class="hidden-details">
-                                    <p data-i18n="projects.4.details.1">Site portfolio actuellement en production, conçu pour présenter mes projets avec une interface claire, un univers visuel fort et des interactions fluides.</p>
-                                    <p data-i18n-html="projects.4.details.2"><strong>Focus :</strong> architecture front-end en HTML/CSS/JavaScript vanilla, animations sur-mesure, modales de présentation et design orienté performance.</p>
-                                    <a href="https://github.com/nexos20lv/nexos20lv.github.io" target="_blank"
-                                        class="btn btn-primary" data-i18n="projects.source">Code source</a>
-                                </div>
-                                <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span data-i18n="projects.learnMore">En savoir plus</span></button>
-                            </div>
-                        </article>
-
-                        <!-- Project 5 -->
-                        <article class="carousel-item reveal" data-index="4">
-                            <div class="card-content">
-                                <i class="bi bi-rocket-takeoff-fill"></i>
-                                <div class="project-meta" data-i18n="projects.5.meta">APPLICATION DESKTOP</div>
-                                <h3 class="project-title" data-i18n="projects.5.title">Nexaria Launcher</h3>
-                                <p class="project-desc" data-i18n="projects.5.desc">Launcher Minecraft moderne avec mises à jour automatiques et gestion des mods.</p>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">Electron</span>
-                                    <span class="tech-pill">GitHub Actions</span>
-                                </div>
-                                <div class="hidden-details">
-                                    <p data-i18n="projects.5.details.1">Client desktop premium pour l’écosystème Nexaria : authentification, installation simplifiée, gestion des comptes et expérience utilisateur soignée.</p>
-                                    <p data-i18n-html="projects.5.details.2"><strong>Points clés :</strong> auto-update silencieux, vérification d’intégrité des mods, intégration Azuriom et présence Discord en temps réel.</p>
-                                    <a href="https://github.com/nexos20lv/Nexaria-Launcher" target="_blank"
-                                        class="btn btn-primary" data-i18n="projects.github">Voir sur GitHub</a>
-                                </div>
-                                <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span data-i18n="projects.learnMore">En savoir plus</span></button>
-                            </div>
-                        </article>
-
-                        <!-- Project 6 -->
-                        <article class="carousel-item reveal" data-index="5">
-                            <div class="card-content">
-                                <i class="bi bi-map-fill"></i>
-                                <div class="project-meta" data-i18n="projects.6.meta">PLUGIN CMS</div>
-                                <h3 class="project-title" data-i18n="projects.6.title">WebMap</h3>
-                                <p class="project-desc" data-i18n="projects.6.desc">Plugin Azuriom pour intégrer Dynmap, BlueMap ou Pl3xMap en quelques clics.</p>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">PHP</span>
-                                    <span class="tech-pill">Azuriom</span>
-                                </div>
-                                <div class="hidden-details">
-                                    <p data-i18n="projects.6.details.1">Plugin orienté simplicité qui ajoute une section carte directement dans un site Azuriom sans développement custom.</p>
-                                    <p data-i18n-html="projects.6.details.2"><strong>Objectif :</strong> connecter rapidement l’univers web et le serveur Minecraft avec une configuration claire depuis l’admin panel.</p>
-                                    <a href="https://github.com/nexos20lv/WebMap" target="_blank"
-                                        class="btn btn-primary" data-i18n="projects.github">Voir sur GitHub</a>
-                                </div>
-                                <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span data-i18n="projects.learnMore">En savoir plus</span></button>
-                            </div>
-                        </article>
-
-                        <!-- Project 7 -->
-                        <article class="carousel-item reveal" data-index="6">
-                            <div class="card-content">
-                                <i class="bi bi-house-gear-fill"></i>
-                                <div class="project-meta" data-i18n="projects.7.meta">APPLICATION DESKTOP</div>
-                                <h3 class="project-title" data-i18n="projects.7.title">Home Assistant Desktop</h3>
-                                <p class="project-desc" data-i18n="projects.7.desc">Client desktop dédié à Home Assistant avec capteurs PC et accès rapide.</p>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">Electron</span>
-                                    <span class="tech-pill">JavaScript</span>
-                                </div>
-                                <div class="hidden-details">
-                                    <p data-i18n="projects.7.details.1">Application desktop indépendante du navigateur pour piloter Home Assistant avec une interface fluide et une présence native (tray, raccourcis globaux).</p>
-                                    <p data-i18n-html="projects.7.details.2"><strong>Fonctions :</strong> auto-updates, intégration des métriques machine (CPU, RAM, batterie, uptime) et workflow pensé for un usage quotidien.</p>
-                                    <a href="https://github.com/nexos20lv/Home-Assistant-Desktop" target="_blank"
-                                        class="btn btn-primary" data-i18n="projects.github">Voir sur GitHub</a>
-                                </div>
-                                <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span data-i18n="projects.learnMore">En savoir plus</span></button>
-                            </div>
-                        </article>
-
-                        <!-- Project 8 -->
-                        <article class="carousel-item reveal" data-index="7">
-                            <div class="card-content">
-                                <i class="bi bi-speedometer"></i>
-                                <div class="project-meta" data-i18n="projects.8.meta">SUPERVISION</div>
-                                <h3 class="project-title" data-i18n="projects.8.title">AzureLab Dashboard</h3>
-                                <p class="project-desc" data-i18n="projects.8.desc">Dashboard VPS en temps réel pour suivre santé serveur et réseau.</p>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">PHP</span>
-                                    <span class="tech-pill">Monitoring</span>
-                                </div>
-                                <div class="hidden-details">
-                                    <p data-i18n="projects.8.details.1">Tableau de bord de supervision affichant CPU, RAM, disque, uptime, bande passante et latence avec actualisation périodique.</p>
-                                    <p data-i18n-html="projects.8.details.2"><strong>Approche :</strong> stack légère en PHP, métriques système collectées côté serveur et visualisation claire via graphiques interactifs.</p>
-                                    <a href="https://github.com/nexos20lv/AzureLab-Dashboard" target="_blank"
-                                        class="btn btn-primary" data-i18n="projects.github">Voir sur GitHub</a>
-                                </div>
-                                <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span data-i18n="projects.learnMore">En savoir plus</span></button>
-                            </div>
-                        </article>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- Project Details Modal (Custom Overlay) -->
-            <div id="project-modal" class="modal-overlay">
-                <div class="modal-content">
-                    <button class="close-modal">×</button>
-                    <div class="modal-body-content">
-                        <div class="modal-header">
-                            <i id="modal-icon" class="bi bi-code-square"></i>
-                            <span id="modal-meta" class="mono" style="color:var(--primary)"></span>
-                            <h2 id="modal-title"></h2>
-                        </div>
-                        <div id="modal-desc" class="modal-description"></div>
-                        <div id="gh-modal-stats" class="gh-modal-stats"></div>
-                        <div id="modal-action" style="margin-top: 2rem;"></div>
+                    <div class="gh-languages">
+                        <div class="gh-lang-bar-container" id="gh-lang-bar"></div>
+                        <div id="gh-lang-labels" class="gh-lang-labels"></div>
                     </div>
                 </div>
             </div>
+        </section>
 
-
-            <section id="contact" class="footer-cta container">
-                <div class="contact-inner reveal">
-                    <span class="section-tag" data-i18n="sections.contact.tag">04 / CONTACT</span>
-                    <h2 class="section-title" data-i18n="contact.title">Un projet en tête ?</h2>
-                    <div class="contact-form-container">
-                        <form id="contact-form" class="reveal">
-                            <div class="form-group">
-                                <input type="text" id="contact-name" name="name" required placeholder=" " data-i18n-placeholder="contact.name">
-                                <label for="contact-name" data-i18n="contact.name">Votre nom</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="contact-email" name="email" required placeholder=" " data-i18n-placeholder="contact.email">
-                                <label for="contact-email" data-i18n="contact.email">Votre email</label>
-                            </div>
-                            <div class="form-group">
-                                <textarea id="contact-message" name="message" required placeholder=" " data-i18n-placeholder="contact.message"></textarea>
-                                <label for="contact-message" data-i18n="contact.message">Votre message...</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="contact-submit">
-                                <span data-i18n="contact.send">Envoyer le message</span>
-                            </button>
-                            <div id="form-feedback" class="form-feedback"></div>
-                        </form>
+        <section id="experience" class="section container">
+            <div class="section-tag reveal" data-i18n="sections.experience.tag">02 / EXPÉRIENCE</div>
+            <h2 class="section-title reveal" data-i18n="sections.experience.title">Mon parcours</h2>
+            <div class="timeline">
+                <!-- Project Experience -->
+                <div class="tl-item reveal">
+                    <div class="tl-meta">
+                        <span class="tl-date" data-i18n="experience.1.date">2024 — Présent</span>
+                        <span class="tl-company" data-i18n="experience.1.company">Projets Personnels</span>
                     </div>
+                    <div class="tl-role" data-i18n="experience.1.title">Développeur Full-Stack</div>
+                    <div class="tl-desc" data-i18n="experience.1.desc">Développement d'applications complexes comme Home
+                        Assistant Desktop et Nexaria Launcher. Focus sur la performance et l'expérience utilisateur.
+                    </div>
+                </div>
+                <!-- Lycée -->
+                <div class="tl-item reveal">
+                    <div class="tl-meta">
+                        <span class="tl-date" data-i18n="experience.2.date">2024 — Présent</span>
+                        <span class="tl-company" data-i18n="experience.2.company">Lycée Paul Duez (Cambrai)</span>
+                    </div>
+                    <div class="tl-role" data-i18n="experience.2.title">Lycéen | Première STI2D</div>
+                    <div class="tl-desc" data-i18n="experience.2.desc">Actuellement en classe de Première STI2D pour
+                        approfondir mes connaissances technologiques.</div>
+                </div>
+                <!-- Stage 2nde -->
+                <div class="tl-item reveal">
+                    <div class="tl-meta">
+                        <span class="tl-date" data-i18n="experience.4.date">2025</span>
+                        <span class="tl-company" data-i18n="experience.4.company">Déclic Info</span>
+                    </div>
+                    <div class="tl-role" data-i18n="experience.4.title">Stagiaire Seconde</div>
+                    <div class="tl-desc" data-i18n="experience.4.desc">Stage d'observation et d'immersion dans le milieu
+                        de la maintenance et du service informatique.</div>
+                </div>
+                <!-- Stage 3ème -->
+                <div class="tl-item reveal">
+                    <div class="tl-meta">
+                        <span class="tl-date" data-i18n="experience.5.date">2024</span>
+                        <span class="tl-company" data-i18n="experience.5.company">ASC Computer</span>
+                    </div>
+                    <div class="tl-role" data-i18n="experience.5.title">Stagiaire 3ème</div>
+                    <div class="tl-desc" data-i18n="experience.5.desc">Premier contact avec le monde professionnel de
+                        l'informatique.</div>
+                </div>
+                <!-- Collège -->
+                <div class="tl-item reveal">
+                    <div class="tl-meta">
+                        <span class="tl-date" data-i18n="experience.3.date">2020 — 2024</span>
+                        <span class="tl-company" data-i18n="experience.3.company">Collège Paul Duez (Cambrai)</span>
+                    </div>
+                    <div class="tl-role" data-i18n="experience.3.title">Collégien</div>
+                    <div class="tl-desc" data-i18n="experience.3.desc">Études secondaires terminées avec succès.</div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="contact-social-links reveal" style="margin-top: 2rem;">
-                        <a href="mailto:pierre.bouteman@icloud.com" class="contact-link">
-                            <i class="bi bi-envelope-fill icon"></i> pierre.bouteman@icloud.com
+        <section id="projects" class="section container">
+            <div class="section-header reveal">
+                <span class="section-tag" data-i18n="sections.projects.tag">03 / PROJETS</span>
+                <h2 class="section-title" data-i18n="sections.projects.title">Ce que j'ai construit</h2>
+            </div>
+
+            <!-- 3D Carousel Container -->
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- Project 1 -->
+                    <article class="carousel-item reveal" data-index="0">
+                        <div class="card-content">
+                            <i class="bi bi-calendar-check-fill"></i>
+                            <div class="project-meta" data-i18n="projects.1.meta">APPLICATION WEB</div>
+                            <h3 class="project-title" data-i18n="projects.1.title">Conférences Orientation</h3>
+                            <p class="project-desc" data-i18n="projects.1.desc">Plateforme d’inscription et de suivi
+                                pour conférences scolaires.</p>
+                            <div class="tech-stack">
+                                <span class="tech-pill">PHP</span>
+                                <span class="tech-pill">MySQL</span>
+                            </div>
+                            <div class="hidden-details">
+                                <p data-i18n="projects.1.details.1">Application web conçue pour le lycée Paul Duez afin
+                                    de centraliser toute l’organisation des conférences : inscription des élèves, suivi
+                                    des présences par les enseignants et export administratif en quelques clics.</p>
+                                <p data-i18n-html="projects.1.details.2"><strong>Défi technique :</strong> garantir la
+                                    fiabilité des créneaux en forte affluence et générer des exports PDF dynamiques en
+                                    temps réel.</p>
+                                <a href="https://conferencesorientationpdz.eclozionmc.ovh/" target="_blank"
+                                    class="btn btn-primary" data-i18n="projects.1.action">Accès Interne</a>
+                            </div>
+                            <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span
+                                    data-i18n="projects.learnMore">En savoir plus</span></button>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="carousel-item reveal" data-index="1">
+                        <div class="card-content">
+                            <i class="bi bi-box-seam-fill"></i>
+                            <div class="project-meta" data-i18n="projects.2.meta">ÉCOSYSTÈME MINECRAFT</div>
+                            <h3 class="project-title" data-i18n="projects.2.title">Nexaria</h3>
+                            <p class="project-desc" data-i18n="projects.2.desc">Écosystème complet autour d’un serveur
+                                survie communautaire.</p>
+                            <div class="tech-stack">
+                                <span class="tech-pill">Paper API</span>
+                                <span class="tech-pill">Azuriom</span>
+                            </div>
+                            <div class="hidden-details">
+                                <p data-i18n="projects.2.details.1">Mise en place d’une infrastructure full-stack pour
+                                    l’univers Nexaria : expérience de jeu, services web et outils communautaires réunis
+                                    dans une plateforme cohérente.</p>
+                                <p data-i18n-html="projects.2.details.2"><strong>Stack :</strong> Paper API pour la
+                                    partie serveur Minecraft, Azuriom pour le site (boutique, classement, espace
+                                    communauté).</p>
+                                <a href="https://nexaria.netlib.re" target="_blank" class="btn btn-primary"
+                                    data-i18n="projects.2.action">Voir le site</a>
+                            </div>
+                            <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span
+                                    data-i18n="projects.learnMore">En savoir plus</span></button>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="carousel-item reveal" data-index="2">
+                        <div class="card-content">
+                            <i class="bi bi-controller"></i>
+                            <div class="project-meta" data-i18n="projects.3.meta">DÉVELOPPEMENT JEU</div>
+                            <h3 class="project-title" data-i18n="projects.3.title">Guerre Des Capsules</h3>
+                            <p class="project-desc" data-i18n="projects.3.desc">Fast-FPS multijoueur avec gameplay
+                                nerveux et compétitif.</p>
+                            <div class="tech-stack">
+                                <span class="tech-pill">Godot</span>
+                                <span class="tech-pill">GDScript</span>
+                            </div>
+                            <div class="hidden-details">
+                                <p data-i18n="projects.3.details.1">Prototype de shooter rapide où les joueurs
+                                    contrôlent des capsules spatiales dans des affrontements dynamiques orientés skill
+                                    et mobilité.</p>
+                                <p data-i18n-html="projects.3.details.2"><strong>Points clés :</strong> synchronisation
+                                    réseau via ENet, comportements physiques personnalisés et boucle de jeu pensée pour
+                                    le fun immédiat.</p>
+                                <a href="https://github.com/nexos20lv/La-Guerre-Des-Capsules" target="_blank"
+                                    class="btn btn-primary" data-i18n="projects.github">Voir sur GitHub</a>
+                            </div>
+                            <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span
+                                    data-i18n="projects.learnMore">En savoir plus</span></button>
+                        </div>
+                    </article>
+
+                    <!-- Project 4 -->
+                    <article class="carousel-item reveal" data-index="3">
+                        <div class="card-content">
+                            <i class="bi bi-window-sidebar"></i>
+                            <div class="project-meta" data-i18n="projects.4.meta">FRONT-END</div>
+                            <h3 class="project-title" data-i18n="projects.4.title">Portfolio</h3>
+                            <p class="project-desc" data-i18n="projects.4.desc">Version actuelle de mon portfolio,
+                                pensée pour une expérience moderne et immersive.</p>
+                            <div class="tech-stack">
+                                <span class="tech-pill">JavaScript</span>
+                                <span class="tech-pill">UI Engineering</span>
+                            </div>
+                            <div class="hidden-details">
+                                <p data-i18n="projects.4.details.1">Site portfolio actuellement en production, conçu
+                                    pour présenter mes projets avec une interface claire, un univers visuel fort et des
+                                    interactions fluides.</p>
+                                <p data-i18n-html="projects.4.details.2"><strong>Focus :</strong> architecture front-end
+                                    en HTML/CSS/JavaScript vanilla, animations sur-mesure, modales de présentation et
+                                    design orienté performance.</p>
+                                <a href="https://github.com/nexos20lv/nexos20lv.github.io" target="_blank"
+                                    class="btn btn-primary" data-i18n="projects.source">Code source</a>
+                            </div>
+                            <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span
+                                    data-i18n="projects.learnMore">En savoir plus</span></button>
+                        </div>
+                    </article>
+
+                    <!-- Project 5 -->
+                    <article class="carousel-item reveal" data-index="4">
+                        <div class="card-content">
+                            <i class="bi bi-rocket-takeoff-fill"></i>
+                            <div class="project-meta" data-i18n="projects.5.meta">APPLICATION DESKTOP</div>
+                            <h3 class="project-title" data-i18n="projects.5.title">Nexaria Launcher</h3>
+                            <p class="project-desc" data-i18n="projects.5.desc">Launcher Minecraft moderne avec mises à
+                                jour automatiques et gestion des mods.</p>
+                            <div class="tech-stack">
+                                <span class="tech-pill">Electron</span>
+                                <span class="tech-pill">GitHub Actions</span>
+                            </div>
+                            <div class="hidden-details">
+                                <p data-i18n="projects.5.details.1">Client desktop premium pour l’écosystème Nexaria :
+                                    authentification, installation simplifiée, gestion des comptes et expérience
+                                    utilisateur soignée.</p>
+                                <p data-i18n-html="projects.5.details.2"><strong>Points clés :</strong> auto-update
+                                    silencieux, vérification d’intégrité des mods, intégration Azuriom et présence
+                                    Discord en temps réel.</p>
+                                <a href="https://github.com/nexos20lv/Nexaria-Launcher" target="_blank"
+                                    class="btn btn-primary" data-i18n="projects.github">Voir sur GitHub</a>
+                            </div>
+                            <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span
+                                    data-i18n="projects.learnMore">En savoir plus</span></button>
+                        </div>
+                    </article>
+
+                    <!-- Project 6 -->
+                    <article class="carousel-item reveal" data-index="5">
+                        <div class="card-content">
+                            <i class="bi bi-map-fill"></i>
+                            <div class="project-meta" data-i18n="projects.6.meta">PLUGIN CMS</div>
+                            <h3 class="project-title" data-i18n="projects.6.title">WebMap</h3>
+                            <p class="project-desc" data-i18n="projects.6.desc">Plugin Azuriom pour intégrer Dynmap,
+                                BlueMap ou Pl3xMap en quelques clics.</p>
+                            <div class="tech-stack">
+                                <span class="tech-pill">PHP</span>
+                                <span class="tech-pill">Azuriom</span>
+                            </div>
+                            <div class="hidden-details">
+                                <p data-i18n="projects.6.details.1">Plugin orienté simplicité qui ajoute une section
+                                    carte directement dans un site Azuriom sans développement custom.</p>
+                                <p data-i18n-html="projects.6.details.2"><strong>Objectif :</strong> connecter
+                                    rapidement l’univers web et le serveur Minecraft avec une configuration claire
+                                    depuis l’admin panel.</p>
+                                <a href="https://github.com/nexos20lv/WebMap" target="_blank" class="btn btn-primary"
+                                    data-i18n="projects.github">Voir sur GitHub</a>
+                            </div>
+                            <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span
+                                    data-i18n="projects.learnMore">En savoir plus</span></button>
+                        </div>
+                    </article>
+
+                    <!-- Project 7 -->
+                    <article class="carousel-item reveal" data-index="6">
+                        <div class="card-content">
+                            <i class="bi bi-house-gear-fill"></i>
+                            <div class="project-meta" data-i18n="projects.7.meta">APPLICATION DESKTOP</div>
+                            <h3 class="project-title" data-i18n="projects.7.title">Home Assistant Desktop</h3>
+                            <p class="project-desc" data-i18n="projects.7.desc">Client desktop dédié à Home Assistant
+                                avec capteurs PC et accès rapide.</p>
+                            <div class="tech-stack">
+                                <span class="tech-pill">Electron</span>
+                                <span class="tech-pill">JavaScript</span>
+                            </div>
+                            <div class="hidden-details">
+                                <p data-i18n="projects.7.details.1">Application desktop indépendante du navigateur pour
+                                    piloter Home Assistant avec une interface fluide et une présence native (tray,
+                                    raccourcis globaux).</p>
+                                <p data-i18n-html="projects.7.details.2"><strong>Fonctions :</strong> auto-updates,
+                                    intégration des métriques machine (CPU, RAM, batterie, uptime) et workflow pensé for
+                                    un usage quotidien.</p>
+                                <a href="https://github.com/nexos20lv/Home-Assistant-Desktop" target="_blank"
+                                    class="btn btn-primary" data-i18n="projects.github">Voir sur GitHub</a>
+                            </div>
+                            <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span
+                                    data-i18n="projects.learnMore">En savoir plus</span></button>
+                        </div>
+                    </article>
+
+                    <!-- Project 8 -->
+                    <article class="carousel-item reveal" data-index="7">
+                        <div class="card-content">
+                            <i class="bi bi-speedometer"></i>
+                            <div class="project-meta" data-i18n="projects.8.meta">SUPERVISION</div>
+                            <h3 class="project-title" data-i18n="projects.8.title">AzureLab Dashboard</h3>
+                            <p class="project-desc" data-i18n="projects.8.desc">Dashboard VPS en temps réel pour suivre
+                                santé serveur et réseau.</p>
+                            <div class="tech-stack">
+                                <span class="tech-pill">PHP</span>
+                                <span class="tech-pill">Monitoring</span>
+                            </div>
+                            <div class="hidden-details">
+                                <p data-i18n="projects.8.details.1">Tableau de bord de supervision affichant CPU, RAM,
+                                    disque, uptime, bande passante et latence avec actualisation périodique.</p>
+                                <p data-i18n-html="projects.8.details.2"><strong>Approche :</strong> stack légère en
+                                    PHP, métriques système collectées côté serveur et visualisation claire via
+                                    graphiques interactifs.</p>
+                                <a href="https://github.com/nexos20lv/AzureLab-Dashboard" target="_blank"
+                                    class="btn btn-primary" data-i18n="projects.github">Voir sur GitHub</a>
+                            </div>
+                            <button class="btn btn-secondary btn-sm learn-more-btn" style="margin-top: 1.5rem;"><span
+                                    data-i18n="projects.learnMore">En savoir plus</span></button>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Project Details Modal (Custom Overlay) -->
+        <div id="project-modal" class="modal-overlay">
+            <div class="modal-content">
+                <button class="close-modal">×</button>
+                <div class="modal-body-content">
+                    <div class="modal-header">
+                        <i id="modal-icon" class="bi bi-code-square"></i>
+                        <span id="modal-meta" class="mono" style="color:var(--primary)"></span>
+                        <h2 id="modal-title"></h2>
+                    </div>
+                    <div id="modal-desc" class="modal-description"></div>
+                    <div id="gh-modal-stats" class="gh-modal-stats"></div>
+                    <div id="modal-action" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <section id="contact" class="footer-cta container">
+            <div class="contact-inner reveal">
+                <span class="section-tag" data-i18n="sections.contact.tag">04 / CONTACT</span>
+                <h2 class="section-title" data-i18n="contact.title">Un projet en tête ?</h2>
+                <div class="contact-form-container">
+                    <form id="contact-form" class="reveal">
+                        <div class="form-group">
+                            <input type="text" id="contact-name" name="name" required placeholder=" "
+                                data-i18n-placeholder="contact.name">
+                            <label for="contact-name" data-i18n="contact.name">Votre nom</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contact-email" name="email" required placeholder=" "
+                                data-i18n-placeholder="contact.email">
+                            <label for="contact-email" data-i18n="contact.email">Votre email</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contact-message" name="message" required placeholder=" "
+                                data-i18n-placeholder="contact.message"></textarea>
+                            <label for="contact-message" data-i18n="contact.message">Votre message...</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="contact-submit">
+                            <span data-i18n="contact.send">Envoyer le message</span>
+                        </button>
+                        <div id="form-feedback" class="form-feedback"></div>
+                    </form>
+                </div>
+
+                <div class="contact-social-links reveal" style="margin-top: 2rem;">
+                    <a href="mailto:pierre.bouteman@icloud.com" class="contact-link">
+                        <i class="bi bi-envelope-fill icon"></i> pierre.bouteman@icloud.com
+                    </a>
+                    <div class="contact-discord-group"
+                        style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem;">
+                        <a href="https://discord.com/users/1288079115248992297" target="_blank" class="contact-link">
+                            <i class="bi bi-discord icon"></i> @nexos20lv
                         </a>
-                        <div class="contact-discord-group" style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem;">
-                            <a href="https://discord.com/users/1288079115248992297" target="_blank" class="contact-link">
-                                <i class="bi bi-discord icon"></i> @nexos20lv
-                            </a>
-                            <a href="https://discord.gg/aQREDsZqv4" target="_blank" class="contact-link">
-                                <i class="bi bi-shield-shaded icon"></i> Mon serveur Discord
-                            </a>
-                        </div>
+                        <a href="https://discord.gg/aQREDsZqv4" target="_blank" class="contact-link">
+                            <i class="bi bi-shield-shaded icon"></i> Mon serveur Discord
+                        </a>
                     </div>
-
-                    <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-                        <a href="https://buymeacoffee.com/nexos20" target="_blank" class="btn btn-secondary" title="Support me on Buy Me A Coffee">☕ Buy Me A Coffee</a>
-                    </div>
-
-                    <footer>
-                        <div style="margin-top: 5rem;">
-                            <p data-i18n-html="footer.copyright">© 2026 Pierre Bouteman. Fait main avec <span style="color:var(--primary)">❤</span> et du code.</p>
-                        </div>
-                    </footer>
                 </div>
-            </section>
 
-        </main>
+                <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <a href="https://buymeacoffee.com/nexos20" target="_blank" class="btn btn-secondary"
+                        title="Support me on Buy Me A Coffee">☕ Buy Me A Coffee</a>
+                </div>
 
-        <!-- Search Modal (Ctrl+K) -->
+                <footer>
+                    <div style="margin-top: 5rem;">
+                        <p data-i18n-html="footer.copyright">© 2026 Pierre Bouteman. Fait main avec <span
+                                style="color:var(--primary)">❤</span> et du code.</p>
+                    </div>
+                </footer>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Search Modal (Ctrl+K) -->
     <div id="search-modal" class="search-overlay">
         <div class="search-container glass-panel">
             <div class="search-header">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                <input type="text" id="projects-search" placeholder="Rechercher un projet (Titre, tags...)..." autocomplete="off" data-i18n-placeholder="search.placeholder">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                </svg>
+                <input type="text" id="projects-search" placeholder="Rechercher un projet (Titre, tags...)..."
+                    autocomplete="off" data-i18n-placeholder="search.placeholder">
                 <span class="search-kbd mono" data-i18n="search.kbd">ESC</span>
             </div>
             <div id="search-results" class="search-results">
@@ -536,9 +665,9 @@
 
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+
     <!-- Main Script Module -->
-        <script type="module" src="js/main.js?v=2.0"></script>
+    <script type="module" src="js/main.js?v=2.0"></script>
 </body>
 
 </html>
