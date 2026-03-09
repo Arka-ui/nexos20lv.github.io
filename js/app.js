@@ -741,6 +741,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             };
 
+            // Safety Check: Avoid error if secret is not set
+            if (!config.discordWebhook || config.discordWebhook.startsWith('{{')) {
+                console.warn("⚠️ Discord Webhook not configured. Please add DISCORD_WEBHOOK to GitHub Secrets.");
+                feedback.textContent = t('contact.error');
+                feedback.className = 'form-feedback error';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+                return;
+            }
+
             try {
                 const res = await fetch(config.discordWebhook, {
                     method: 'POST',
