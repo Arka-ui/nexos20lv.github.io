@@ -1,0 +1,59 @@
+name: Discord Status Sync
+
+on:
+  schedule:
+    - cron: '*/10 * * * *' # Every 10 minutes
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  sync_status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch Discord Channel Status
+        id: discord_fetch
+        run: |
+          CHANNEL_ID="${{ secrets.DISCORD_STATUS_CHANNEL_ID }}"
+          BOT_TOKEN="${{ secrets.DISCORD_BOT_TOKEN }}"
+          
+          if [ -z "$BOT_TOKEN" ]; then
+            echo "❌ DISCORD_BOT_TOKEN is missing"
+            exit 1
+          fi
+
+          # Get latest message from channel
+          RESPONSE=$(curl -s -H "Authorization: Bot $BOT_TOKEN" \
+            "https://discord.com/api/v10/channels/$CHANNEL_ID/messages?limit=1")
+          
+          CONTENT=$(echo $RESPONSE | jq -r '.[0].content')
+          echo "Last message: $CONTENT"
+
+          if [ "$CONTENT" == "null" ]; then
+             echo "⚠️ No messages found"
+             exit 0
+          fi
+
+          # Parsing logic
+          PROJECTS=$(echo "$CONTENT" | grep -oEi '[0-9]+' | head -1 || echo "0")
+          AVAILABLE="true"
+          if [[ "$CONTENT" =~ "indisponible"|"busy"|"occupé" ]]; then
+            AVAILABLE="false"
+          fi
+
+          # Update status.json
+          echo "{\"activeProjects\": $PROJECTS, \"isAvailable\": $AVAILABLE, \"lastUpdate\": \"$(date -u +'%Y-%m-%dT%H:%M:%SZ')\"}" > js/status.json
+          cat js/status.json
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add js/status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update status from discord channel"
+            git push
+          else
+            echo "No changes to commit"
+          fi

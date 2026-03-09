@@ -4,101 +4,61 @@
 ![Stack](https://img.shields.io/badge/Stack-HTML%20%7C%20CSS%20%7C%20JS-0ea5e9?style=for-the-badge)
 ![i18n](https://img.shields.io/badge/Langues-FR%20%2F%20EN-22c55e?style=for-the-badge)
 
-Portfolio personnel avec identité visuelle moderne, animation canvas, carte Discord en temps réel et système multilingue.
+Portfolio personnel ultra-moderne avec identité visuelle futuriste, intégration temps réel (GitHub & Discord) et système de gestion dynamique.
 
 ## 🚀 Features
 
-- Hero full-screen avec effets visuels et typographie marquée
-- Grille de projets + modale de détails
-- Carte Discord live via Lanyard WebSocket
-- i18n FR/EN avec persistance utilisateur (`localStorage`)
-- Architecture front clean, sans framework
+- **Terminal Loader** : Animation de chargement immersive simulant un scan système.
+- **High Performance Mode** : Optimisation pour les anciens PCs (désactive le mesh background et les animations lourdes).
+- **Ctrl+K Search** : Recherche rapide de projets par titre ou technologie.
+- **GitHub Stats Live** : Affichage en temps réel des statistiques globales et par projet (stars, forks).
+- **Discord Sync System** : Synchronisation dynamique de la disponibilité via un salon Discord privé.
+- **Contact Form Securisé** : Envoi de messages via Webhook Discord avec injection de secrets via GitHub Actions.
+- **Identité Vectorielle** : Logo SVG haute résolution et favicon assorti.
 
 ## 🧱 Stack technique
 
-- **HTML5**
-- **CSS3** (split en fichiers base/composants)
-- **JavaScript ES Modules**
-- **Canvas API** (particules)
-- **Lanyard API** (présence Discord)
+- **HTML5 & CSS3** (Vanilla, Glassmorphism, CSS Variables)
+- **JavaScript ES Modules** (Pas de framework)
+- **Lanyard API** (Statut Discord en temps réel via WebSocket)
+- **GitHub API** (Statistiques des repositories)
+- **GitHub Actions** (Déploiement auto & Injection de secrets)
 
 ## 📂 Architecture
 
 ```text
 modern-portfolio/
-├── index.html
-├── README.md
+├── .github/workflows/      # Automatisations GitHub
+├── assets/                 # Logo SVG, Favicon, Images
 ├── css/
-│   ├── style.css          # Entrée CSS (imports)
-│   ├── base.css           # Variables, reset, layout, nav, hero
-│   └── components.css     # Cards, modale, sections, responsive
+│   ├── base.css            # Thème, variables, reset
+│   └── components.css      # Logique visuelle des composants
 └── js/
-    ├── main.js            # Entrée JS
-    ├── app.js             # Logique principale UI
-    ├── i18n.js            # Dictionnaires FR/EN
-    └── particles.js       # Effet particules canvas
+    ├── app.js              # Logique métier & UI
+    ├── i18n.js             # Internationalisation (FR/EN)
+    ├── config.js           # Configuration injectée au déploiement
+    └── status.json         # État de disponibilité (mis à jour via Discord)
 ```
 
-## ⚙️ Démarrage local
+## ⚙️ Configuration & Secrets
 
-### 1) Serveur Python
+Pour faire fonctionner les fonctionnalités dynamiques, vous devez configurer les **Secrets** dans votre repo GitHub :
 
-```bash
-cd modern-portfolio
-python3 -m http.server 8000
-```
+| Secret | Description |
+| :--- | :--- |
+| `DISCORD_WEBHOOK` | L'URL du webhook de votre salon de contact. |
+| `DISCORD_BOT_TOKEN` | Token d'un bot Discord pour lire votre statut. |
+| `DISCORD_STATUS_CHANNEL_ID` | L'ID du salon Discord utilisé pour la synchro. |
 
-Ouvre ensuite :
-
-```text
-http://127.0.0.1:8000
-```
-
-### 2) VS Code Live Server
-
-- Ouvre le dossier dans VS Code
-- Lance `index.html` avec l’extension Live Server
-
-## 🌍 i18n (FR/EN)
-
-- Langue par défaut : **français**
-- Switch de langue dans le header : `FR` / `EN`
-- Préférence persistée dans `localStorage` avec la clé `portfolio-lang`
-- Traductions centralisées dans `js/i18n.js`
-
-## 🎨 Personnalisation rapide
-
-### Contenu
-
-- Textes de page : `index.html`
-- Dictionnaires de traduction : `js/i18n.js`
-- Données projets : structure des cartes dans `index.html`
-
-### UI & thème
-
-- Variables de thème (`:root`) : `css/base.css`
-- Composants visuels : `css/components.css`
-
-### Discord
-
-- Configuration & logique de la carte : `js/app.js`
+> [!IMPORTANT]
+> N'oubliez pas d'activer les **"Workflow permissions"** sur **Read and write** dans les paramètres de votre repo (Actions > General) pour que la synchro automatique puisse fonctionner.
 
 ## 🚢 Déploiement
 
-Le projet est statique, il fonctionne directement sur :
-
-- GitHub Pages
-- Netlify
-- Vercel (mode static)
-- Nginx / Apache
-
-## 🗺️ Roadmap (idées)
-
-- [ ] Ajouter une vue mobile de navigation complète
-- [ ] Ajouter une section expériences/formation
-- [ ] Ajouter des tests visuels (Playwright)
+Le site est conçu pour être déployé via **GitHub Pages**. Le workflow `.github/workflows/static.yml` gère automatiquement :
+1. Le cache-busting par versioning.
+2. L'injection sécurisée du Webhook dans `js/config.js`.
 
 ## 📄 Licence
 
-Pas de licence définie actuellement.
-Si besoin, ajoute un fichier `LICENSE` (ex: MIT).
+© 2026 Pierre Bouteman. Tous droits réservés.

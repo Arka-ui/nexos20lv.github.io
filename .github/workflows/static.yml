@@ -56,6 +56,15 @@ jobs:
           
           echo "✅ Version numbers updated to: $VERSION"
           
+      # Injecter le Webhook Discord depuis les Secrets GitHub
+      - name: Inject Discord Webhook
+        run: |
+          if [ -n "${{ secrets.DISCORD_WEBHOOK }}" ]; then
+            sed -i "s|{{DISCORD_WEBHOOK}}|${{ secrets.DISCORD_WEBHOOK }}|g" js/config.js
+            echo "✅ Discord Webhook injected"
+          else
+            echo "⚠️ DISCORD_WEBHOOK secret not found, skipping injection"
+          fi
       - name: Setup Pages
         uses: actions/configure-pages@v5
         

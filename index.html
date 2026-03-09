@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="meta.title">Pierre | Développeur Créatif</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <link rel="apple-touch-icon" href="assets/logo.svg">
     <meta name="description" content="Portfolio de Pierre Bouteman, développeur full-stack orienté applications web et desktop." data-i18n-content="meta.description">
 
     <!-- Fonts -->
@@ -23,31 +24,47 @@
     <!-- Loader -->
     <div id="loader">
         <div class="loader-content">
-            <span class="mono" data-i18n="loader.init">> INITIALISATION DU SYSTÈME...</span>
-            <div class="loader-bar"></div>
+            <div class="loader-terminal">
+                <div class="terminal-line mono" data-i18n="loader.init">> INITIALISATION DU SYSTÈME...</div>
+                <div id="loader-logs" class="mono"></div>
+            </div>
+            <div class="loader-bar-container">
+                <div class="loader-bar"></div>
+            </div>
         </div>
     </div>
 
     <!-- Custom Cursor -->
-    <div class="cursor-dot" data-cursor-dot></div>
-    <div class="cursor-outline" data-cursor-outline></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorRing"></div>
 
-    <!-- Canvas Background -->
-    <canvas id="bg-canvas"></canvas>
+    <!-- Canvas Background (Old) -->
+    <!-- <canvas id="bg-canvas"></canvas> -->
+    
+    <!-- Mesh Background (New) -->
+    <div class="mesh"></div>
 
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">PB<span style="color:var(--primary)">.</span></a>
+                <a href="#" class="logo">
+                    <img src="assets/logo.svg" alt="Pierre Bouteman" height="52" width="auto" style="display: block;">
+                </a>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
                         <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+                        <li><a href="#experience" data-i18n="nav.experience">Expérience</a></li>
+                        <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
                         <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
                     </ul>
-                    <div class="lang-switch" role="group" aria-label="Language switcher">
-                        <button type="button" class="lang-btn active" data-lang="fr">FR</button>
-                        <button type="button" class="lang-btn" data-lang="en">EN</button>
+                    <div class="nav-actions">
+                        <button type="button" class="perf-btn" id="perfToggle" title="Toggle High Performance Mode">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        </button>
+                        <div class="lang-switch" role="group" aria-label="Language switcher">
+                            <button type="button" class="lang-btn active" data-lang="fr">FR</button>
+                            <button type="button" class="lang-btn" data-lang="en">EN</button>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -78,10 +95,14 @@
         
             <section class="hero">
                 <div class="hero-content">
-                    <h1><span data-i18n="hero.title.prefix">Développeur</span> <span class="highlight-text" data-i18n="hero.title.highlight">Front & Back-End.</span></h1>
-                    <p data-i18n="hero.desc">Je conçois des architectures complètes et des interfaces immersives. Ma priorité reste
-                        l’ingénierie logicielle robuste, avec l’IA comme accélérateur ponctuel.</p>
-                    <div class="cta-group">
+                    <div class="hero-tag reveal" id="hero-availability" data-i18n="hero.status.loading">Synchronisation du statut...</div>
+                    <h1 class="reveal">
+                        <span class="line dim" data-i18n="hero.title.prefix">Développeur</span>
+                        <span class="line glow-word" data-i18n="hero.title.highlight">Full-Stack</span>
+                        <span class="line dim" data-i18n="hero.title.suffix">& Créatif</span>
+                    </h1>
+                    <p class="hero-sub reveal" data-i18n="hero.desc">Je conçois des architectures complètes et des interfaces immersives. Ma priorité reste l’ingénierie logicielle robuste, avec l’IA comme accélérateur ponctuel.</p>
+                    <div class="hero-actions reveal">
                         <a href="#projects" class="btn btn-primary" data-i18n="hero.cta.projects">Voir les projets</a>
                         <a href="#contact" class="btn btn-secondary" data-i18n="hero.cta.contact">Me contacter</a>
                     </div>
@@ -106,17 +127,122 @@
                 </div>
             </div>
 
+            <!-- Moved Sections Above Projects -->
+            <section id="about" class="section container">
+                <div class="bio-grid">
+                    <div class="reveal">
+                        <span class="section-tag" data-i18n="sections.about.tag">01 / À PROPOS</span>
+                        <p class="big-text">
+                            <span data-i18n-html="about.p1">Je suis <span class="highlight">Pierre Bouteman</span>, développeur polyvalent (Front & Back) basé en France.</span>
+                            <br><br>
+                            <span data-i18n-html="about.p2">Je suis actuellement en <strong>Première STI2D</strong>, et je développe en parallèle des projets concrets pour renforcer mes compétences techniques.</span>
+                            <br><br>
+                    <span data-i18n="about.p3">Mon approche repose sur des bases solides : architecture, qualité de code, performance et maintenabilité. J’utilise les outils IA de manière ciblée pour accélérer certaines étapes, sans jamais remplacer l’analyse technique et les bonnes pratiques d’ingénierie.</span>
+                </p>
+            </div>
+                    <div class="glass-panel reveal" data-tilt>
+                        <h4 style="margin-bottom: 1.5rem; color: #fff; font-size: 1.2rem;" data-i18n="about.expertise.title">Expertise Technique</h4>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div>
+                                <strong style="color: #fff; display: block; margin-bottom: 0.5rem;" data-i18n="about.expertise.1.title">Applications Desktop & Web</strong>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.1.desc">JavaScript, Electron, HTML/CSS et architecture front-end pour des apps desktop et des interfaces web interactives.</p>
+                            </div>
+                            <div>
+                                <strong style="color: #fff; display: block; margin-bottom: 0.5rem;" data-i18n="about.expertise.2.title">Back-End PHP & Écosystème Minecraft</strong>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.2.desc">PHP, MySQL et intégrations Azuriom/Paper API pour des outils communautaires (launcher, plugin WebMap, services web).</p>
+                            </div>
+                            <div>
+                                <strong style="color: #fff; display: block; margin-bottom: 0.5rem;" data-i18n="about.expertise.3.title">Qualité & Livraison</strong>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.3.desc">Utilisation avancée des LLMs pour accélérer certaines tâches, avec validation manuelle. Utilisation de Git, releases GitHub et automatisations CI pour livrer des versions stables.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-panel reveal github-card" data-tilt style="margin-top: 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem;">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="color: var(--violet-light);"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            <span class="mono" style="color: #fff; font-size: 1rem; letter-spacing: 0.1em;">GITHUB METRICS</span>
+                        </div>
+                        <div class="gh-stats-grid">
+                            <div class="gh-stat-item">
+                                <span class="gh-stat-value" id="gh-repos">--</span>
+                                <span class="gh-stat-label">Repos</span>
+                            </div>
+                            <div class="gh-stat-item">
+                                <span class="gh-stat-value" id="gh-stars">--</span>
+                                <span class="gh-stat-label">Stars</span>
+                            </div>
+                        </div>
+                        <div class="gh-languages">
+                            <div class="gh-lang-bar-container" id="gh-lang-bar"></div>
+                            <div id="gh-lang-labels" class="gh-lang-labels"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="section container">
+                <div class="section-tag reveal" data-i18n="sections.experience.tag">02 / EXPÉRIENCE</div>
+                <h2 class="section-title reveal" data-i18n="sections.experience.title">Mon parcours</h2>
+                <div class="timeline">
+                    <!-- Project Experience -->
+                    <div class="tl-item reveal">
+                        <div class="tl-meta">
+                            <span class="tl-date" data-i18n="experience.1.date">2024 — Présent</span>
+                            <span class="tl-company" data-i18n="experience.1.company">Projets Personnels</span>
+                        </div>
+                        <div class="tl-role" data-i18n="experience.1.title">Développeur Full-Stack</div>
+                        <div class="tl-desc" data-i18n="experience.1.desc">Développement d'applications complexes comme Home Assistant Desktop et Nexaria Launcher. Focus sur la performance et l'expérience utilisateur.</div>
+                    </div>
+                    <!-- Lycée -->
+                    <div class="tl-item reveal">
+                        <div class="tl-meta">
+                            <span class="tl-date" data-i18n="experience.2.date">2024 — Présent</span>
+                            <span class="tl-company" data-i18n="experience.2.company">Lycée Paul Duez (Cambrai)</span>
+                        </div>
+                        <div class="tl-role" data-i18n="experience.2.title">Lycéen | Première STI2D</div>
+                        <div class="tl-desc" data-i18n="experience.2.desc">Actuellement en classe de Première STI2D pour approfondir mes connaissances technologiques.</div>
+                    </div>
+                    <!-- Stage 2nde -->
+                    <div class="tl-item reveal">
+                        <div class="tl-meta">
+                            <span class="tl-date" data-i18n="experience.4.date">2025</span>
+                            <span class="tl-company" data-i18n="experience.4.company">Déclic Info</span>
+                        </div>
+                        <div class="tl-role" data-i18n="experience.4.title">Stagiaire Seconde</div>
+                        <div class="tl-desc" data-i18n="experience.4.desc">Stage d'observation et d'immersion dans le milieu de la maintenance et du service informatique.</div>
+                    </div>
+                    <!-- Stage 3ème -->
+                    <div class="tl-item reveal">
+                        <div class="tl-meta">
+                            <span class="tl-date" data-i18n="experience.5.date">2024</span>
+                            <span class="tl-company" data-i18n="experience.5.company">ASC Computer</span>
+                        </div>
+                        <div class="tl-role" data-i18n="experience.5.title">Stagiaire 3ème</div>
+                        <div class="tl-desc" data-i18n="experience.5.desc">Premier contact avec le monde professionnel de l'informatique.</div>
+                    </div>
+                    <!-- Collège -->
+                    <div class="tl-item reveal">
+                        <div class="tl-meta">
+                            <span class="tl-date" data-i18n="experience.3.date">2020 — 2024</span>
+                            <span class="tl-company" data-i18n="experience.3.company">Collège Paul Duez (Cambrai)</span>
+                        </div>
+                        <div class="tl-role" data-i18n="experience.3.title">Collégien</div>
+                        <div class="tl-desc" data-i18n="experience.3.desc">Études secondaires terminées avec succès.</div>
+                    </div>
+                </div>
+            </section>
+
             <section id="projects" class="section container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="sections.projects.tag">01 / PROJETS</span>
-                    <h2 class="section-title" data-i18n="sections.projects.title">Sélection de Travaux</h2>
+                <div class="section-header reveal">
+                    <span class="section-tag" data-i18n="sections.projects.tag">03 / PROJETS</span>
+                    <h2 class="section-title" data-i18n="sections.projects.title">Ce que j'ai construit</h2>
                 </div>
 
                 <!-- 3D Carousel Container -->
                 <div class="carousel-container">
                     <div class="carousel-track">
                         <!-- Project 1 -->
-                        <article class="card-3d carousel-item" data-index="0">
+                        <article class="carousel-item reveal" data-index="0">
                             <div class="card-content">
                                 <div class="project-meta" data-i18n="projects.1.meta">APPLICATION WEB</div>
                                 <h3 class="project-title" data-i18n="projects.1.title">Conférences Orientation</h3>
@@ -135,7 +261,7 @@
                         </article>
 
                         <!-- Project 2 -->
-                        <article class="card-3d carousel-item" data-index="1">
+                        <article class="carousel-item reveal" data-index="1">
                             <div class="card-content">
                                 <div class="project-meta" data-i18n="projects.2.meta">ÉCOSYSTÈME MINECRAFT</div>
                                 <h3 class="project-title" data-i18n="projects.2.title">Nexaria</h3>
@@ -154,7 +280,7 @@
                         </article>
 
                         <!-- Project 3 -->
-                        <article class="card-3d carousel-item" data-index="2">
+                        <article class="carousel-item reveal" data-index="2">
                             <div class="card-content">
                                 <div class="project-meta" data-i18n="projects.3.meta">DÉVELOPPEMENT JEU</div>
                                 <h3 class="project-title" data-i18n="projects.3.title">Guerre Des Capsules</h3>
@@ -174,7 +300,7 @@
                         </article>
 
                         <!-- Project 4 -->
-                        <article class="card-3d carousel-item" data-index="3">
+                        <article class="carousel-item reveal" data-index="3">
                             <div class="card-content">
                                 <div class="project-meta" data-i18n="projects.4.meta">FRONT-END</div>
                                 <h3 class="project-title" data-i18n="projects.4.title">Portfolio</h3>
@@ -194,7 +320,7 @@
                         </article>
 
                         <!-- Project 5 -->
-                        <article class="card-3d carousel-item" data-index="4">
+                        <article class="carousel-item reveal" data-index="4">
                             <div class="card-content">
                                 <div class="project-meta" data-i18n="projects.5.meta">APPLICATION DESKTOP</div>
                                 <h3 class="project-title" data-i18n="projects.5.title">Nexaria Launcher</h3>
@@ -214,7 +340,7 @@
                         </article>
 
                         <!-- Project 6 -->
-                        <article class="card-3d carousel-item" data-index="5">
+                        <article class="carousel-item reveal" data-index="5">
                             <div class="card-content">
                                 <div class="project-meta" data-i18n="projects.6.meta">PLUGIN CMS</div>
                                 <h3 class="project-title" data-i18n="projects.6.title">WebMap</h3>
@@ -234,7 +360,7 @@
                         </article>
 
                         <!-- Project 7 -->
-                        <article class="card-3d carousel-item" data-index="6">
+                        <article class="carousel-item reveal" data-index="6">
                             <div class="card-content">
                                 <div class="project-meta" data-i18n="projects.7.meta">APPLICATION DESKTOP</div>
                                 <h3 class="project-title" data-i18n="projects.7.title">Home Assistant Desktop</h3>
@@ -254,7 +380,7 @@
                         </article>
 
                         <!-- Project 8 -->
-                        <article class="card-3d carousel-item" data-index="7">
+                        <article class="carousel-item reveal" data-index="7">
                             <div class="card-content">
                                 <div class="project-meta" data-i18n="projects.8.meta">SUPERVISION</div>
                                 <h3 class="project-title" data-i18n="projects.8.title">AzureLab Dashboard</h3>
@@ -281,54 +407,57 @@
             <div id="project-modal" class="modal-overlay">
                 <div class="modal-content">
                     <button class="close-modal">×</button>
-                    <div class="modal-body">
+                    <div class="modal-body-content">
                         <div class="modal-header">
                             <span id="modal-meta" class="mono" style="color:var(--primary)"></span>
                             <h2 id="modal-title"></h2>
                         </div>
                         <div id="modal-desc" class="modal-description"></div>
+                        <div id="gh-modal-stats" class="gh-modal-stats"></div>
                         <div id="modal-action" style="margin-top: 2rem;"></div>
                     </div>
                 </div>
             </div>
 
-            <section id="about" class="section container">
-                <div class="bio-grid">
-                    <div>
-                        <span class="section-tag" data-i18n="sections.about.tag">02 / À PROPOS</span>
-                        <p class="big-text">
-                            <span data-i18n-html="about.p1">Je suis <span class="highlight">Pierre Bouteman</span>, développeur polyvalent (Front & Back) basé en France.</span>
-                            <br><br>
-                            <span data-i18n-html="about.p2">Je suis actuellement en <strong>Première STI2D</strong>, et je développe en parallèle des projets concrets pour renforcer mes compétences techniques.</span>
-                            <br><br>
-                            <span data-i18n="about.p3">Mon approche repose sur des bases solides : architecture, qualité de code, performance et maintenabilité. J’utilise les outils IA de manière ciblée pour accélérer certaines étapes, sans jamais remplacer l’analyse technique et les bonnes pratiques d’ingénierie.</span>
-                        </p>
+
+            <section id="contact" class="footer-cta container">
+                <div class="contact-inner reveal">
+                    <span class="section-tag" data-i18n="sections.contact.tag">04 / CONTACT</span>
+                    <h2 class="section-title" data-i18n="contact.title">Un projet en tête ?</h2>
+                    <div class="contact-form-container">
+                        <form id="contact-form" class="reveal">
+                            <div class="form-group">
+                                <input type="text" id="contact-name" name="name" required placeholder=" " data-i18n-placeholder="contact.name">
+                                <label for="contact-name" data-i18n="contact.name">Votre nom</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="contact-email" name="email" required placeholder=" " data-i18n-placeholder="contact.email">
+                                <label for="contact-email" data-i18n="contact.email">Votre email</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="contact-message" name="message" required placeholder=" " data-i18n-placeholder="contact.message"></textarea>
+                                <label for="contact-message" data-i18n="contact.message">Votre message...</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="contact-submit">
+                                <span data-i18n="contact.send">Envoyer le message</span>
+                            </button>
+                            <div id="form-feedback" class="form-feedback"></div>
+                        </form>
                     </div>
-                    <div class="glass-panel" data-tilt>
-                        <h4 style="margin-bottom: 1.5rem; color: #fff; font-size: 1.2rem;" data-i18n="about.expertise.title">Expertise Technique</h4>
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <div>
-                                <strong style="color: #fff; display: block; margin-bottom: 0.5rem;" data-i18n="about.expertise.1.title">Applications Desktop & Web</strong>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.1.desc">JavaScript, Electron, HTML/CSS et architecture front-end pour des apps desktop et des interfaces web interactives.</p>
-                            </div>
-                            <div>
-                                <strong style="color: #fff; display: block; margin-bottom: 0.5rem;" data-i18n="about.expertise.2.title">Back-End PHP & Écosystème Minecraft</strong>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.2.desc">PHP, MySQL et intégrations Azuriom/Paper API pour des outils communautaires (launcher, plugin WebMap, services web).</p>
-                            </div>
-                            <div>
-                                <strong style="color: #fff; display: block; margin-bottom: 0.5rem;" data-i18n="about.expertise.3.title">Qualité & Livraison</strong>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="about.expertise.3.desc">Utilisation avancée des LLMs pour accélérer certaines tâches, avec validation manuelle. Utilisation de Git, releases GitHub et automatisations CI pour livrer des versions stables.</p>
-                            </div>
+
+                    <div class="contact-social-links reveal" style="margin-top: 2rem;">
+                        <a href="mailto:pierre.bouteman@icloud.com" class="contact-link">
+                            <span class="icon">📧</span> pierre.bouteman@icloud.com
+                        </a>
+                        <div class="contact-discord-group" style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem;">
+                            <a href="https://discord.com/users/1288079115248992297" target="_blank" class="contact-link">
+                                <span class="icon">👤</span> @nexos20lv
+                            </a>
+                            <a href="https://discord.gg/aQREDsZqv4" target="_blank" class="contact-link">
+                                <span class="icon">🛡️</span> Mon serveur Discord
+                            </a>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <section id="contact" class="footer-cta">
-                <div class="container">
-                    <span class="section-tag" data-i18n="sections.contact.tag">03 / CONTACT</span>
-                    <h2 style="font-size: 2rem; margin-bottom: 3rem; color: #fff;" data-i18n="contact.title">Un projet en tête ?</h2>
-                    <a href="mailto:pierre.bouteman@icloud.com" class="email-display">pierre.bouteman@icloud.com</a>
 
                     <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
                         <a href="https://buymeacoffee.com/nexos20" target="_blank" class="btn btn-secondary" title="Support me on Buy Me A Coffee">☕ Buy Me A Coffee</a>
@@ -344,7 +473,21 @@
 
         </main>
 
-        <!-- Main Script Module -->
+        <!-- Search Modal (Ctrl+K) -->
+    <div id="search-modal" class="search-overlay">
+        <div class="search-container glass-panel">
+            <div class="search-header">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" id="projects-search" placeholder="Rechercher un projet (Titre, tags...)..." autocomplete="off" data-i18n-placeholder="search.placeholder">
+                <span class="search-kbd mono" data-i18n="search.kbd">ESC</span>
+            </div>
+            <div id="search-results" class="search-results">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Script Module -->
         <script type="module" src="js/main.js"></script>
 </body>
 

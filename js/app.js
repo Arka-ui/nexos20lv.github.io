@@ -1,5 +1,6 @@
 import { ParticleSystem } from './particles.js';
 import { i18n } from './i18n.js';
+import { config } from './config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -63,79 +64,126 @@ document.addEventListener('DOMContentLoaded', () => {
 
     applyLanguage(currentLang);
 
-    // 1. Loader
-    setTimeout(() => {
+    // 1. Advanced Loader
+    const initLoader = async () => {
         const loader = document.getElementById('loader');
-        if (loader) {
-            loader.style.opacity = '0';
-            setTimeout(() => loader.style.visibility = 'hidden', 500);
+        const logsContainer = document.getElementById('loader-logs');
+        const progressBar = document.querySelector('.loader-bar');
+        
+        if (!loader || !logsContainer || !progressBar) return;
+
+        const logKeys = ['mesh', 'experience', 'projects', 'ready'];
+        const totalLogs = logKeys.length;
+        
+        // Initial delay
+        await new Promise(r => setTimeout(r, 400));
+
+        for (let i = 0; i < totalLogs; i++) {
+            const key = logKeys[i];
+            const logContent = t(`loader.${key}`);
+            
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            line.textContent = logContent;
+            logsContainer.appendChild(line);
+            
+            // Update bar
+            const progress = ((i + 1) / totalLogs) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Random processing delay
+            await new Promise(r => setTimeout(r, 300 + Math.random() * 300));
         }
-    }, 1500); // 1.5s Load simulation
 
-    // 2. Initialize Particles
-    const canvas = document.getElementById('bg-canvas');
-    if (canvas) {
-        new ParticleSystem('bg-canvas');
-    }
+        // Final delay before reveal
+        await new Promise(r => setTimeout(r, 600));
+        loader.classList.add('fade-out');
+        setTimeout(() => loader.style.display = 'none', 800);
+    };
 
-    // 3. Custom Cursor (Optimized)
-    const cursorDot = document.querySelector('[data-cursor-dot]');
-    const cursorOutline = document.querySelector('[data-cursor-outline]');
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    initLoader();
 
-    if (isSafari) {
-        document.body.classList.add('use-native-cursor');
-    }
+    // 1.5 High Performance Mode
+    const initPerformanceMode = () => {
+        const perfToggle = document.getElementById('perfToggle');
+        const isPerfMode = localStorage.getItem('perf-mode') === 'true';
 
-    if (!isSafari && cursorDot && cursorOutline && window.matchMedia("(pointer: fine)").matches) {
+        if (isPerfMode) {
+            document.body.classList.add('perf-mode');
+            perfToggle?.classList.add('active');
+        }
 
-        let mouseX = 0;
-        let mouseY = 0;
-        let outlineX = 0;
-        let outlineY = 0;
+        perfToggle?.addEventListener('click', () => {
+            const active = document.body.classList.toggle('perf-mode');
+            perfToggle.classList.toggle('active', active);
+            localStorage.setItem('perf-mode', active);
+        });
+    };
 
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+    initPerformanceMode();
 
-            // Dot follows instantly
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
+    // 2. Initialize Particles (Disabled for new design)
+    // const canvas = document.getElementById('bg-canvas');
+    // if (canvas) {
+    //     new ParticleSystem('bg-canvas');
+    // }
+
+    // 3. Custom Cursor (New Design)
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    if (dot && ring && window.matchMedia("(pointer: fine)").matches) {
+        document.addEventListener('mousemove', e => { 
+            mx = e.clientX; 
+            my = e.clientY; 
         });
 
-        // Smooth outline follower loop
-        const animateCursor = () => {
-            // Lerp (Linear Interpolation) for smooth delay
-            // outlineX += (mouseX - outlineX) * 0.15; // Adjustment speed
-            // outlineY += (mouseY - outlineY) * 0.15;
-
-            // Or simplified for performance if lerp feels floaty:
-            outlineX += (mouseX - outlineX) * 0.2;
-            outlineY += (mouseY - outlineY) * 0.2;
-
-            cursorOutline.style.left = `${outlineX}px`;
-            cursorOutline.style.top = `${outlineY}px`;
-
-            requestAnimationFrame(animateCursor);
-        };
-        animateCursor();
-
-        // Hover States
-        document.querySelectorAll('a, button, .card-3d, .clickable, .carousel-item').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorOutline.style.width = '60px';
-                cursorOutline.style.height = '60px';
-                cursorOutline.style.borderColor = 'var(--primary)';
-                cursorOutline.style.backgroundColor = 'rgba(0, 255, 242, 0.1)';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursorOutline.style.width = '40px';
-                cursorOutline.style.height = '40px';
-                cursorOutline.style.borderColor = 'rgba(255, 255, 255, 0.5)';
-                cursorOutline.style.backgroundColor = 'transparent';
-            });
-        });
+        function animCursor() {
+            dot.style.left = mx + 'px'; 
+            dot.style.top = my + 'px';
+            rx += (mx - rx) * 0.12; 
+            ry += (my - ry) * 0.12;
+            ring.style.left = rx + 'px'; 
+            ring.style.top = ry + 'px';
+            requestAnimationFrame(animCursor);
+        }
+        animCursor();
     }
+
+    // 3.5 Scroll Reveal & Navbar Scroll Spy
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const reveals = document.querySelectorAll('.reveal');
+    
+    // Intersection Observer for Reveals
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Scroll Spy for Navbar
+    window.addEventListener('scroll', () => {
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.pageYOffset >= sectionTop - sectionHeight / 3) {
+                current = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").includes(current)) {
+                link.classList.add("active");
+            }
+        });
+    });
 
     // 4. 3D Tilt Effect (Optimized)
     if (window.matchMedia("(pointer: fine)").matches) {
@@ -249,6 +297,34 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             renderIdle();
         }
+
+        // 3. Parse Availability Sync (Manual or External JSON)
+        const updateHeroFromJSON = async () => {
+             const heroTag = document.getElementById('hero-availability');
+             if (!heroTag) return;
+
+             try {
+                 // Fetch status.json (add timestamp to bypass cache)
+                 const res = await fetch(`js/status.json?t=${Date.now()}`);
+                 const data = await res.json();
+                 
+                 if (data.activeProjects > 0) {
+                     heroTag.textContent = t('hero.status.busy').replace('{count}', data.activeProjects);
+                 } else {
+                     heroTag.textContent = t('hero.status.available');
+                 }
+             } catch (e) {
+                 // Fallback to i18n manual config
+                 const config = i18n.config;
+                 if (config.activeProjects > 0) {
+                     heroTag.textContent = t('hero.status.busy').replace('{count}', config.activeProjects);
+                 } else {
+                     heroTag.textContent = t('hero.status.available');
+                 }
+             }
+        };
+
+        updateHeroFromJSON();
     }
 
     function renderSpotify(spotify) {
@@ -347,14 +423,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Modal Logic
-    // Modal Logic
-    function openModal(index) {
+    async function openModal(index) {
         activeIndex = index;
         markActiveItem(index);
 
+        const projectData = i18n[currentLang].projects[index + 1];
         const item = items[index];
-        const title = item.querySelector('.project-title').textContent;
-        const meta = item.querySelector('.project-meta').textContent;
+        const title = projectData?.title || item.querySelector('.project-title').textContent;
+        const meta = projectData?.meta || item.querySelector('.project-meta').textContent;
+        const repo = projectData?.repo;
+        
         // Data extraction
         const detailsClone = item.querySelector('.hidden-details').cloneNode(true);
         detailsClone.style.display = 'block';
@@ -367,14 +445,62 @@ document.addEventListener('DOMContentLoaded', () => {
         descContainer.innerHTML = '';
         descContainer.appendChild(detailsClone);
 
+        // GitHub Stats for Modal
+        const modalStats = document.getElementById('gh-modal-stats');
+        modalStats.innerHTML = '';
+        if (repo) {
+            try {
+                const res = await fetch(`https://api.github.com/repos/${repo}`);
+                const data = await res.json();
+                if (data.stargazers_count !== undefined) {
+                    modalStats.innerHTML = `
+                        <div class="gh-modal-stat">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <span>${data.stargazers_count} stars</span>
+                        </div>
+                        <div class="gh-modal-stat">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.2 13.3l-6.2-1.3V3c0-.6-.4-1-1-1S10 2.4 10 3v9l-6.2 1.3c-.6.1-1 .7-.9 1.3.1.6.7 1 1.3.9l5.8-1.2v5.6l-2.3 2.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l1.9-1.9 1.9 1.9c.4.4 1 .4 1.4 0s.4-1 0-1.4l-2.3-2.3v-5.6l5.8 1.2c.6.1 1.2-.3 1.3-.9.1-.6-.3-1.2-.9-1.3z"/></svg>
+                            <span>${data.forks_count} forks</span>
+                        </div>
+                    `;
+                }
+            } catch (e) { console.error('Error fetching modal repo stats:', e); }
+        }
+
         // Show Overlay (Fix: use class instead of showModal)
         modal.classList.add('open');
         document.body.classList.add('modal-open');
-        if (cursorDot && cursorOutline) {
-            cursorDot.style.display = 'none';
-            cursorOutline.style.display = 'none';
+        if (dot && ring) {
+            dot.style.display = 'none';
+            ring.style.display = 'none';
         }
     }
+
+    // Availability Sync (Manual or GitHub)
+    const updateHeroAvailability = () => {
+        const heroTag = document.getElementById('hero-availability');
+        if (!heroTag) return;
+
+        // Priority to manual config in i18n.js
+        const config = i18n.config;
+        if (config) {
+            if (!config.isAvailable) {
+                // If explicitly not available (you can add a 'not available' string if needed, 
+                // but usually busy means not available for NEW projects)
+                // For now, let's keep it simple:
+            }
+
+            if (config.activeProjects > 0) {
+                heroTag.textContent = t('hero.status.busy').replace('{count}', config.activeProjects);
+                return;
+            } else {
+                heroTag.textContent = t('hero.status.available');
+                return;
+            }
+        }
+    };
+
+    updateHeroAvailability();
 
     // Interactions
     items.forEach((item, index) => {
@@ -400,9 +526,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function hideModal() {
         modal.classList.remove('open');
         document.body.classList.remove('modal-open');
-        if (cursorDot && cursorOutline) {
-            cursorDot.style.display = '';
-            cursorOutline.style.display = '';
+        if (dot && ring) {
+            dot.style.display = '';
+            ring.style.display = '';
         }
     }
 
@@ -416,8 +542,231 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === modal) hideModal();
     });
 
-    // Initialize
-    markActiveItem(activeIndex);
+    // 8. Project Search (Ctrl+K)
+    const initProjectSearch = () => {
+        const searchModal = document.getElementById('search-modal');
+        const searchInput = document.getElementById('projects-search');
+        const resultsContainer = document.getElementById('search-results');
+        
+        if (!searchModal || !searchInput || !resultsContainer) return;
+
+        const toggleSearch = (show) => {
+            searchModal.classList.toggle('open', show);
+            if (show) {
+                searchInput.value = '';
+                searchInput.focus();
+                renderSearchResults('');
+            } else {
+                if (dot && ring) {
+                    dot.style.display = '';
+                    ring.style.display = '';
+                }
+            }
+        };
+
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                if (dot && ring) {
+                    dot.style.display = 'none';
+                    ring.style.display = 'none';
+                }
+                toggleSearch(!searchModal.classList.contains('open'));
+            }
+            if (e.key === 'Escape' && searchModal.classList.contains('open')) {
+                toggleSearch(false);
+            }
+        });
+
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) toggleSearch(false);
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            renderSearchResults(e.target.value);
+        });
+
+        function renderSearchResults(query) {
+            resultsContainer.innerHTML = '';
+            const q = query.toLowerCase().trim();
+            const projects = i18n[currentLang].projects;
+            
+            const matches = Object.keys(projects)
+                .filter(key => !isNaN(key))
+                .map(key => ({ id: key, ...projects[key] }))
+                .filter(p => 
+                    p.title.toLowerCase().includes(q) || 
+                    p.desc.toLowerCase().includes(q) ||
+                    p.meta.toLowerCase().includes(q)
+                );
+
+            if (matches.length === 0) {
+                resultsContainer.innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--text-muted);">${t('search.noResults')}</div>`;
+                return;
+            }
+
+            matches.forEach(p => {
+                const item = document.createElement('div');
+                item.className = 'search-item';
+                item.innerHTML = `
+                    <div class="search-icon">${getProjectIcon(p.id)}</div>
+                    <div class="search-info">
+                        <strong>${p.title}</strong>
+                        <span>${p.meta} — ${p.desc}</span>
+                    </div>
+                `;
+                item.addEventListener('click', () => {
+                    toggleSearch(false);
+                    // Match with index (1-based id in i18n, 0-based index in items)
+                    openModal(parseInt(p.id) - 1);
+                });
+                resultsContainer.appendChild(item);
+            });
+        }
+
+        function getProjectIcon(id) {
+            const icons = { '1': '🎤', '2': '⚔️', '3': '💊', '4': '✨', '5': '🚀', '6': '🗺️', '7': '🏠', '8': '📊' };
+            return icons[id] || '📁';
+        }
+    };
+
+    initProjectSearch();
+
+    // 9. GitHub Integration
+    const initGitHubStats = async () => {
+        const username = 'nexos20lv';
+        const reposEl = document.getElementById('gh-repos');
+        const starsEl = document.getElementById('gh-stars');
+        const langBar = document.getElementById('gh-lang-bar');
+        const langLabels = document.getElementById('gh-lang-labels');
+
+        if (!reposEl) return;
+
+        try {
+            const response = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`);
+            const repos = await response.json();
+
+            if (!Array.isArray(repos)) throw new Error('Invalid response');
+
+            const totalRepos = repos.length;
+            const totalStars = repos.reduce((acc, repo) => acc + repo.stargazers_count, 0);
+
+            reposEl.textContent = totalRepos;
+            starsEl.textContent = totalStars;
+
+            const langMap = {};
+            repos.forEach(repo => {
+                if (repo.language) {
+                    langMap[repo.language] = (langMap[repo.language] || 0) + 1;
+                }
+            });
+
+            const topLangs = Object.entries(langMap)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+
+            const totalLangCount = topLangs.reduce((acc, l) => acc + l[1], 0);
+
+            const colors = {
+                'JavaScript': '#f7df1e',
+                'TypeScript': '#3178c6',
+                'PHP': '#777bb3',
+                'Python': '#3776ab',
+                'HTML': '#e34c26',
+                'CSS': '#563d7c',
+                'C++': '#f34b7d',
+                'Java': '#b07219',
+                'Godot': '#478cbf'
+            };
+
+            langBar.innerHTML = '';
+            langLabels.innerHTML = '';
+
+            topLangs.forEach(([lang, count]) => {
+                const percent = (count / totalLangCount) * 100;
+                const color = colors[lang] || '#8b5cf6';
+
+                const segment = document.createElement('div');
+                segment.className = 'gh-lang-bar-segment';
+                segment.style.width = '0%';
+                segment.style.backgroundColor = color;
+                langBar.appendChild(segment);
+
+                const label = document.createElement('div');
+                label.className = 'gh-lang-label';
+                label.innerHTML = `
+                    <span class="gh-lang-dot" style="background-color: ${color}"></span>
+                    <span>${lang}</span>
+                    <span style="opacity: 0.5; font-size: 0.7rem;">${Math.round(percent)}%</span>
+                `;
+                langLabels.appendChild(label);
+
+                setTimeout(() => segment.style.width = `${percent}%`, 100);
+            });
+
+        } catch (err) {
+            console.error('GitHub Fetch Error:', err);
+            reposEl.textContent = '??';
+            starsEl.textContent = '??';
+        }
+    };
+
+    initGitHubStats();
+
+    // 10. Contact Form Logic
+    const contactForm = document.getElementById('contact-form');
+    const feedback = document.getElementById('form-feedback');
+
+    if (contactForm && feedback) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('contact-submit');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loader-dots">...</span>';
+
+            const formData = new FormData(contactForm);
+            const payload = {
+                embeds: [{
+                    title: 'New Portfolio Message 📬',
+                    color: 0x8b5cf6,
+                    fields: [
+                        { name: 'Name', value: formData.get('name'), inline: true },
+                        { name: 'Email', value: formData.get('email'), inline: true },
+                        { name: 'Message', value: formData.get('message') }
+                    ],
+                    footer: { text: `Sent from ${window.location.hostname}` },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            try {
+                const res = await fetch(config.discordWebhook, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    feedback.textContent = t('contact.success');
+                    feedback.className = 'form-feedback success';
+                    contactForm.reset();
+                } else {
+                    throw new Error();
+                }
+            } catch (err) {
+                feedback.textContent = t('contact.error');
+                feedback.className = 'form-feedback error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 5000);
+            }
+        });
+    }
 
     console.log("System Initialized: Ultra Modern Portfolio V3");
 });
