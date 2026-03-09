@@ -1075,6 +1075,9 @@ h1 .highlight-text {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     gap: 1rem;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
 }
 
 .skill-item i {
@@ -1115,8 +1118,17 @@ h1 .highlight-text {
     transform: translateY(0);
 }
 
+/* Fix for dark Vercel icon */
+.vercel-icon {
+    filter: invert(1) brightness(2) !important;
+}
+
+.skill-item:hover .vercel-icon {
+    filter: invert(1) brightness(2.5) drop-shadow(0 0 15px #fff) !important;
+}
+
 .marquee-anim {
-    animation: marquee-scroll 25s linear infinite;
+    animation: marquee-scroll 40s linear infinite;
 }
 
 @keyframes marquee-scroll {
