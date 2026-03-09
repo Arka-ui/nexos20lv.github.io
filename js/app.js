@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalLogs = logKeys.length;
 
         // Initial delay
-        await new Promise(r => setTimeout(r, 400));
+        await new Promise(r => setTimeout(r, 50));
 
         for (let i = 0; i < totalLogs; i++) {
             const key = logKeys[i];
@@ -91,12 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const progress = ((i + 1) / totalLogs) * 100;
             progressBar.style.width = `${progress}%`;
 
-            // Random processing delay
-            await new Promise(r => setTimeout(r, 300 + Math.random() * 300));
+            // Random processing delay (Optimized speed)
+            await new Promise(r => setTimeout(r, 50 + Math.random() * 50));
         }
 
         // Final delay before reveal
-        await new Promise(r => setTimeout(r, 600));
+        await new Promise(r => setTimeout(r, 300));
         loader.classList.add('fade-out');
         setTimeout(() => loader.style.display = 'none', 800);
     };
