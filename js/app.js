@@ -25,6 +25,9 @@ import {
     initHeaderScroll,
     initReadingProgress
 } from './modules/ui-effects.js';
+import { initScrollAnimations } from './modules/scroll-animations.js';
+import { initLazyImages } from './modules/lazy-images.js';
+import { initWebVitals } from './modules/web-vitals.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Basic clickjacking defense when served without strict headers.
@@ -117,6 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     initAccessibilityMode(document.getElementById('accessibilityToggle'));
     initUltraCompactMode();
+
+    // Performance & Monitoring
+    initScrollAnimations();
+    initLazyImages();
+    initWebVitals();
 
     const { dot, ring } = initCustomCursor();
 
