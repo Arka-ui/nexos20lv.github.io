@@ -10,6 +10,7 @@ export function initProjectsUI({
     languageColors
 }) {
     const items = document.querySelectorAll('.carousel-item');
+    const filterButtons = document.querySelectorAll('.client-filter-btn');
     const modal = document.getElementById('project-modal');
     const closeModalBtn = modal?.querySelector('.close-modal');
     let activeIndex = 0;
@@ -92,6 +93,137 @@ export function initProjectsUI({
         items.forEach((item, itemIndex) => {
             item.classList.toggle('active', itemIndex === index);
         });
+    }
+
+    function getVisibleItems() {
+        return Array.from(items).filter((item) => !item.classList.contains('project-hidden'));
+    }
+
+    function applyClientFilter(filterKey) {
+        const normalized = filterKey || 'all';
+
+        items.forEach((item) => {
+            const need = item.dataset.clientNeed || 'all';
+            const isMatch = normalized === 'all' || need === normalized;
+            item.classList.toggle('project-hidden', !isMatch);
+        });
+
+        filterButtons.forEach((button) => {
+            button.classList.toggle('active', button.dataset.clientFilter === normalized);
+        });
+
+        const visibleItems = getVisibleItems();
+        if (!visibleItems.length) {
+            activeIndex = -1;
+            items.forEach((item) => item.classList.remove('active'));
+            return;
+        }
+
+        const firstVisibleIndex = Number(visibleItems[0].dataset.index || 0);
+        activeIndex = firstVisibleIndex;
+        markActiveItem(activeIndex);
+    }
+
+    function initClientModeFilter() {
+        if (!filterButtons.length) return;
+
+        filterButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                applyClientFilter(button.dataset.clientFilter || 'all');
+            });
+        });
+    }
+
+    function formatBuildDuration(startedAt, updatedAt) {
+        if (!startedAt || !updatedAt) return '--';
+        const start = new Date(startedAt).getTime();
+        const end = new Date(updatedAt).getTime();
+        if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return '--';
+
+        const totalSec = Math.round((end - start) / 1000);
+        const min = Math.floor(totalSec / 60);
+        const sec = totalSec % 60;
+        if (min <= 0) return `${sec}s`;
+        return `${min}m ${sec.toString().padStart(2, '0')}s`;
+    }
+
+    async function initFeaturedMetrics() {
+        const starsNode = document.getElementById('featured-stars-total');
+        const releaseNode = document.getElementById('featured-latest-release');
+        const buildNode = document.getElementById('featured-build-time');
+        if (!starsNode || !releaseNode || !buildNode) return;
+
+        const featuredRepos = [
+            'nexos20lv/Nexaria-Launcher',
+            'nexos20lv/Home-Assistant-Desktop',
+            'nexos20lv/AzureLab-Dashboard'
+        ];
+
+        try {
+            const repoPayloads = await Promise.all(featuredRepos.map(async (repo) => {
+                const [repoRes, releaseRes, runsRes] = await Promise.all([
+                    fetch(`${config.endpoints.githubApi}/repos/${repo}`),
+                    fetch(`${config.endpoints.githubApi}/repos/${repo}/releases/latest`),
+                    fetch(`${config.endpoints.githubApi}/repos/${repo}/actions/runs?per_page=1`)
+                ]);
+
+                const repoData = await repoRes.json().catch(() => ({}));
+                const releaseData = await releaseRes.json().catch(() => ({}));
+                const runsData = await runsRes.json().catch(() => ({}));
+
+                return {
+                    repo,
+                    repoOk: repoRes.ok,
+                    releaseOk: releaseRes.ok,
+                    repoData,
+                    releaseData,
+                    latestRun: Array.isArray(runsData?.workflow_runs) ? runsData.workflow_runs[0] : null
+                };
+            }));
+
+            const starsTotal = repoPayloads.reduce((acc, payload) => {
+                const stars = payload.repoOk ? Number(payload.repoData?.stargazers_count || 0) : 0;
+                return acc + (Number.isFinite(stars) ? stars : 0);
+            }, 0);
+            starsNode.textContent = String(starsTotal);
+
+            const releases = repoPayloads
+                .filter((payload) => payload.releaseOk && payload.releaseData?.tag_name)
+                .map((payload) => ({
+                    tag: payload.releaseData.tag_name,
+                    date: new Date(payload.releaseData.published_at || payload.releaseData.created_at || 0).getTime()
+                }))
+                .filter((release) => Number.isFinite(release.date));
+
+            if (releases.length) {
+                releases.sort((a, b) => b.date - a.date);
+                releaseNode.textContent = releases[0].tag;
+            } else {
+                releaseNode.textContent = '--';
+            }
+
+            const latestRuns = repoPayloads
+                .map((payload) => payload.latestRun)
+                .filter(Boolean)
+                .map((run) => ({
+                    startedAt: run.run_started_at,
+                    updatedAt: run.updated_at,
+                    created: new Date(run.created_at || run.updated_at || 0).getTime()
+                }))
+                .filter((run) => Number.isFinite(run.created));
+
+            if (latestRuns.length) {
+                latestRuns.sort((a, b) => b.created - a.created);
+                buildNode.textContent = formatBuildDuration(latestRuns[0].startedAt, latestRuns[0].updatedAt);
+            } else {
+                buildNode.textContent = '--';
+            }
+        } catch (error) {
+            console.error('Error loading featured metrics:', error);
+            starsNode.textContent = '--';
+            releaseNode.textContent = '--';
+            buildNode.textContent = '--';
+        }
     }
 
     function applyProjectStatusBadges() {
@@ -358,16 +490,19 @@ export function initProjectsUI({
             item.setAttribute('tabindex', '0');
             item.querySelector('.learn-more-btn')?.addEventListener('click', (e) => {
                 e.stopPropagation();
+                if (item.classList.contains('project-hidden')) return;
                 openModal(index, e.currentTarget);
             });
 
             item.addEventListener('click', (e) => {
+                if (item.classList.contains('project-hidden')) return;
                 openModal(index, e.currentTarget);
             });
 
             item.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
+                    if (item.classList.contains('project-hidden')) return;
                     openModal(index, e.currentTarget);
                 }
             });
@@ -498,6 +633,8 @@ export function initProjectsUI({
 
     attachProjectInteractions();
     applyProjectStatusBadges();
+    initClientModeFilter();
+    applyClientFilter('all');
     updateHeroAvailability();
 
     return {
@@ -505,6 +642,7 @@ export function initProjectsUI({
         applyProjectStatusBadges,
         refreshOpenModal,
         initGitHubStats,
+        initFeaturedMetrics,
         updateHeroAvailability
     };
 }

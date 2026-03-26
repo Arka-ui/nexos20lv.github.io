@@ -117,7 +117,31 @@ document.addEventListener('DOMContentLoaded', () => {
         indicator.className = 'quick-tour-indicator';
         indicator.setAttribute('role', 'status');
         indicator.setAttribute('aria-live', 'polite');
+        indicator.innerHTML = `
+            <div class="quick-tour-head">
+                <span class="quick-tour-text"></span>
+                <button type="button" class="quick-tour-skip-btn"></button>
+            </div>
+            <div class="quick-tour-progress">
+                <div class="quick-tour-progress-fill"></div>
+            </div>
+        `;
         return indicator;
+    }
+
+    function waitWithSkip(ms, tourState) {
+        return new Promise((resolve) => {
+            const timer = setTimeout(() => {
+                tourState.skipWait = null;
+                resolve();
+            }, ms);
+
+            tourState.skipWait = () => {
+                clearTimeout(timer);
+                tourState.skipWait = null;
+                resolve();
+            };
+        });
     }
 
     function initQuickGuidedTour() {
@@ -128,10 +152,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const tourSections = [projectsSection, contactSection];
         const tourIndicator = createTourIndicator();
+        const tourText = tourIndicator.querySelector('.quick-tour-text');
+        const tourProgress = tourIndicator.querySelector('.quick-tour-progress-fill');
+        const tourSkipBtn = tourIndicator.querySelector('.quick-tour-skip-btn');
+        const tourState = { skipWait: null };
         document.body.appendChild(tourIndicator);
 
-        const setStep = (step) => {
-            tourIndicator.textContent = `${t('hero.cta.tourRunning')} ${step}`;
+        const setStep = (stepLabel, stepIndex, totalSteps = 3) => {
+            if (tourText) {
+                tourText.textContent = `${t('hero.cta.tourRunning')} ${stepLabel}`;
+            }
+            if (tourSkipBtn) {
+                tourSkipBtn.textContent = t('hero.tour.skip');
+            }
+            if (tourProgress) {
+                const ratio = Math.max(0, Math.min(1, stepIndex / totalSteps));
+                tourProgress.style.width = `${Math.round(ratio * 100)}%`;
+            }
             tourIndicator.classList.add('visible');
         };
 
@@ -151,36 +188,47 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalText = quickTourText ? quickTourText.textContent : '';
             if (quickTourText) quickTourText.textContent = t('hero.cta.tourRunning');
 
+            const onSkipClick = () => {
+                if (typeof tourState.skipWait === 'function') {
+                    tourState.skipWait();
+                }
+            };
+            tourSkipBtn?.addEventListener('click', onSkipClick);
+
             try {
-                setStep(t('hero.tour.step1'));
+                setStep(t('hero.tour.step1'), 1);
                 setTourFocus(projectsSection, tourSections);
                 projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                await wait(1000);
+                await waitWithSkip(1000, tourState);
 
-                setStep(t('hero.tour.step2'));
+                setStep(t('hero.tour.step2'), 2);
                 const featuredProjectIndexes = [0, 4, 7];
                 for (const index of featuredProjectIndexes) {
                     await projectsUI.openModal(index);
-                    await wait(1600);
+                    await waitWithSkip(1450, tourState);
                     await closeProjectModalIfOpen();
-                    await wait(160);
+                    await waitWithSkip(160, tourState);
                 }
 
-                await wait(380);
-                setStep(t('hero.tour.step3'));
+                await waitWithSkip(320, tourState);
+                setStep(t('hero.tour.step3'), 3);
                 setTourFocus(contactSection, tourSections);
                 contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                await wait(950);
+                await waitWithSkip(900, tourState);
 
                 const contactNameInput = document.getElementById('contact-name');
                 if (contactNameInput instanceof HTMLElement) {
                     contactNameInput.focus({ preventScroll: true });
                 }
-                await wait(900);
+                await waitWithSkip(600, tourState);
             } finally {
+                tourSkipBtn?.removeEventListener('click', onSkipClick);
                 quickTourBtn.disabled = false;
                 if (quickTourText) quickTourText.textContent = originalText || t('hero.cta.tour');
                 tourIndicator.classList.remove('visible');
+                if (tourProgress) {
+                    tourProgress.style.width = '0%';
+                }
                 setTourFocus(null, tourSections);
             }
         });
@@ -273,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     runWhenIdle(() => projectsUI.initGitHubStats(), 2200);
+    runWhenIdle(() => projectsUI.initFeaturedMetrics(), 1800);
     initContactForm({ config, t });
     initQuickGuidedTour();
     runWhenIdle(() => initTerminal(), 2200);

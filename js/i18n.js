@@ -31,7 +31,8 @@ export const i18n = {
             tour: {
                 step1: '1/3 Projets phares',
                 step2: '2/3 Showcase multi-projets',
-                step3: '3/3 Contact direct'
+                step3: '3/3 Contact direct',
+                skip: 'Passer a l\'etape suivante'
             },
             status: {
                 available: ' Disponible pour des projets',
@@ -113,6 +114,19 @@ export const i18n = {
                 title: 'Actuellement en build',
                 subtitle: 'Projets actifs en création et en test',
                 empty: 'Aucun projet actif pour le moment.'
+            },
+            clientMode: {
+                title: 'Mode client :',
+                all: 'Tous',
+                web: 'Site web',
+                desktop: 'Desktop',
+                maintenance: 'Maintenance'
+            },
+            featuredMetrics: {
+                title: 'Projets phares (GitHub)',
+                stars: 'Stars total',
+                release: 'Derniere release',
+                buildTime: 'Temps de build'
             },
             quality: {
                 ci: 'CI',
@@ -326,7 +340,8 @@ export const i18n = {
             tour: {
                 step1: '1/3 Featured projects',
                 step2: '2/3 Multi-project showcase',
-                step3: '3/3 Direct contact'
+                step3: '3/3 Direct contact',
+                skip: 'Skip to next step'
             },
             status: {
                 available: ' Available for projects',
@@ -408,6 +423,19 @@ export const i18n = {
                 title: 'Currently in build',
                 subtitle: 'Active projects in creation and testing',
                 empty: 'No active project right now.'
+            },
+            clientMode: {
+                title: 'Client mode:',
+                all: 'All',
+                web: 'Website',
+                desktop: 'Desktop',
+                maintenance: 'Maintenance'
+            },
+            featuredMetrics: {
+                title: 'Featured projects (GitHub)',
+                stars: 'Total stars',
+                release: 'Latest release',
+                buildTime: 'Build time'
             },
             quality: {
                 ci: 'CI',

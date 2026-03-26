@@ -444,11 +444,39 @@
                     focus UX, performance, observabilité et qualité de code.</p>
             </div>
 
+            <div class="client-mode-toolbar reveal" role="group" aria-label="Client mode filters">
+                <span class="client-mode-label" data-i18n="projects.clientMode.title">Mode client :</span>
+                <div class="client-mode-filters">
+                    <button type="button" class="client-filter-btn active" data-client-filter="all" data-i18n="projects.clientMode.all">Tous</button>
+                    <button type="button" class="client-filter-btn" data-client-filter="web" data-i18n="projects.clientMode.web">Site web</button>
+                    <button type="button" class="client-filter-btn" data-client-filter="desktop" data-i18n="projects.clientMode.desktop">Desktop</button>
+                    <button type="button" class="client-filter-btn" data-client-filter="maintenance" data-i18n="projects.clientMode.maintenance">Maintenance</button>
+                </div>
+            </div>
+
+            <div class="featured-metrics-panel reveal" aria-live="polite">
+                <div class="featured-metrics-head" data-i18n="projects.featuredMetrics.title">Projets phares (GitHub)</div>
+                <div class="featured-metrics-grid">
+                    <div class="featured-metric-item">
+                        <span class="featured-metric-label" data-i18n="projects.featuredMetrics.stars">Stars total</span>
+                        <span class="featured-metric-value" id="featured-stars-total">--</span>
+                    </div>
+                    <div class="featured-metric-item">
+                        <span class="featured-metric-label" data-i18n="projects.featuredMetrics.release">Dernière release</span>
+                        <span class="featured-metric-value" id="featured-latest-release">--</span>
+                    </div>
+                    <div class="featured-metric-item">
+                        <span class="featured-metric-label" data-i18n="projects.featuredMetrics.buildTime">Temps de build</span>
+                        <span class="featured-metric-value" id="featured-build-time">--</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- 3D Carousel Container -->
             <div class="carousel-container">
                 <div class="carousel-track">
                     <!-- Project 1 -->
-                    <article class="carousel-item reveal" data-index="0" data-category="web">
+                    <article class="carousel-item reveal" data-index="0" data-category="web" data-client-need="web">
                         <div class="card-content">
                             <i class="bi bi-calendar-check-fill"></i>
                             <div class="project-meta" data-i18n="projects.1.meta">APPLICATION WEB</div>
@@ -476,7 +504,7 @@
                     </article>
 
                     <!-- Project 2 -->
-                    <article class="carousel-item reveal" data-index="1" data-category="minecraft">
+                    <article class="carousel-item reveal" data-index="1" data-category="minecraft" data-client-need="maintenance">
                         <div class="card-content">
                             <i class="bi bi-box-seam-fill"></i>
                             <div class="project-meta" data-i18n="projects.2.meta">ÉCOSYSTÈME MINECRAFT</div>
@@ -503,7 +531,7 @@
                     </article>
 
                     <!-- Project 3 -->
-                    <article class="carousel-item reveal" data-index="2" data-category="game">
+                    <article class="carousel-item reveal" data-index="2" data-category="game" data-client-need="maintenance">
                         <div class="card-content">
                             <i class="bi bi-controller"></i>
                             <div class="project-meta" data-i18n="projects.3.meta">DÉVELOPPEMENT JEU</div>
@@ -531,7 +559,7 @@
                     </article>
 
                     <!-- Project 4 -->
-                    <article class="carousel-item reveal" data-index="3" data-category="web">
+                    <article class="carousel-item reveal" data-index="3" data-category="web" data-client-need="web">
                         <div class="card-content">
                             <i class="bi bi-window-sidebar"></i>
                             <div class="project-meta" data-i18n="projects.4.meta">FRONT-END</div>
@@ -559,7 +587,7 @@
                     </article>
 
                     <!-- Project 5 -->
-                    <article class="carousel-item reveal" data-index="4" data-category="desktop">
+                    <article class="carousel-item reveal" data-index="4" data-category="desktop" data-client-need="desktop">
                         <div class="card-content">
                             <i class="bi bi-rocket-takeoff-fill"></i>
                             <div class="project-meta" data-i18n="projects.5.meta">APPLICATION DESKTOP</div>
@@ -587,7 +615,7 @@
                     </article>
 
                     <!-- Project 6 -->
-                    <article class="carousel-item reveal" data-index="5" data-category="plugin">
+                    <article class="carousel-item reveal" data-index="5" data-category="plugin" data-client-need="maintenance">
                         <div class="card-content">
                             <i class="bi bi-map-fill"></i>
                             <div class="project-meta" data-i18n="projects.6.meta">PLUGIN CMS</div>
@@ -613,7 +641,7 @@
                     </article>
 
                     <!-- Project 7 -->
-                    <article class="carousel-item reveal" data-index="6" data-category="desktop">
+                    <article class="carousel-item reveal" data-index="6" data-category="desktop" data-client-need="desktop">
                         <div class="card-content">
                             <i class="bi bi-house-gear-fill"></i>
                             <div class="project-meta" data-i18n="projects.7.meta">APPLICATION DESKTOP</div>
@@ -641,7 +669,7 @@
                     </article>
 
                     <!-- Project 8 -->
-                    <article class="carousel-item reveal" data-index="7" data-category="web">
+                    <article class="carousel-item reveal" data-index="7" data-category="web" data-client-need="maintenance">
                         <div class="card-content">
                             <i class="bi bi-speedometer"></i>
                             <div class="project-meta" data-i18n="projects.8.meta">SUPERVISION</div>
