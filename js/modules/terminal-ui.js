@@ -1,3 +1,12 @@
+/**
+ * @module terminal-ui
+ * @description Interactive terminal overlay with command history and navigation commands.
+ */
+
+/**
+ * @param {{ openOverlay: Function, closeOverlay: Function, dot: HTMLElement, ring: HTMLElement, applyLanguage: Function }} options
+ * @returns {{ toggleTerminal: Function, initTerminal: Function }}
+ */
 export function initTerminalUI({ openOverlay, closeOverlay, dot, ring, applyLanguage }) {
     const toggleTerminal = (show, triggerElement) => {
         const modal = document.getElementById('terminal-modal');

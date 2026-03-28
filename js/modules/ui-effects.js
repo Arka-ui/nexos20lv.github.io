@@ -1,3 +1,13 @@
+/**
+ * @module ui-effects
+ * @description Visual effects: loader animation, custom cursor, scroll reveal,
+ * parallax motion, card tilt, sticky header, and reading progress bar.
+ */
+
+/**
+ * Initializes and animates the loading screen with progress bar and log entries.
+ * @param {Function} t - Translation function for loader messages.
+ */
 export function initLoader(t) {
     const loader = document.getElementById('loader');
     const logsContainer = document.getElementById('loader-logs');
@@ -34,6 +44,10 @@ export function initLoader(t) {
     })();
 }
 
+/**
+ * Initializes custom cursor dot and ring elements for fine-pointer devices.
+ * @returns {{ dot: HTMLElement|null, ring: HTMLElement|null }}
+ */
 export function initCustomCursor() {
     const dot = document.getElementById('cursorDot');
     const ring = document.getElementById('cursorRing');
@@ -59,6 +73,9 @@ export function initCustomCursor() {
     return { dot, ring };
 }
 
+/**
+ * Observes elements with .reveal class and marks navigation links as active during scroll.
+ */
 export function initScrollRevealAndNavSpy() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
@@ -93,6 +110,9 @@ export function initScrollRevealAndNavSpy() {
     });
 }
 
+/**
+ * Applies parallax, stagger animations, and motion effects when not in perf mode.
+ */
 export function initMotionEnhancements() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('perf-mode')) {
         return;
@@ -160,6 +180,9 @@ export function initMotionEnhancements() {
     smoothParallax();
 }
 
+/**
+ * Adds 3D tilt transform effect to cards on mousemove for fine-pointer devices.
+ */
 export function initTiltEffect() {
     if (!window.matchMedia('(pointer: fine)').matches) return;
 
@@ -190,6 +213,9 @@ export function initTiltEffect() {
     });
 }
 
+/**
+ * Adds 'scrolled' class to header when page scrolls past a threshold.
+ */
 export function initHeaderScroll() {
     const header = document.querySelector('header');
     if (!header) return;
@@ -203,6 +229,9 @@ export function initHeaderScroll() {
     });
 }
 
+/**
+ * Updates reading progress bar width based on page scroll position.
+ */
 export function initReadingProgress() {
     const progressBar = document.getElementById('reading-progress');
     if (!progressBar) return;

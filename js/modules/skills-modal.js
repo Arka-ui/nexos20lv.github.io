@@ -1,3 +1,13 @@
+/**
+ * @module skills-modal
+ * @description Opens a detail modal when a skill item in the marquee is clicked.
+ * Modal content comes from i18n keys under skills.*.
+ */
+
+/**
+ * @param {{ openOverlay: Function, closeOverlay: Function, dot: HTMLElement, ring: HTMLElement, t: Function, getCurrentLang: Function }} options
+ * @returns {void}
+ */
 export function initSkillsModal({ openOverlay, closeOverlay, dot, ring, t, getCurrentLang }) {
     const skillModal = document.getElementById('skill-modal');
     const closeSkillModalBtn = document.getElementById('close-skill-modal');

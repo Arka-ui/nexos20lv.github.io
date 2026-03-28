@@ -1,3 +1,13 @@
+/**
+ * @module project-search-ui
+ * @description Full-text project search overlay. Triggered by Ctrl/Cmd+K or search button.
+ * Searches project titles and descriptions from i18n data.
+ */
+
+/**
+ * @param {{ i18n: object, getCurrentLang: Function, t: Function, openOverlay: Function, closeOverlay: Function, dot: HTMLElement, ring: HTMLElement, openModal: Function, applyLanguage: Function, toggleTerminal: Function }} options
+ * @returns {void}
+ */
 export function initProjectSearchUI({
     i18n,
     getCurrentLang,
