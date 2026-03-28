@@ -1,3 +1,24 @@
+/**
+ * @module contact-form
+ * @description Handles the contact form and booking modal submissions.
+ * Sends payloads to the Supabase edge function `contact-handler` which
+ * forwards messages to Telegram. Requires config.supabaseUrl to be set.
+ *
+ * Payload sent to edge function:
+ * {
+ *   provider: 'telegram',
+ *   type: 'contact' | 'booking',
+ *   timestamp: string (ISO 8601),
+ *   contact: { name, email, message },
+ *   text: string (pre-formatted Telegram message)
+ * }
+ */
+
+/**
+ * Wires up the contact form and booking modal to the Supabase edge function.
+ * @param {{ config: { supabaseUrl: string, supabaseAnonKey: string }, t: Function }} options
+ * @returns {void}
+ */
 export function initContactForm({ config, t }) {
     const contactForm = document.getElementById('contact-form');
     const feedback = document.getElementById('form-feedback');

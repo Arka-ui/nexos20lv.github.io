@@ -1,3 +1,19 @@
+/**
+ * @module projects-ui
+ * @description Manages the project carousel, project detail modal, GitHub API stats,
+ * featured metrics panel, and client-mode filters.
+ *
+ * Project data is defined in the projectData array inside this module.
+ * GitHub API calls are deferred via runWhenIdle to keep initial render fast.
+ *
+ * To add a project: add an entry to projectData AND a .carousel-item card
+ * in index.html with a matching data-index attribute.
+ */
+
+/**
+ * @param {{ i18n: object, config: object, t: Function, getCurrentLang: Function, openOverlay: Function, closeOverlay: Function, dot: HTMLElement, ring: HTMLElement, languageColors: Record<string, string> }} options
+ * @returns {{ openModal: Function, applyProjectStatusBadges: Function, refreshOpenModal: Function, initGitHubStats: Function, initFeaturedMetrics: Function }}
+ */
 export function initProjectsUI({
     i18n,
     config,

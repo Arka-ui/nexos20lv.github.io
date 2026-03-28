@@ -1,5 +1,18 @@
 import { i18n } from '../i18n.js';
 
+/**
+ * @module discord-realtime
+ * @description Connects to the Lanyard WebSocket API for real-time Discord presence
+ * (status, activity, Spotify). Reconnects automatically with exponential backoff.
+ * Also subscribes to Supabase realtime for live visitor count.
+ *
+ * Protocol: wss://api.lanyard.rest/socket — heartbeat every 30s.
+ */
+
+/**
+ * @param {{ config: object, t: Function, getCurrentLang: Function, getBackoffDelay: Function, onStatusChange: (status: string) => void, onVisitorsCountChange: (count: number) => void }} options
+ * @returns {void}
+ */
 export function initDiscordRealtime({
     config,
     t,
