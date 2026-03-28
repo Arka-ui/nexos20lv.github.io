@@ -1,3 +1,18 @@
+/**
+ * @module app
+ * @description Main application bootstrap. Initializes all modules in dependency order:
+ * 1. i18n + language switching
+ * 2. Loader animation + performance/accessibility modes
+ * 3. Scroll, lazy-loading, web vitals, custom cursor
+ * 4. Discord realtime + visitor count
+ * 5. Projects UI (GitHub stats deferred)
+ * 6. Terminal + project search (deferred via runWhenIdle)
+ * 7. Contact form + quick guided tour
+ *
+ * Entry: js/main.js → js/app.js
+ * Heavy initialization is deferred with runWhenIdle() to keep TTI low.
+ */
+
 import { i18n } from './i18n.js';
 import { config } from './config.js';
 import {
@@ -49,6 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const { openOverlay, closeOverlay } = createOverlayManager();
     let projectsUI = null;
 
+    /**
+     * Updates the hero live visitor counter element.
+     * @param {number} count - Non-integer or negative values show loading state.
+     */
     function renderLiveVisitorsCount(count) {
         const visitorsText = document.getElementById('live-visitors-text');
         if (!visitorsText) return;
@@ -62,10 +81,20 @@ document.addEventListener('DOMContentLoaded', () => {
         visitorsText.textContent = t(key).replace('{count}', count);
     }
 
+    /**
+     * Translates a dot-notation i18n key. Falls back: currentLang → fr → key itself.
+     * @param {string} key - e.g. 'hero.title.prefix'
+     * @returns {string}
+     */
     function t(key) {
         return getNested(i18n[currentLang], key) ?? getNested(i18n[fallbackLang], key) ?? key;
     }
 
+    /**
+     * Applies a language to all i18n-bound DOM elements and persists the choice.
+     * Handles: textContent, sanitized HTML, content/aria-label/placeholder attributes.
+     * @param {string} lang - 'fr' | 'en'
+     */
     function applyLanguage(lang) {
         if (!i18n[lang]) return;
 
@@ -178,6 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+     * Sets up the 30-second portfolio tour button.
+     * Tour: projects section → 3 featured modals → contact section.
+     * Skip button resolves the current wait promise immediately.
+     */
     function initQuickGuidedTour() {
         const quickTourBtn = document.getElementById('quick-tour-btn');
         const projectsSection = document.getElementById('projects');
