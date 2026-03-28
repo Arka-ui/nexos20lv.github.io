@@ -101,6 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     const allowed = ALLOWED_ATTRS[node.tagName] ?? [];
                     if (!allowed.includes(attr.name)) node.removeAttribute(attr.name);
                 });
+
+                // Block javascript: and data: URIs in href
+                if (node.tagName === 'A' && node.hasAttribute('href')) {
+                    const scheme = node.getAttribute('href').trimStart().toLowerCase();
+                    if (scheme.startsWith('javascript:') || scheme.startsWith('data:')) {
+                        node.removeAttribute('href');
+                    }
+                }
             });
 
             element.replaceChildren(frag);
