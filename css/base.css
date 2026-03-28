@@ -393,6 +393,44 @@ nav {
 }
 ::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, 0.7); }
 
+/* ── READING PROGRESS ── */
+#reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(to right, var(--violet), var(--accent));
+    z-index: 1002;
+    pointer-events: none;
+    transition: width 0.1s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #reading-progress {
+        transition: none;
+    }
+}
+
+/* ── SKIP LINK ── */
+.skip-link {
+    position: absolute;
+    top: -48px;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--violet);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    border-radius: var(--radius-sm);
+    z-index: 10001;
+    transition: top 0.2s;
+}
+
+.skip-link:focus {
+    top: 0.75rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
