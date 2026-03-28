@@ -1,3 +1,8 @@
+/**
+ * @module github-colors
+ * @description Maps GitHub language names to their official hex colors for the language bar.
+ * @type {Record<string, string>}
+ */
 export const LANGUAGE_COLORS = {
     JavaScript: '#f7df1e',
     TypeScript: '#3178c6',

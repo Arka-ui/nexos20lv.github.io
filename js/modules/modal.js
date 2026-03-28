@@ -1,3 +1,9 @@
+/**
+ * @module modal
+ * @description Accessible overlay/modal manager with focus trap and keyboard navigation.
+ * Supports multiple independent overlay instances via factory pattern.
+ */
+
 const FOCUSABLE_SELECTOR = [
     'a[href]',
     'button:not([disabled])',
@@ -14,6 +20,10 @@ function getFocusableElements(container) {
     });
 }
 
+/**
+ * Creates an isolated overlay manager with its own focus trap state.
+ * @returns {{ openOverlay: Function, closeOverlay: Function }}
+ */
 export function createOverlayManager() {
     let activeOverlay = null;
     let lastFocusedElement = null;
@@ -71,6 +81,12 @@ export function createOverlayManager() {
         }
     };
 
+    /**
+     * Opens an overlay, traps focus inside it, and stores the previously focused element.
+     * @param {HTMLElement} overlay - The overlay DOM element.
+     * @param {HTMLElement|null} triggerElement - Element that triggered open (restored on close).
+     * @param {Function} [onEscape] - Callback when Escape key is pressed.
+     */
     const openOverlay = (overlay, triggerElement, onEscape) => {
         if (!overlay) return;
         if (activeOverlay && activeOverlay !== overlay) {
@@ -84,6 +100,10 @@ export function createOverlayManager() {
         trapFocus(overlay, onEscape);
     };
 
+    /**
+     * Closes an overlay, releases the focus trap, and restores focus to the trigger element.
+     * @param {HTMLElement} overlay - The overlay DOM element to close.
+     */
     const closeOverlay = (overlay) => {
         if (!overlay) return;
         releaseFocusTrap(overlay);

@@ -1,8 +1,13 @@
 /**
- * Progressive Image Loading Module
- * Supports lazy loading with WebP fallback and blur-up effect
+ * @module lazy-images
+ * @description IntersectionObserver-based lazy loading for images with data-src attribute.
  */
 
+/**
+ * Initializes lazy loading for all img[data-src] elements.
+ * Falls back to immediate src swap if IntersectionObserver is unavailable.
+ * @returns {void}
+ */
 export function initLazyImages() {
     // Check if browser supports loading="lazy"
     const supportsNativeLazyLoad = 'loading' in HTMLImageElement.prototype;

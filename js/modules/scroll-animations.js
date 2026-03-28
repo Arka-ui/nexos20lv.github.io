@@ -1,8 +1,12 @@
 /**
- * Scroll Animation Module
- * Uses Intersection Observer to trigger animations when elements enter the viewport
+ * @module scroll-animations
+ * @description Triggers CSS [data-animate] classes when elements enter the viewport.
  */
 
+/**
+ * Observes all [data-animate] elements and adds the animate-in class on viewport entry.
+ * @returns {void}
+ */
 export function initScrollAnimations() {
     // Animation configuration
     const animationConfig = {

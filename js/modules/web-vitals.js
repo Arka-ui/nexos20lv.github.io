@@ -1,9 +1,14 @@
 /**
- * Web Vitals Module
- * Tracks Core Web Vitals: LCP (Largest Contentful Paint), FID (First Input Delay), CLS (Cumulative Layout Shift)
- * Also tracks: TTFB (Time to First Byte), FCP (First Contentful Paint)
+ * @module web-vitals
+ * @description Collects Core Web Vitals (LCP, FID/INP, CLS) and logs them to console.
+ * No external reporting — purely local monitoring.
  */
 
+/**
+ * Registers PerformanceObserver listeners for LCP, CLS, and FID metrics.
+ * Results are logged to console with a "⚡ Vitals:" prefix.
+ * @returns {void}
+ */
 export function initWebVitals() {
     const vitals = {
         lcp: null,
