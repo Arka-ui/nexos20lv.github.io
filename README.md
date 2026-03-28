@@ -1,380 +1,161 @@
-# ✨ Pierre Bouteman Portfolio
+# Pierre Bouteman — Portfolio
 
-[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-121212?style=for-the-badge&logo=github)](https://nexos20lv.github.io/)
-[![Frontend](https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-0ea5e9?style=for-the-badge)](https://nexos20lv.github.io/)
-[![Realtime](https://img.shields.io/badge/Realtime-Supabase-3ecf8e?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
-[![Discord Presence](https://img.shields.io/badge/Presence-Lanyard%20%2B%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/)
+Live: [nexos20lv.github.io](https://nexos20lv.github.io/)
 
-Portfolio personnel oriente performance, identite visuelle forte et donnees temps reel.
+Personal portfolio — dark-themed, vanilla JS, no build step.
 
-Le projet repose sur une base statique simple a maintenir, enrichie par plusieurs integrations externes:
+---
 
-- GitHub API pour les statistiques globales et par projet
-- Lanyard pour la presence Discord
-- Supabase pour la disponibilite et le compteur de visiteurs
-- Telegram Bot API pour recevoir les messages de contact
-- GitHub Pages pour le deploiement
-- un bot Node.js pour synchroniser un statut Discord vers Supabase
+## Tech Stack
 
-## 👀 Apercu
+| Layer | Technology |
+|---|---|
+| Markup | HTML5 (single-page, `index.html`) |
+| Styles | CSS3 custom properties (`css/base.css`, `css/components.css`, `css/animations.css`) |
+| Logic | Vanilla ES modules (`js/app.js` + `js/modules/`) |
+| Realtime | [Lanyard](https://github.com/phineas/lanyard) WebSocket — Discord presence |
+| Backend | [Supabase](https://supabase.com/) — contact form edge function + live visitor count |
+| External APIs | GitHub REST API v3 — repo stats & language breakdown |
+| Hosting | GitHub Pages + custom CNAME |
 
-Site en ligne: https://nexos20lv.github.io/
+---
 
-Le portfolio propose notamment:
-
-- une interface immersive en HTML, CSS et JavaScript vanilla
-- une experience bilingue FR / EN
-- une grille projets avec modales detaillees
-- des badges d'etat projet et indicateurs de build
-- des stats GitHub robustes avec gestion du rate limit
-- un mode performance pour alleger les animations
-- une recherche rapide des projets
-- une carte Discord temps reel
-- un compteur de visiteurs en direct via Supabase Presence
-
-## 🪪 Highlights
-
-| Carte | Description |
-| --- | --- |
-| 🚀 Experience premium | Interface immersive, loader terminal, animations dosees et design plus compact sur mobile. |
-| 📡 Donnees live | Presence Discord, disponibilite synchronisee, visiteurs en temps reel et statistiques GitHub. |
-| 🧩 Base simple a maintenir | Stack front sans framework, structure lisible et logique centralisee dans quelques fichiers cles. |
-| 🛡️ Approche solide | Gestion du rate limit GitHub, policies RLS Supabase et separation claire entre lecture publique et ecriture service role. |
-
-## 🧠 Carte mentale
-
-```mermaid
-flowchart TD
-    A[Portfolio Pierre] --> B[Frontend]
-    A --> C[UI]
-    A --> D[Donnees live]
-    A --> E[Bot Discord]
-    A --> F[Deploiement]
-    A --> G[Securite]
-
-    B --> B1[HTML CSS JS]
-    B --> B2[i18n FR EN]
-    B --> B3[Modales projets]
-
-    C --> C1[Loader terminal]
-    C --> C2[Responsive mobile]
-    C --> C3[Mode performance]
-
-    D --> D1[GitHub API]
-    D --> D2[Lanyard]
-    D --> D3[Supabase]
-
-    D1 --> D11[Stats globales]
-    D1 --> D12[Stats par projet]
-    D2 --> D21[Presence et avatar]
-    D3 --> D31[Disponibilite]
-    D3 --> D32[Visiteurs live]
-
-    E --> E1[Node.js]
-    E --> E2[discord.js]
-    E --> E3[Sync portfolio_status]
-
-    F --> F1[GitHub Actions]
-    F --> F2[GitHub Pages]
-    F --> F3[CNAME]
-
-    G --> G1[RLS Supabase]
-    G --> G2[Service role ecriture]
-    G --> G3[CSP frontend]
-```
-
-## 🧱 Stack
-
-### 🎨 Frontend
-
-- HTML5
-- CSS3 modulaire
-- JavaScript ES Modules
-- Bootstrap Icons
-- Devicon
-- Google Fonts
-
-### 🌐 Services externes
-
-- GitHub API
-- Lanyard WebSocket API
-- Supabase Realtime
-- GitHub Pages
-
-### ⚙️ Outils serveur
-
-- Node.js
-- discord.js
-- @supabase/supabase-js
-- dotenv
-
-## 🚀 Points forts du projet
-
-### 🧠 Experience utilisateur
-
-- loader type terminal
-- curseur personnalise
-- fond visuel mesh
-- design compact optimise mobile
-- modales projet plus rapides a ouvrir
-
-### 📡 Donnees dynamiques
-
-- statut de disponibilite pilote depuis Discord
-- visiteurs actifs suivis en temps reel
-- statistiques GitHub globales
-- statistiques GitHub par projet si le repo existe
-- masquage automatique des stats sur les projets sans repo GitHub
-
-### 🛡️ Robustesse
-
-- filtrage des reponses GitHub invalides
-- gestion du rate limit GitHub sans casser l'UI
-- RLS prevu pour Supabase
-- deploiement automatise via GitHub Actions
-
-## 📁 Structure du repository
+## File Structure
 
 ```text
 .
-├── .github/
-│   └── workflows/
-│       └── static.yml
+├── index.html              # Single-page HTML — all sections inline
+├── css/
+│   ├── base.css            # Reset, design tokens, layout primitives, loader
+│   ├── components.css      # All component styles (nav, hero, projects, contact…)
+│   └── animations.css      # Keyframes + [data-animate] scroll animation classes
+├── js/
+│   ├── main.js             # Entry point: imports app.js
+│   ├── app.js              # Orchestrator — initializes all modules in order
+│   ├── config.js           # Runtime config (Supabase, GitHub, Discord)
+│   ├── i18n.js             # FR/EN translation strings
+│   └── modules/
+│       ├── contact-form.js       # Contact + booking → Supabase edge function
+│       ├── discord-realtime.js   # Lanyard WebSocket → Discord presence card
+│       ├── projects-ui.js        # Carousel, modal, GitHub stats, filters
+│       ├── perf-mode.js          # Perf / a11y / ultra-compact modes
+│       ├── ui-effects.js         # Loader, cursor, scroll reveal, tilt, header
+│       ├── modal.js              # Accessible overlay (focus trap + keyboard)
+│       ├── terminal-ui.js        # Interactive terminal overlay
+│       ├── skills-modal.js       # Skill marquee → detail modal
+│       ├── project-search-ui.js  # Ctrl+K project search overlay
+│       ├── web-vitals.js         # Core Web Vitals (console only)
+│       ├── lazy-images.js        # IntersectionObserver lazy loading
+│       ├── scroll-animations.js  # [data-animate] viewport trigger
+│       ├── retry.js              # Exponential backoff helper
+│       └── github-colors.js      # GitHub language → hex color map
 ├── assets/
 │   ├── logo.svg
-│   └── og-image.svg
-├── bot/
-│   ├── index.js
-│   └── package.json
-├── css/
-│   ├── base.css
-│   ├── components.css
-│   └── style.css
-├── js/
-│   ├── app.js
-│   ├── config.js
-│   ├── i18n.js
-│   ├── main.js
-│   └── particles.js
-├── CNAME
-├── index.html
-├── README.md
-└── supabase_hardening.sql
+│   ├── og-image.svg
+│   └── structured-data.json      # Schema.org source (inlined in index.html)
+├── supabase/functions/
+│   └── contact-handler/          # Edge function: form → Telegram
+└── sw.js                         # Service worker (caching)
 ```
 
-## 🔎 Comment ca fonctionne
+---
 
-### 1. 🖥️ Front statique
+## Local Setup
 
-Le site est servi comme un projet statique pur. Il n'y a pas de build frontend obligatoire ni de framework a compiler.
-
-### 2. 🔄 Disponibilite temps reel
-
-Le bot Discord ecoute un salon cible, parse les messages de l'utilisateur autorise, puis met a jour la table Supabase `portfolio_status`.
-
-Le frontend lit ensuite cette table pour afficher:
-
-- le statut disponible / occupe
-- le nombre de projets actifs
-
-### 3. 💬 Presence Discord
-
-La carte Discord du site utilise Lanyard pour recuperer:
-
-- avatar
-- statut online / idle / dnd / offline
-- activite en cours
-- ecoute Spotify si presente
-
-### 4. 📊 Statistiques GitHub
-
-Le frontend interroge GitHub pour afficher:
-
-- le nombre total de repos
-- les stars totales
-- la repartition des langages
-- des donnees par projet dans la modal
-
-Quand un projet n'a pas de repo GitHub, les blocs dependants de GitHub sont automatiquement masques.
-
-## 🧪 Lancer le projet en local
-
-Comme le site est statique, un simple serveur HTTP suffit.
-
-### Option 1 ⚡
+No build step. Any static server works:
 
 ```bash
+npx serve .          # then open http://localhost:3000
 python3 -m http.server 8080
+# or VS Code Live Server extension
 ```
 
-### Option 2 📦
+---
 
-```bash
-npx serve .
-```
+## Configuration
 
-Ensuite ouvrir:
-
-```text
-http://localhost:8080
-```
-
-## 🔧 Configuration frontend
-
-Le fichier `js/config.js` contient la configuration publique utilisee par le frontend:
+Edit `js/config.js`:
 
 ```js
 export const config = {
-	supabaseUrl: 'https://...supabase.co',
-	supabaseAnonKey: 'sb_publishable_...'
+    supabaseUrl: 'https://YOUR_PROJECT.supabase.co',
+    supabaseAnonKey: 'sb_publishable_...',  // public anon key — safe to commit
+    githubUsername: 'nexos20lv',
+    discordId: '...',
 };
 ```
 
-Ces valeurs sont publiques par design pour un client Supabase cote navigateur. La securite d'ecriture repose sur les policies RLS, pas sur le secret de cette cle.
+`supabaseAnonKey` is intentionally public — Supabase RLS restricts access. Never use a service role key here.
 
-## 🤖 Bot Discord -> Supabase
+---
 
-Le bot se trouve dans le dossier `bot/`.
+## Adding a Project
 
-### 📥 Installation
+**1. Add HTML card** in `index.html` inside `.carousel-track`:
+
+```html
+<article class="carousel-item reveal" data-index="N" data-category="web" data-client-need="web">
+    <div class="card-content">
+        <i class="bi bi-YOUR-ICON"></i>
+        <div class="project-meta" data-i18n="projects.N.meta">TYPE</div>
+        <h3 class="project-title" data-i18n="projects.N.title">Titre</h3>
+        <p class="project-desc" data-i18n="projects.N.desc">Description.</p>
+        <div class="tech-stack"><span class="tech-pill">Tech</span></div>
+        <div class="hidden-details">
+            <p data-i18n="projects.N.details.1">Detail.</p>
+            <a href="URL" target="_blank" rel="noopener noreferrer"
+               class="btn btn-primary" data-i18n="projects.N.action">Voir</a>
+        </div>
+        <button class="btn btn-secondary btn-sm learn-more-btn learn-more-spaced">
+            <span data-i18n="projects.learnMore">En savoir plus</span>
+        </button>
+    </div>
+</article>
+```
+
+`N` = next index (0-based). `data-index` must match DOM position.
+
+**2. Add project data** in `js/modules/projects-ui.js`, `projectData` array:
+
+```js
+{ index: N, githubRepo: 'nexos20lv/repo', status: 'production', hasBuildBadge: false }
+```
+
+**3. Add i18n keys** in `js/i18n.js` under `projects` for both `fr` and `en`:
+
+```js
+'N': { meta: 'APP WEB', title: '...', desc: '...', details: { '1': '...', '2': '...' }, action: '...' }
+```
+
+---
+
+## Adding / Modifying Translations
+
+All strings are in `js/i18n.js`:
+
+```js
+export const i18n = {
+    fr: { nav: { about: 'À propos' }, ... },
+    en: { nav: { about: 'About' }, ... },
+};
+```
+
+To add a language: add `de: { ... }` to `i18n` (copy `en` as base) and add `<button class="lang-btn" data-lang="de">DE</button>` in `index.html`.
+
+---
+
+## CSP SHA-256 Hash
+
+If you modify any inline `<script>` in `index.html`, regenerate its hash:
 
 ```bash
-cd bot
-npm install
+printf '%s' 'SCRIPT CONTENT HERE' | openssl dgst -sha256 -binary | openssl base64
 ```
 
-### 🔐 Variables d'environnement attendues
+Update the `'sha256-...'` value in the `script-src` directive of the CSP meta tag.
 
-Creer un fichier `.env` dans `bot/` avec:
+---
 
-```env
-DISCORD_BOT_TOKEN=...
-DISCORD_STATUS_CHANNEL_ID=...
-ALLOWED_USER_ID=...
-SUPABASE_URL=...
-SUPABASE_SERVICE_ROLE_KEY=...
-```
+## Deployment
 
-### ▶️ Demarrage
-
-```bash
-npm start
-```
-
-### 🧭 Comportement du bot
-
-Le bot:
-
-- ignore tous les bots
-- ignore les salons non autorises
-- ignore les utilisateurs non autorises
-- applique un cooldown pour eviter le spam
-- parse un nombre pour les projets actifs
-- parse les mots cles de disponibilite
-- upsert ensuite la ligne `id = 1` dans `portfolio_status`
-
-### 💡 Exemples de messages interpretes
-
-- `dispo`
-- `busy`
-- `indisponible 3`
-- `available 1`
-- `2`
-
-## 🗄️ Supabase
-
-Le fichier `supabase_hardening.sql` contient une base de durcissement pour la table `portfolio_status`.
-
-Objectif:
-
-- lecture publique autorisee
-- ecriture reservee au role service
-
-Cela permet au frontend de lire librement l'etat du portfolio tout en reservant les modifications au bot.
-
-## ✉️ Contact -> Telegram (Edge Function)
-
-Les formulaires de contact frontend envoient leurs messages a:
-
-- `functions/v1/contact-handler`
-
-La fonction edge se trouve ici:
-
-- `supabase/functions/contact-handler/index.ts`
-
-Secrets requis cote Supabase:
-
-```env
-TELEGRAM_BOT_TOKEN=...
-TELEGRAM_CHAT_ID=...
-```
-
-Deploiement:
-
-```bash
-supabase functions deploy contact-handler
-```
-
-Le bot Discord dans `bot/` reste uniquement dedie au statut de disponibilite.
-
-## 🚢 Deploiement
-
-Le deploiement est gere par GitHub Actions via `.github/workflows/static.yml`.
-
-Le workflow:
-
-- se declenche sur push vers `main`
-- prepare GitHub Pages
-- publie le contenu du repository
-- injecte un numero de version derive du commit pour le cache busting
-
-Le site est ensuite publie sur GitHub Pages avec le domaine configure dans `CNAME`.
-
-## 🌍 SEO et partage social
-
-Le projet inclut:
-
-- des metas Open Graph
-- des metas Twitter Card
-- une image de partage dediee
-- un contenu FR / EN exploitable par les moteurs et apercus sociaux
-
-Si Discord ou un autre service garde un ancien apercu, il peut etre necessaire d'attendre le refresh de cache ou de republier le lien avec un parametre de version.
-
-## 🛠️ Personnalisation rapide
-
-### ✍️ Contenu et textes
-
-- `js/i18n.js` pour les textes FR / EN
-- `index.html` pour la structure
-
-### 🎛️ Style
-
-- `css/base.css` pour les variables globales
-- `css/components.css` pour les composants et le responsive
-
-### 🧩 Logique
-
-- `js/app.js` pour les interactions UI, APIs et modales
-- `js/particles.js` pour le rendu visuel d'arriere-plan
-
-## 🔮 Ameliorations possibles
-
-- remplacer l'image Open Graph SVG par une version PNG pour une compatibilite embed maximale
-- ajouter un endpoint serveur pour proxyfier certaines requetes GitHub et reduire l'exposition au rate limit
-- sortir les donnees projets dans un JSON ou une source CMS legere
-- ajouter un vrai pipeline de tests visuels ou de validation front
-
-## 📄 Licence
-
-Projet personnel.
-
-Le code source est visible publiquement mais aucune licence open source explicite n'est fournie a ce stade. En pratique, cela signifie que tous les droits restent reserves par defaut sauf autorisation explicite.
-
-## 🙌 Credits
-
-- Design et developpement: Pierre Bouteman
-- Icons: Bootstrap Icons, Devicon
-- Presence Discord: Lanyard
-- Realtime: Supabase
-- Hebergement: GitHub Pages
+Push to `main` → GitHub Pages auto-deploys. Custom domain via `CNAME` file. HTTPS is automatic.
