@@ -87,7 +87,7 @@ export function initScrollRevealAndNavSpy() {
                 entry.target.classList.add('visible');
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
 
     reveals.forEach((element) => revealObserver.observe(element));
 
