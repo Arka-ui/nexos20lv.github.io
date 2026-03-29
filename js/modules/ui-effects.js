@@ -248,6 +248,10 @@ export function initReadingProgress() {
  * Initializes the hamburger menu for mobile navigation.
  * Opens/closes a nav drawer with keyboard and touch support.
  */
+/**
+ * Initializes the hamburger menu for mobile navigation.
+ * Opens/closes a nav drawer with keyboard, focus trap, and touch support.
+ */
 export function initHamburgerMenu() {
     const btn = document.getElementById('hamburgerBtn');
     const drawer = document.getElementById('navDrawer');
@@ -256,13 +260,17 @@ export function initHamburgerMenu() {
 
     if (!btn || !drawer) return;
 
-    const drawerLinks = drawer.querySelectorAll('a, button');
+    const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
     const openDrawer = () => {
         drawer.setAttribute('aria-hidden', 'false');
         btn.setAttribute('aria-expanded', 'true');
         document.body.classList.add('nav-open');
-        document.body.style.overflow = 'hidden';
+        // iOS scroll lock: fixed positioning
+        document.body.dataset.scrollY = String(window.scrollY);
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${window.scrollY}px`;
+        document.body.style.width = '100%';
         closeBtn?.focus();
     };
 
@@ -270,9 +278,41 @@ export function initHamburgerMenu() {
         drawer.setAttribute('aria-hidden', 'true');
         btn.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('nav-open');
-        document.body.style.overflow = '';
+        // Restore scroll position
+        const scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
         btn.focus();
     };
+
+    // Focus trap: cycle Tab/Shift-Tab within the drawer
+    drawer.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeDrawer();
+            return;
+        }
+        if (event.key !== 'Tab') return;
+
+        const focusable = Array.from(drawer.querySelectorAll(FOCUSABLE));
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey) {
+            if (document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        }
+    });
 
     btn.addEventListener('click', () => {
         if (drawer.getAttribute('aria-hidden') === 'false') {
@@ -285,17 +325,12 @@ export function initHamburgerMenu() {
     overlay?.addEventListener('click', closeDrawer);
     closeBtn?.addEventListener('click', closeDrawer);
 
-    drawer.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') closeDrawer();
+    // Close drawer when a nav link is clicked
+    drawer.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeDrawer);
     });
 
-    drawerLinks.forEach((link) => {
-        if (link.tagName === 'A') {
-            link.addEventListener('click', closeDrawer);
-        }
-    });
-
-    // Sync drawer lang buttons with main lang buttons
+    // Sync drawer lang buttons with main lang buttons (click delegation only — applyLanguage handles active state)
     const drawerLangBtns = drawer.querySelectorAll('.lang-btn');
     const mainLangBtns = document.querySelectorAll('header .lang-btn');
 
@@ -305,7 +340,6 @@ export function initHamburgerMenu() {
             mainLangBtns.forEach((mainBtn) => {
                 if (mainBtn.dataset.lang === lang) mainBtn.click();
             });
-            drawerLangBtns.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
         });
     });
 }
