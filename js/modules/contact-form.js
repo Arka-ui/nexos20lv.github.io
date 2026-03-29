@@ -56,6 +56,32 @@ export function initContactForm({ config, t }) {
         });
     }
 
+    // Inline field validation on blur
+    const validateField = (input) => {
+        const group = input.closest('.form-group');
+        if (!group) return;
+
+        let isValid = true;
+        if (input.type === 'email') {
+            isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+        } else if (input.tagName === 'TEXTAREA') {
+            isValid = input.value.trim().length >= 10;
+        } else {
+            isValid = input.value.trim().length > 0;
+        }
+
+        group.classList.toggle('field-error', !isValid && input.value.trim() !== '');
+    };
+
+    contactForm.querySelectorAll('input, textarea').forEach((field) => {
+        field.addEventListener('blur', () => validateField(field));
+        field.addEventListener('input', () => {
+            if (field.closest('.form-group')?.classList.contains('field-error')) {
+                validateField(field);
+            }
+        });
+    });
+
     // Main contact form submission
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();

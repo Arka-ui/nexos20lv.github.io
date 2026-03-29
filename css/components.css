@@ -507,15 +507,20 @@
 }
 
 .perf-btn:focus-visible,
+.lang-btn:focus-visible,
+.skill-item:focus-visible,
 .close-modal:focus-visible,
 .close-terminal:focus-visible,
-.nav-drawer-close:focus-visible,
-.search-item:focus-visible,
 .card-toggle:focus-visible,
+.hamburger-btn:focus-visible,
+.nav-drawer-close:focus-visible,
+.tl-toggle:focus-visible,
+.back-to-top:focus-visible,
+.search-item:focus-visible,
 #projects-search:focus-visible,
 #terminal-input:focus-visible {
-    outline: 2px solid var(--violet-light);
-    outline-offset: 2px;
+    outline: 2px solid var(--violet);
+    outline-offset: 3px;
 }
 
 /* ----------------
@@ -2403,6 +2408,20 @@ body.motion-ready .hero-content .reveal {
 
 #contact-form .form-group {
     margin-bottom: 2rem;
+}
+
+.form-group.field-error input,
+.form-group.field-error textarea {
+    border-color: #f87171;
+}
+
+.form-group.field-error::after {
+    content: attr(data-error-msg);
+    display: block;
+    font-size: 0.75rem;
+    color: #f87171;
+    margin-top: 0.25rem;
+    font-family: var(--font-mono);
 }
 
 .form-group input,
