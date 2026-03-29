@@ -139,10 +139,34 @@
                             <button type="button" class="lang-btn" data-lang="en">EN</button>
                         </div>
                     </div>
+                    <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navDrawer">
+                        <span class="hamburger-bar"></span>
+                        <span class="hamburger-bar"></span>
+                        <span class="hamburger-bar"></span>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
+
+    <div class="nav-drawer" id="navDrawer" aria-hidden="true">
+        <div class="nav-drawer-overlay" id="navDrawerOverlay"></div>
+        <div class="nav-drawer-panel">
+            <button type="button" class="nav-drawer-close" id="navDrawerClose" aria-label="Fermer le menu">×</button>
+            <ul class="nav-drawer-links">
+                <li><a href="#about"><i class="bi bi-person-fill"></i> <span data-i18n="nav.about">À propos</span></a></li>
+                <li><a href="#experience"><i class="bi bi-briefcase-fill"></i> <span data-i18n="nav.experience">Expérience</span></a></li>
+                <li><a href="#projects"><i class="bi bi-code-slash"></i> <span data-i18n="nav.projects">Projets</span></a></li>
+                <li><a href="#contact"><i class="bi bi-envelope-at-fill"></i> <span data-i18n="nav.contact">Contact</span></a></li>
+            </ul>
+            <div class="nav-drawer-lang">
+                <div class="lang-switch" role="group" aria-label="Language switcher">
+                    <button type="button" class="lang-btn active" data-lang="fr">FR</button>
+                    <button type="button" class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main id="main-content">
         <!-- Discord Status Card (Fixed Bottom Left) -->

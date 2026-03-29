@@ -38,7 +38,8 @@ import {
     initMotionEnhancements,
     initTiltEffect,
     initHeaderScroll,
-    initReadingProgress
+    initReadingProgress,
+    initHamburgerMenu
 } from './modules/ui-effects.js';
 import { initScrollAnimations } from './modules/scroll-animations.js';
 import { initLazyImages } from './modules/lazy-images.js';
@@ -395,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
     runWhenIdle(() => initTerminal(), 2200);
 
     initReadingProgress();
+    initHamburgerMenu();
 
     console.log('System Initialized: Ultra Modern Portfolio V3');
 });

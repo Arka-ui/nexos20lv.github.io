@@ -243,3 +243,69 @@ export function initReadingProgress() {
         progressBar.style.width = `${scrolled}%`;
     });
 }
+
+/**
+ * Initializes the hamburger menu for mobile navigation.
+ * Opens/closes a nav drawer with keyboard and touch support.
+ */
+export function initHamburgerMenu() {
+    const btn = document.getElementById('hamburgerBtn');
+    const drawer = document.getElementById('navDrawer');
+    const overlay = document.getElementById('navDrawerOverlay');
+    const closeBtn = document.getElementById('navDrawerClose');
+
+    if (!btn || !drawer) return;
+
+    const drawerLinks = drawer.querySelectorAll('a, button');
+
+    const openDrawer = () => {
+        drawer.setAttribute('aria-hidden', 'false');
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('nav-open');
+        document.body.style.overflow = 'hidden';
+        closeBtn?.focus();
+    };
+
+    const closeDrawer = () => {
+        drawer.setAttribute('aria-hidden', 'true');
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('nav-open');
+        document.body.style.overflow = '';
+        btn.focus();
+    };
+
+    btn.addEventListener('click', () => {
+        if (drawer.getAttribute('aria-hidden') === 'false') {
+            closeDrawer();
+        } else {
+            openDrawer();
+        }
+    });
+
+    overlay?.addEventListener('click', closeDrawer);
+    closeBtn?.addEventListener('click', closeDrawer);
+
+    drawer.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeDrawer();
+    });
+
+    drawerLinks.forEach((link) => {
+        if (link.tagName === 'A') {
+            link.addEventListener('click', closeDrawer);
+        }
+    });
+
+    // Sync drawer lang buttons with main lang buttons
+    const drawerLangBtns = drawer.querySelectorAll('.lang-btn');
+    const mainLangBtns = document.querySelectorAll('header .lang-btn');
+
+    drawerLangBtns.forEach((drawerBtn) => {
+        drawerBtn.addEventListener('click', () => {
+            const lang = drawerBtn.dataset.lang;
+            mainLangBtns.forEach((mainBtn) => {
+                if (mainBtn.dataset.lang === lang) mainBtn.click();
+            });
+            drawerLangBtns.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
+        });
+    });
+}
