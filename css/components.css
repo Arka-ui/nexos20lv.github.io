@@ -1694,6 +1694,23 @@ h1 .highlight-text {
     justify-content: center;
 }
 
+/* ── HERO STAGGER ── */
+.hero .hero-tag       { animation-delay: 0ms; }
+.hero .live-visitors  { animation-delay: 100ms; }
+.hero h1              { animation-delay: 200ms; }
+.hero .hero-sub       { animation-delay: 300ms; }
+.hero .hero-actions   { animation-delay: 400ms; }
+
+@media (prefers-reduced-motion: reduce) {
+    .hero .hero-tag,
+    .hero .live-visitors,
+    .hero h1,
+    .hero .hero-sub,
+    .hero .hero-actions {
+        animation-delay: 0ms;
+    }
+}
+
 /* ----------------
  * Buttons
  * ---------------- */
@@ -1794,6 +1811,8 @@ h1 .highlight-text {
     background: rgba(255, 255, 255, 0.02);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 /* Marquee Styles simplified */
@@ -1898,6 +1917,14 @@ h1 .highlight-text {
     z-index: 2;
     content-visibility: auto;
     contain-intrinsic-size: 1px 820px;
+}
+
+.section::after {
+    content: '';
+    display: block;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
 }
 
 .section + .section {
@@ -3358,6 +3385,10 @@ body.nav-open .hamburger-btn .hamburger-bar:nth-child(3) {
     .hero-content {
         max-width: 100%;
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .hero-tag,
@@ -3366,7 +3397,7 @@ body.nav-open .hamburger-btn .hamburger-bar:nth-child(3) {
     }
 
     h1 {
-        font-size: clamp(1.65rem, 7.2vw, 2.25rem);
+        font-size: clamp(1.6rem, 7.2vw, 2.25rem);
         line-height: 1.12;
         margin-bottom: 0.9rem;
     }
@@ -3378,7 +3409,20 @@ body.nav-open .hamburger-btn .hamburger-bar:nth-child(3) {
         margin-bottom: 1.2rem;
     }
 
-    .hero-actions,
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
     .cta-group {
         display: grid;
         grid-template-columns: 1fr;
@@ -3386,7 +3430,6 @@ body.nav-open .hamburger-btn .hamburger-bar:nth-child(3) {
         width: 100%;
     }
 
-    .hero-actions .btn,
     .cta-group .btn,
     .btn {
         width: calc(100% - 0.2rem);
