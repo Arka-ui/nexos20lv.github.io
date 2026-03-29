@@ -1695,21 +1695,7 @@ h1 .highlight-text {
 }
 
 /* ── HERO STAGGER ── */
-.hero .hero-tag       { animation-delay: 0ms; }
-.hero .live-visitors  { animation-delay: 100ms; }
-.hero h1              { animation-delay: 200ms; }
-.hero .hero-sub       { animation-delay: 300ms; }
-.hero .hero-actions   { animation-delay: 400ms; }
-
-@media (prefers-reduced-motion: reduce) {
-    .hero .hero-tag,
-    .hero .live-visitors,
-    .hero h1,
-    .hero .hero-sub,
-    .hero .hero-actions {
-        animation-delay: 0ms;
-    }
-}
+/* Stagger driven by --reveal-order via initMotionEnhancements + body.motion-ready .hero-content .reveal */
 
 /* ----------------
  * Buttons
@@ -2832,7 +2818,7 @@ body.ultra-compact .modal-description {
     }
 
     h1 {
-        font-size: clamp(1.9rem, 10vw, 3.3rem);
+        font-size: clamp(1.6rem, 10vw, 3.3rem);
         margin-bottom: 1.5rem;
     }
 
