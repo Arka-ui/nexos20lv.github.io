@@ -150,6 +150,7 @@ export function initContactForm({ config, t }) {
                 feedback.classList.add('success');
                 feedback.style.display = 'block';
                 contactForm.reset();
+                contactForm.querySelectorAll('.field-error').forEach((el) => el.classList.remove('field-error'));
             } else {
                 throw new Error();
             }
