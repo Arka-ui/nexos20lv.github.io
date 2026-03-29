@@ -362,3 +362,37 @@ export function initTimelineCollapse() {
         });
     });
 }
+
+/**
+ * On mobile, collapses Discord card to a dot; tap to expand.
+ */
+export function initDiscordCardMobile() {
+    if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+    const card = document.getElementById('lanyard-card');
+    if (!card) return;
+
+    card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        card.classList.toggle('expanded-mobile');
+    });
+}
+
+/**
+ * Shows a back-to-top button after 30% scroll depth.
+ */
+export function initBackToTop() {
+    const btn = document.querySelector('.back-to-top');
+    if (!btn) return;
+
+    const threshold = document.documentElement.scrollHeight * 0.3;
+
+    window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > threshold);
+    }, { passive: true });
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}

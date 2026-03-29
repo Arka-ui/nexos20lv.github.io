@@ -3765,7 +3765,7 @@ body.nav-open .hamburger-btn .hamburger-bar:nth-child(3) {
         width: 100%;
         justify-content: center;
         font-size: 0.82rem;
-        padding: 0.56rem 0.7rem;
+        padding: 1rem 1.25rem;
         min-height: 36px;
     }
 
@@ -3877,6 +3877,53 @@ body.nav-open .hamburger-btn .hamburger-bar:nth-child(3) {
         left: 0.7rem;
         right: 0.7rem;
         bottom: 0.45rem;
+    }
+
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+
+    .discord-card {
+        bottom: 1.5rem;
+        left: auto;
+        right: 1.5rem;
+        width: 12px;
+        height: 12px;
+        padding: 0;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+        background: var(--violet);
+        border-color: transparent;
+        box-shadow: 0 0 8px var(--glow);
+        transition: all 0.3s var(--ease-smooth);
+    }
+
+    .discord-card.expanded-mobile {
+        width: min(320px, calc(100vw - 2rem));
+        height: auto;
+        padding: var(--space-3);
+        border-radius: var(--radius-lg);
+        border-color: rgba(189, 0, 255, 0.2);
+        background: rgba(10, 5, 20, 0.92);
+    }
+
+    .discord-card > *:not(.card-toggle) {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .discord-card.expanded-mobile > * {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .booking-section,
+    .booking-section * {
+        max-width: 100%;
+        overflow-x: hidden;
     }
 }
 
@@ -4767,4 +4814,50 @@ body.nav-open .hamburger-btn .hamburger-bar:nth-child(3) {
     outline: none;
     border-color: var(--violet);
     box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+/* ── BACK TO TOP ── */
+.back-to-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    color: var(--violet-light);
+    font-size: 1rem;
+    backdrop-filter: var(--glass-blur);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 998;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-to-top:hover {
+    transform: translateY(-2px);
+    border-color: var(--violet);
+    box-shadow: var(--glow-hover);
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 4rem;
+        right: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+        transition: opacity 0.3s;
+    }
 }

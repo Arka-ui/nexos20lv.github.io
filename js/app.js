@@ -40,7 +40,9 @@ import {
     initHeaderScroll,
     initReadingProgress,
     initHamburgerMenu,
-    initTimelineCollapse
+    initTimelineCollapse,
+    initDiscordCardMobile,
+    initBackToTop
 } from './modules/ui-effects.js';
 import { initScrollAnimations } from './modules/scroll-animations.js';
 import { initLazyImages } from './modules/lazy-images.js';
@@ -399,6 +401,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initReadingProgress();
     initHamburgerMenu();
     initTimelineCollapse();
+    initDiscordCardMobile();
+    initBackToTop();
 
     console.log('System Initialized: Ultra Modern Portfolio V3');
 });
