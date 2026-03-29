@@ -3873,12 +3873,6 @@ body.nav-open .hamburger-btn .hamburger-bar:nth-child(3) {
         font-size: 1.35rem;
     }
 
-    .discord-card {
-        left: 0.7rem;
-        right: 0.7rem;
-        bottom: 0.45rem;
-    }
-
     input,
     textarea,
     select {

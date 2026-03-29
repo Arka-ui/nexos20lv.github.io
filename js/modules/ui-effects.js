@@ -385,9 +385,8 @@ export function initBackToTop() {
     const btn = document.querySelector('.back-to-top');
     if (!btn) return;
 
-    const threshold = document.documentElement.scrollHeight * 0.3;
-
     window.addEventListener('scroll', () => {
+        const threshold = document.documentElement.scrollHeight * 0.3;
         btn.classList.toggle('visible', window.scrollY > threshold);
     }, { passive: true });
 
