@@ -64,7 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLang = localStorage.getItem('portfolio-lang');
     if (!currentLang || !i18n[currentLang]) currentLang = fallbackLang;
     let lastDiscordStatus = null;
+    // Fonction globale pour forcer la mise à jour du badge Discord dans la bonne langue
+    window.refreshDiscordStatusLang = function() {
+        const statusNode = document.getElementById('discord-status-text');
+        if (statusNode) {
+            if (lastDiscordStatus) {
+                statusNode.textContent = t(`discord.status.${lastDiscordStatus}`);
+            } else {
+                statusNode.textContent = t('hero.status.loading') || t('discord.status.loading') || 'Synchronisation du statut...';
+            }
+        }
+    };
     let liveVisitorsCount = null;
+    // Pour le badge de statut via Supabase/BOT Discord
+    window.lastSupabaseStatus = null;
     const { openOverlay, closeOverlay } = createOverlayManager();
     let projectsUI = null;
 
@@ -159,11 +172,15 @@ document.addEventListener('DOMContentLoaded', () => {
             element.setAttribute('placeholder', t(element.dataset.i18nPlaceholder));
         });
 
-        if (lastDiscordStatus) {
-            const statusNode = document.getElementById('discord-status-text');
-            if (statusNode) {
-                statusNode.textContent = t(`discord.status.${lastDiscordStatus}`);
-            }
+
+
+
+        // Rafraîchit le badge Discord dans la bonne langue
+        window.refreshDiscordStatusLang();
+
+        // Rafraîchit le badge de statut via Supabase/BOT Discord dans la bonne langue
+        if (window.lastSupabaseStatus && window.applyStatusToUI) {
+            window.applyStatusToUI(window.lastSupabaseStatus);
         }
 
         renderLiveVisitorsCount(liveVisitorsCount);

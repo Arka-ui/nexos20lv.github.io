@@ -255,7 +255,10 @@ export function initDiscordRealtime({
         subscribeStatusChannel();
     }
 
+    // Expose la fonction et stocke la dernière donnée reçue
+    window.applyStatusToUI = applyStatusToUI;
     function applyStatusToUI(data) {
+        window.lastSupabaseStatus = data;
         const heroTag = document.getElementById('hero-availability');
         if (!heroTag) return;
 
