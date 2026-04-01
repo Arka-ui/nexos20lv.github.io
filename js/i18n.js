@@ -128,6 +128,10 @@ export const i18n = {
                 release: 'Derniere release',
                 buildTime: 'Temps de build'
             },
+            featured: 'Featured',
+            published: 'Projets publiés',
+            contributors: 'Contributeurs',
+            seeAll: 'Voir tous les projets →',
             quality: {
                 ci: 'CI',
                 updated: 'Maj',
@@ -230,6 +234,13 @@ export const i18n = {
             kbd: "ESC pour fermer"
         },
         about: {
+            title: 'À propos',
+            bioLabel: 'Bio',
+            projects: 'Projets',
+            years: 'Années',
+            available: 'Open to work',
+            location: 'Paris · Remote',
+            skills: 'Compétences',
             p1: 'Je suis <span class="highlight">Pierre Bouteman</span>, développeur polyvalent (Front & Back) basé en France.',
             p2: 'Je suis actuellement en <strong>Première STI2D</strong>, et je développe en parallèle des projets concrets pour renforcer mes compétences techniques.',
             p3: 'Mon approche repose sur des bases solides : architecture, qualité de code, performance et maintenabilité. J’utilise les outils IA de manière ciblée pour accélérer certaines étapes, sans jamais remplacer l’analyse technique et les bonnes pratiques d’ingénierie.',
@@ -251,6 +262,9 @@ export const i18n = {
         },
         contact: {
             title: 'Un projet en tête ?',
+            formLabel: 'Envoyer un message',
+            socialsLabel: 'Réseaux',
+            discordServer: 'Mon serveur Discord',
             responseTime: 'Temps de réponse moyen : < 24h',
             name: 'Votre nom',
             email: 'Votre email',
@@ -295,7 +309,8 @@ export const i18n = {
             }
         },
         footer: {
-            copyright: '© 2026 Pierre Bouteman. Fait main avec <span style="color:var(--primary)">❤</span> et du code.'
+            copyright: '© 2026 Pierre Bouteman. Fait main avec <span style="color:var(--primary)">❤</span> et du code.',
+            top: 'Haut de page'
         },
         discord: {
             toggleAria: 'Réduire le statut',
@@ -437,6 +452,10 @@ export const i18n = {
                 release: 'Latest release',
                 buildTime: 'Build time'
             },
+            featured: 'Featured',
+            published: 'Published projects',
+            contributors: 'Contributors',
+            seeAll: 'View all projects →',
             quality: {
                 ci: 'CI',
                 updated: 'Updated',
@@ -539,6 +558,13 @@ export const i18n = {
             kbd: "ESC to close"
         },
         about: {
+            title: 'About',
+            bioLabel: 'Bio',
+            projects: 'Projects',
+            years: 'Years',
+            available: 'Open to work',
+            location: 'Paris · Remote',
+            skills: 'Skills',
             p1: 'I am <span class="highlight">Pierre Bouteman</span>, a versatile front-end and back-end developer based in France.',
             p2: 'I am currently in <strong>Première STI2D</strong>, and I build concrete projects in parallel to strengthen my technical skills.',
             p3: 'My approach is built on strong fundamentals: architecture, code quality, performance, and maintainability. I use AI tools selectively to accelerate specific steps, without replacing technical analysis and software engineering best practices.',
@@ -560,6 +586,9 @@ export const i18n = {
         },
         contact: {
             title: 'Have a project in mind?',
+            formLabel: 'Send a message',
+            socialsLabel: 'Social networks',
+            discordServer: 'My Discord Server',
             responseTime: 'Average response time: < 24h',
             name: 'Your name',
             email: 'Your email',
@@ -604,7 +633,8 @@ export const i18n = {
             }
         },
         footer: {
-            copyright: '© 2026 Pierre Bouteman. Handcrafted with <span style="color:var(--primary)">❤</span> and code.'
+            copyright: '© 2026 Pierre Bouteman. Handcrafted with <span style="color:var(--primary)">❤</span> and code.',
+            top: 'Back to top'
         },
         discord: {
             toggleAria: 'Toggle status card',
