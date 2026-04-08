@@ -20,6 +20,7 @@
  * @returns {void}
  */
 export function initContactForm({ config, t }) {
+    const getLocale = () => ((document.documentElement.lang || 'fr').toLowerCase().startsWith('en') ? 'en-GB' : 'fr-FR');
     const contactForm = document.getElementById('contact-form');
     const feedback = document.getElementById('form-feedback');
     const messageInput = document.getElementById('contact-message');
@@ -92,7 +93,7 @@ export function initContactForm({ config, t }) {
         submitBtn.innerHTML = '<span class="loader-dots">...</span>';
 
         const formData = new FormData(contactForm);
-        const receivedAt = new Date().toLocaleString('fr-FR', {
+        const receivedAt = new Date().toLocaleString(getLocale(), {
             dateStyle: 'short',
             timeStyle: 'short'
         });
@@ -237,7 +238,7 @@ export function initContactForm({ config, t }) {
         const renderCalendar = () => {
             const { daysInMonth, startingDayOfWeek, year, month } = getMonthDays(currentDate);
 
-            calendarMonthEl.textContent = currentDate.toLocaleDateString('fr-FR', { month: 'long' });
+            calendarMonthEl.textContent = currentDate.toLocaleDateString(getLocale(), { month: 'long' });
             calendarYearEl.textContent = year;
 
             calendarDaysEl.innerHTML = '';
@@ -272,7 +273,7 @@ export function initContactForm({ config, t }) {
                 dayEl.addEventListener('click', () => {
                     if (isAvailable) {
                         bookingDateInput.value = localDateValue;
-                        selectedDateDisplay.textContent = date.toLocaleDateString('fr-FR', {
+                        selectedDateDisplay.textContent = date.toLocaleDateString(getLocale(), {
                             weekday: 'short',
                             month: 'short',
                             day: 'numeric'
@@ -289,7 +290,7 @@ export function initContactForm({ config, t }) {
         const renderTimeGrid = () => {
             const selectedDate = bookingDateInput.value;
             if (!selectedDate) {
-                timeGridEl.innerHTML = '<p class="time-placeholder">Sélectionner une date d\'abord</p>';
+                timeGridEl.innerHTML = `<p class="time-placeholder">${t('contact.booking.selectDateFirst')}</p>`;
                 return;
             }
 
@@ -342,7 +343,7 @@ export function initContactForm({ config, t }) {
             });
 
             if (!hasAvailableSlots) {
-                timeGridEl.innerHTML = '<p class="time-placeholder">Aucun créneau restant pour cette date</p>';
+                timeGridEl.innerHTML = `<p class="time-placeholder">${t('contact.booking.noSlotsLeft')}</p>`;
             }
         };
 
@@ -404,8 +405,8 @@ export function initContactForm({ config, t }) {
             const selectedDate = formData.get('date');
             const selectedTime = formData.get('time');
             const dateObj = new Date(selectedDate + 'T' + selectedTime);
-            const dateDisplay = dateObj.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            const receivedAt = new Date().toLocaleString('fr-FR', {
+            const dateDisplay = dateObj.toLocaleDateString(getLocale(), { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            const receivedAt = new Date().toLocaleString(getLocale(), {
                 dateStyle: 'short',
                 timeStyle: 'short'
             });

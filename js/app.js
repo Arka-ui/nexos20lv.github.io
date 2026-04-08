@@ -172,6 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
             element.setAttribute('placeholder', t(element.dataset.i18nPlaceholder));
         });
 
+        document.querySelectorAll('[data-i18n-title]').forEach((element) => {
+            element.setAttribute('title', t(element.dataset.i18nTitle));
+        });
+
+        document.querySelectorAll('[data-i18n-alt]').forEach((element) => {
+            element.setAttribute('alt', t(element.dataset.i18nAlt));
+        });
+
 
 
 

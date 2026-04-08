@@ -2414,7 +2414,7 @@ body.motion-ready .hero-content .reveal {
 
 .form-group.field-error input,
 .form-group.field-error textarea {
-    border-color: #f87171;
+    border-color: transparent;
 }
 
 .form-group.field-error::after {
@@ -2431,7 +2431,7 @@ body.motion-ready .hero-content .reveal {
     width: 100%;
     padding: var(--space-4);
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
+    border: none;
     border-radius: var(--radius-md);
     color: #fff;
     font-family: inherit;
@@ -2442,7 +2442,7 @@ body.motion-ready .hero-content .reveal {
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: var(--violet);
+    border-color: transparent;
     box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2), 0 0 16px rgba(124, 58, 237, 0.1);
 }
 
@@ -2496,7 +2496,7 @@ body.motion-ready .hero-content .reveal {
     gap: 0.75rem;
     padding: 0.75rem 1rem;
     background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    border: none;
     border-radius: var(--radius-md);
     color: var(--text-muted);
     font-size: 0.9rem;

@@ -22,7 +22,27 @@ export const i18n = {
             i18n: '> CHARGEMENT DES MODULES LINGUISTIQUES...',
             ready: '> SYSTÈME OPÉRATIONNEL. BIENVENUE.'
         },
-        nav: { projects: 'Projets', about: 'À propos', experience: 'Expérience', contact: 'Contact' },
+        common: {
+            skipToContent: 'Aller au contenu principal',
+            languageSwitcher: 'Sélecteur de langue',
+            openMenu: 'Ouvrir le menu',
+            closeMenu: 'Fermer le menu',
+            backToTop: 'Retour en haut',
+            avatarAlt: 'Avatar Discord'
+        },
+        nav: {
+            projects: 'Projets',
+            about: 'À propos',
+            experience: 'Expérience',
+            contact: 'Contact',
+            drawerAria: 'Menu de navigation'
+        },
+        marquee: {
+            title: {
+                line1: "Technologies que j'utilise",
+                line2: 'principalement'
+            }
+        },
         hero: {
             tag: ' Disponible pour des projets',
             title: { prefix: 'Développeur', highlight: 'Full-Stack', suffix: '& Créatif' },
@@ -59,7 +79,10 @@ export const i18n = {
             9: 'CI/CD',
             10: 'Ingénierie UI',
             11: 'Godot Engine',
-            12: 'Python'
+            12: 'Python',
+            modalMeta: 'TECH STACK',
+            modalTitle: 'Compétence',
+            closeModalAria: 'Fermer la fenêtre compétence'
         },
         sections: {
             about: { tag: '01 / À PROPOS' },
@@ -74,6 +97,10 @@ export const i18n = {
             contact: 'Disponible pour collaborations web/desktop, optimisation produit, automatisation et maintenance d\'applications existantes.'
         },
         experience: {
+            toggle: {
+                view: 'Voir',
+                collapse: 'Réduire'
+            },
             1: {
                 title: 'Développeur Full-Stack',
                 company: 'Projets Personnels',
@@ -117,11 +144,13 @@ export const i18n = {
             },
             clientMode: {
                 title: 'Mode client :',
+                ariaLabel: 'Filtres mode client',
                 all: 'Tous',
                 web: 'Site web',
                 desktop: 'Desktop',
                 maintenance: 'Maintenance'
             },
+            closeModalAria: 'Fermer la fenêtre projet',
             featuredMetrics: {
                 title: 'Projets phares (GitHub)',
                 stars: 'Stars total',
@@ -252,6 +281,7 @@ export const i18n = {
         contact: {
             title: 'Un projet en tête ?',
             responseTime: 'Temps de réponse moyen : < 24h',
+            discordServer: 'Mon serveur Discord',
             name: 'Votre nom',
             email: 'Votre email',
             message: 'Votre message...',
@@ -260,10 +290,27 @@ export const i18n = {
             error: 'Erreur lors de l’envoi. Réessayez plus tard.',
             booking: {
                 title: 'Réserver un appel',
+                openQuick: 'Résa rapide',
                 subtitle: 'Chois une date et une heure, je confirme rapidement.',
                 formSubtitle: 'Quelques infos pour organiser notre discussion.',
+                closeModalAria: 'Fermer la modal',
                 availabilityLabel: 'Créneaux de dispo (Europe/Paris)',
                 availabilityInfo: 'Lun-Ven: 18:00-20:00 · Sam: 14:00-18:00',
+                prevMonthAria: 'Mois précédent',
+                nextMonthAria: 'Mois suivant',
+                chooseDate: 'Choisir une date',
+                chooseTime: 'Choisir une heure',
+                selectDateFirst: "Sélectionner une date d'abord",
+                noSlotsLeft: 'Aucun créneau restant pour cette date',
+                weekdays: {
+                    mon: 'L',
+                    tue: 'M',
+                    wed: 'M',
+                    thu: 'J',
+                    fri: 'V',
+                    sat: 'S',
+                    sun: 'D'
+                },
                 slots: {
                     week: 'Lun-Ven · 18:00-20:00',
                     sat: 'Sam · 14:00-18:00'
@@ -293,6 +340,20 @@ export const i18n = {
                     maintenance: 'Bonjour Pierre,\n\nJ\'ai besoin d\'aide en maintenance/optimisation.\n\nApplication concernée :\n-\n\nProblèmes observés :\n-\n\nPriorité :\n-\n\nStack actuelle :\n-'
                 }
             }
+        },
+        donation: {
+            cta: 'Buy Me A Coffee',
+            title: 'Me soutenir sur Buy Me A Coffee'
+        },
+        github: {
+            metricsTitle: 'GITHUB METRICS',
+            repos: 'Repos',
+            stars: 'Stars'
+        },
+        terminal: {
+            title: 'SYSTEM_TERMINAL_V3',
+            closeAria: 'Fermer le terminal',
+            welcome: "Tape 'help' pour voir les commandes disponibles."
         },
         footer: {
             copyright: '© 2026 Pierre Bouteman. Fait main avec <span style="color:var(--primary)">❤</span> et du code.'
@@ -331,7 +392,27 @@ export const i18n = {
             i18n: '> LOADING LANGUAGE MODULES...',
             ready: '> SYSTEM OPERATIONAL. WELCOME.'
         },
-        nav: { projects: 'Projects', about: 'About', experience: 'Experience', contact: 'Contact' },
+        common: {
+            skipToContent: 'Skip to main content',
+            languageSwitcher: 'Language switcher',
+            openMenu: 'Open menu',
+            closeMenu: 'Close menu',
+            backToTop: 'Back to top',
+            avatarAlt: 'Discord avatar'
+        },
+        nav: {
+            projects: 'Projects',
+            about: 'About',
+            experience: 'Experience',
+            contact: 'Contact',
+            drawerAria: 'Navigation menu'
+        },
+        marquee: {
+            title: {
+                line1: 'Technologies I use',
+                line2: 'most often'
+            }
+        },
         hero: {
             tag: ' Available for projects',
             title: { prefix: 'Creative', highlight: 'Full-Stack', suffix: 'Developer' },
@@ -368,7 +449,10 @@ export const i18n = {
             9: 'CI/CD',
             10: 'UI Engineering',
             11: 'Godot Engine',
-            12: 'Python'
+            12: 'Python',
+            modalMeta: 'TECH STACK',
+            modalTitle: 'Skill',
+            closeModalAria: 'Close skill window'
         },
         sections: {
             about: { tag: '01 / ABOUT' },
@@ -383,6 +467,10 @@ export const i18n = {
             contact: 'Available for web/desktop collaborations, product optimization, automation, and long-term maintenance.'
         },
         experience: {
+            toggle: {
+                view: 'View',
+                collapse: 'Collapse'
+            },
             1: {
                 title: 'Full-Stack Developer',
                 company: 'Personal Projects',
@@ -426,11 +514,13 @@ export const i18n = {
             },
             clientMode: {
                 title: 'Client mode:',
+                ariaLabel: 'Client mode filters',
                 all: 'All',
                 web: 'Website',
                 desktop: 'Desktop',
                 maintenance: 'Maintenance'
             },
+            closeModalAria: 'Close project window',
             featuredMetrics: {
                 title: 'Featured projects (GitHub)',
                 stars: 'Total stars',
@@ -561,6 +651,7 @@ export const i18n = {
         contact: {
             title: 'Have a project in mind?',
             responseTime: 'Average response time: < 24h',
+            discordServer: 'My Discord server',
             name: 'Your name',
             email: 'Your email',
             message: 'Your message...',
@@ -569,10 +660,27 @@ export const i18n = {
             error: 'Error sending message. Try again later.',
             booking: {
                 title: 'Book a Call',
+                openQuick: 'Quick booking',
                 subtitle: 'Pick a date and time, I confirm ASAP.',
                 formSubtitle: 'A few details to organize our discussion.',
+                closeModalAria: 'Close modal',
                 availabilityLabel: 'Available slots (Europe/Paris)',
                 availabilityInfo: 'Mon-Fri: 18:00-20:00 · Sat: 14:00-18:00',
+                prevMonthAria: 'Previous month',
+                nextMonthAria: 'Next month',
+                chooseDate: 'Choose a date',
+                chooseTime: 'Choose a time',
+                selectDateFirst: 'Select a date first',
+                noSlotsLeft: 'No slots left for this date',
+                weekdays: {
+                    mon: 'M',
+                    tue: 'T',
+                    wed: 'W',
+                    thu: 'T',
+                    fri: 'F',
+                    sat: 'S',
+                    sun: 'S'
+                },
                 slots: {
                     week: 'Mon-Fri · 18:00-20:00',
                     sat: 'Sat · 14:00-18:00'
@@ -602,6 +710,20 @@ export const i18n = {
                     maintenance: 'Hi Pierre,\n\nI need help with maintenance/optimization.\n\nApplication:\n-\n\nCurrent issues:\n-\n\nPriority:\n-\n\nCurrent stack:\n-'
                 }
             }
+        },
+        donation: {
+            cta: 'Buy Me A Coffee',
+            title: 'Support me on Buy Me A Coffee'
+        },
+        github: {
+            metricsTitle: 'GITHUB METRICS',
+            repos: 'Repos',
+            stars: 'Stars'
+        },
+        terminal: {
+            title: 'SYSTEM_TERMINAL_V3',
+            closeAria: 'Close terminal',
+            welcome: "Type 'help' for available commands."
         },
         footer: {
             copyright: '© 2026 Pierre Bouteman. Handcrafted with <span style="color:var(--primary)">❤</span> and code.'

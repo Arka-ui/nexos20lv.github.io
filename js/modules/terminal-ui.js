@@ -8,6 +8,9 @@
  * @returns {{ toggleTerminal: Function, initTerminal: Function }}
  */
 export function initTerminalUI({ openOverlay, closeOverlay, dot, ring, applyLanguage }) {
+    const isEnglish = () => (document.documentElement.lang || 'fr').toLowerCase().startsWith('en');
+    const tr = (fr, en) => (isEnglish() ? en : fr);
+
     const toggleTerminal = (show, triggerElement) => {
         const modal = document.getElementById('terminal-modal');
         const input = document.getElementById('terminal-input');
@@ -38,14 +41,26 @@ export function initTerminalUI({ openOverlay, closeOverlay, dot, ring, applyLang
         if (!input || !content || !modal) return;
 
         const commands = {
-            help: () => 'Available commands: about, projects, experience, contact, theme, fr, en, clear, exit, neofetch',
-            about: () => 'Pierre Bouteman - Full-Stack Developer based in France. Currently in 1ere STI2D.',
-            projects: () => 'Listing projects... Command "> projects" in Ctrl+K for a visual list.',
-            experience: () => 'Experience: Personal projects (Nexaria, HA Desktop), STI2D Student, Internships at Declic Info & ASC Computer.',
+            help: () => tr(
+                'Commandes disponibles: about, projects, experience, contact, theme, fr, en, clear, exit, neofetch',
+                'Available commands: about, projects, experience, contact, theme, fr, en, clear, exit, neofetch'
+            ),
+            about: () => tr(
+                'Pierre Bouteman - Developpeur Full-Stack base en France. Actuellement en Premiere STI2D.',
+                'Pierre Bouteman - Full-Stack Developer based in France. Currently in 1ere STI2D.'
+            ),
+            projects: () => tr(
+                'Liste des projets... Commande "> projects" dans Ctrl+K pour une vue visuelle.',
+                'Listing projects... Command "> projects" in Ctrl+K for a visual list.'
+            ),
+            experience: () => tr(
+                'Parcours: projets personnels (Nexaria, HA Desktop), eleve STI2D, stages chez Declic Info et ASC Computer.',
+                'Experience: Personal projects (Nexaria, HA Desktop), STI2D Student, Internships at Declic Info & ASC Computer.'
+            ),
             contact: () => 'Contact: pierre.bouteman@icloud.com | Discord: @nexos20lv',
             theme: () => {
                 document.getElementById('perfToggle')?.click();
-                return 'Toggled High Performance Mode.';
+                return tr('Mode haute performance bascule.', 'Toggled High Performance Mode.');
             },
             fr: () => {
                 applyLanguage('fr');
@@ -106,13 +121,13 @@ export function initTerminalUI({ openOverlay, closeOverlay, dot, ring, applyLang
                 content.innerHTML = '';
                 const welcome = document.createElement('div');
                 welcome.className = 'terminal-welcome';
-                welcome.textContent = "Type 'help' for available commands.";
+                welcome.textContent = tr("Tape 'help' pour voir les commandes disponibles.", "Type 'help' for available commands.");
                 content.appendChild(welcome);
                 return '';
             },
             exit: () => {
                 toggleTerminal(false);
-                return 'Exiting...';
+                return tr('Fermeture...', 'Exiting...');
             }
         };
 
@@ -131,7 +146,10 @@ export function initTerminalUI({ openOverlay, closeOverlay, dot, ring, applyLang
             if (cmd) {
                 const result = commands[cmd]
                     ? commands[cmd]()
-                    : `Command not found: ${cmd}. Type 'help' for possible commands.`;
+                    : tr(
+                        `Commande introuvable: ${cmd}. Tape 'help' pour les commandes possibles.`,
+                        `Command not found: ${cmd}. Type 'help' for possible commands.`
+                    );
 
                 if (result) {
                     const resLine = document.createElement('div');

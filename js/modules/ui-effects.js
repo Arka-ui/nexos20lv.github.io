@@ -346,6 +346,12 @@ export function initHamburgerMenu() {
 export function initTimelineCollapse() {
     if (window.matchMedia('(min-width: 769px)').matches) return;
 
+    const getToggleLabel = (expanded) => {
+        const lang = (document.documentElement.lang || 'fr').toLowerCase();
+        if (lang.startsWith('en')) return expanded ? 'Collapse' : 'View';
+        return expanded ? 'Réduire' : 'Voir';
+    };
+
     const items = document.querySelectorAll('.tl-item');
     items.forEach((item) => {
         const toggle = item.querySelector('.tl-toggle');
@@ -358,7 +364,7 @@ export function initTimelineCollapse() {
             const icon = toggle.querySelector('i');
             const label = toggle.querySelector('span');
             if (icon) icon.className = expanded ? 'bi bi-chevron-up' : 'bi bi-chevron-down';
-            if (label) label.textContent = expanded ? 'Réduire' : 'Voir';
+            if (label) label.textContent = getToggleLabel(expanded);
         });
     });
 }
