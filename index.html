@@ -30,8 +30,8 @@
     <!-- Security Policy (meta fallback). Real security headers must be set by the HTTP server. -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self';
     script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=' https://cdn.jsdelivr.net https://api.lanyard.rest;
-    style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net;
-    font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net;
+    style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net https://api.fontshare.com;
+    font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://fonts.bunny.net;
     img-src 'self' data: https://cdn.discordapp.com https://cdn.discordapp.net https://media.discordapp.net https://avatars.githubusercontent.com https://api.github.com https://opengraph.githubassets.com https://s.wordpress.com https://i.scdn.co https://mosaic.scdn.co;
     connect-src 'self' https://cdn.jsdelivr.net wss://api.lanyard.rest wss://*.supabase.co https://api.github.com https://*.supabase.co https://discord.com;
     frame-src https://conferencesorientationpdz.eclozionmc.ovh https://nexaria.netlib.re;
@@ -43,6 +43,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.3/index.css">
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -57,6 +59,7 @@
     <link rel="stylesheet" href="css/base.css?v=2.2">
     <link rel="stylesheet" href="css/components.css?v=3.6">
     <link rel="stylesheet" href="css/animations.css?v=1.0">
+    <link rel="stylesheet" href="css/hero-style.css?v=1.0">
 
     <script type="application/ld+json">
 {
@@ -108,39 +111,30 @@
     <!-- Mesh Background (New) -->
     <div class="mesh"></div>
 
+    <video
+        id="hero-video"
+        class="hero-video"
+        muted
+        playsinline
+        preload="auto"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4"
+        aria-hidden="true"
+    ></video>
+
     <header>
         <div class="container">
             <nav>
                 <a href="#" class="logo">
-                    <img src="assets/logo.svg" alt="Pierre Bouteman" height="52" width="auto" class="logo-img"
+                    <img src="assets/logo.svg" alt="Pierre Bouteman" height="32" width="auto" class="logo-img"
                         loading="eager" decoding="async" fetchpriority="high">
                 </a>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a href="#about"><i class="bi bi-person-fill"></i> <span data-i18n="nav.about">À
-                                    propos</span></a></li>
-                        <li><a href="#experience"><i class="bi bi-briefcase-fill"></i> <span
-                                    data-i18n="nav.experience">Expérience</span></a></li>
-                        <li><a href="#projects"><i class="bi bi-code-slash"></i> <span
-                                    data-i18n="nav.projects">Projets</span></a></li>
-                        <li><a href="#contact"><i class="bi bi-envelope-at-fill"></i> <span
-                                    data-i18n="nav.contact">Contact</span></a></li>
+                        <li><a href="#about"><span data-i18n="nav.about">À propos</span></a></li>
+                        <li><a href="#experience"><span data-i18n="nav.experience">Expérience</span></a></li>
+                        <li><a href="#projects"><span data-i18n="nav.projects">Projets</span></a></li>
+                        <li><a href="#contact"><span data-i18n="nav.contact">Contact</span></a></li>
                     </ul>
-                    <div class="nav-actions">
-                        <button type="button" class="perf-btn" id="perfToggle" title="Toggle High Performance Mode">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                            </svg>
-                        </button>
-                        <button type="button" class="perf-btn" id="accessibilityToggle" title="Toggle accessibility mode" aria-pressed="false">
-                            <i class="bi bi-universal-access-circle" aria-hidden="true"></i>
-                        </button>
-                        <div class="lang-switch" role="group" aria-label="Language switcher">
-                            <button type="button" class="lang-btn active" data-lang="fr">FR</button>
-                            <button type="button" class="lang-btn" data-lang="en">EN</button>
-                        </div>
-                    </div>
                     <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navDrawer">
                         <span class="hamburger-bar"></span>
                         <span class="hamburger-bar"></span>
@@ -195,6 +189,7 @@
 
 
         <section class="hero">
+            <div class="hero-blur-shape" aria-hidden="true"></div>
             <div class="hero-content">
                 <div class="hero-tag reveal" id="hero-availability" data-i18n="hero.status.loading" role="status" aria-live="polite" aria-atomic="true"><i
                         class="bi bi-arrow-repeat spin"></i> Synchronisation du statut...</div>
@@ -202,7 +197,7 @@
                     <i class="bi bi-people-fill"></i>
                     <span id="live-visitors-text" data-i18n="visitors.loading">Visiteurs en ligne: ...</span>
                 </div>
-                <h1 class="reveal">
+                <h1 class="reveal ai-hero-title">
                     <span class="line dim" data-i18n="hero.title.prefix">Développeur</span>
                     <span class="line glow-word" data-i18n="hero.title.highlight">Full-Stack</span>
                     <span class="line dim" data-i18n="hero.title.suffix">& Créatif</span>
@@ -221,115 +216,30 @@
             </div>
         </section>
 
-        <!-- Marquee Skills -->
+        <!-- Marquee Logos -->
         <div class="marquee">
-            <div class="marquee-content marquee-anim">
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"
-                    rel="noopener noreferrer" class="skill-item"><i class="devicon-javascript-plain colored"></i><span
-                        class="skill-name">JavaScript</span></a>
-                <a href="https://www.electronjs.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-electron-original colored"></i><span class="skill-name">Electron</span></a>
-                <a href="https://www.php.net/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-php-plain colored"></i><span class="skill-name">PHP</span>
-                </a>
-                <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-tailwindcss-plain colored"></i><span class="skill-name">Tailwind</span></a>
-                <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-mysql-plain colored"></i><span class="skill-name">MySQL</span>
-                </a>
-                <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-docker-plain colored"></i><span class="skill-name">Docker</span></a>
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-github-original"></i><span class="skill-name">GitHub</span>
-                </a>
-                <a href="https://supabase.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-supabase-plain colored"></i><span class="skill-name">Supabase</span></a>
-                <a href="https://www.smashingmagazine.com/category/ui/" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="bi bi-layout-wtf colored"></i><span class="skill-name">UI
-                        Engineering</span></a>
-                <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-fastapi-plain colored"></i><span class="skill-name">FastAPI</span></a>
-                <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-python-plain colored"></i><span class="skill-name">Python</span></a>
-                <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-react-original colored"></i><span class="skill-name">React</span></a>
-                <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-nodejs-plain colored"></i><span class="skill-name">Node.js</span></a>
-                <a href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-vite-plain colored"></i><span class="skill-name">Vite</span>
-                </a>
-                <a href="https://godotengine.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-godot-plain colored"></i><span class="skill-name">Godot</span>
-                </a>
-                <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-csharp-plain colored"></i><span class="skill-name">C#</span>
-                </a>
-                <a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-wordpress-plain colored"></i><span class="skill-name">WordPress</span></a>
-                <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-vercel-original vercel-icon"></i><span class="skill-name">Vercel</span></a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-html5-plain colored"></i><span class="skill-name">HTML5</span>
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-css3-plain colored"></i><span class="skill-name">CSS3</span>
-                </a>
-                <a href="https://sass-lang.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-sass-original colored"></i><span class="skill-name">Sass</span></a>
-
-                <!-- Clone for seamless loop -->
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"
-                    rel="noopener noreferrer" class="skill-item"><i class="devicon-javascript-plain colored"></i><span
-                        class="skill-name">JavaScript</span></a>
-                <a href="https://www.electronjs.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-electron-original colored"></i><span class="skill-name">Electron</span></a>
-                <a href="https://www.php.net/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-php-plain colored"></i><span class="skill-name">PHP</span>
-                </a>
-                <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-tailwindcss-plain colored"></i><span class="skill-name">Tailwind</span></a>
-                <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-mysql-plain colored"></i><span class="skill-name">MySQL</span>
-                </a>
-                <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-docker-plain colored"></i><span class="skill-name">Docker</span></a>
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-github-original"></i><span class="skill-name">GitHub</span>
-                </a>
-                <a href="https://supabase.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-supabase-plain colored"></i><span class="skill-name">Supabase</span></a>
-                <a href="https://www.smashingmagazine.com/category/ui/" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="bi bi-layout-wtf colored"></i><span class="skill-name">UI
-                        Engineering</span></a>
-                <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-fastapi-plain colored"></i><span class="skill-name">FastAPI</span></a>
-                <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-python-plain colored"></i><span class="skill-name">Python</span></a>
-                <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-react-original colored"></i><span class="skill-name">React</span></a>
-                <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-nodejs-plain colored"></i><span class="skill-name">Node.js</span></a>
-                <a href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-vite-plain colored"></i><span class="skill-name">Vite</span>
-                </a>
-                <a href="https://godotengine.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-godot-plain colored"></i><span class="skill-name">Godot</span>
-                </a>
-                <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-csharp-plain colored"></i><span class="skill-name">C#</span>
-                </a>
-                <a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-wordpress-plain colored"></i><span class="skill-name">WordPress</span></a>
-                <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-vercel-original vercel-icon"></i><span class="skill-name">Vercel</span></a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-html5-plain colored"></i><span class="skill-name">HTML5</span>
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-css3-plain colored"></i><span class="skill-name">CSS3</span>
-                </a>
-                <a href="https://sass-lang.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-sass-original colored"></i><span class="skill-name">Sass</span></a>
+            <div class="marquee-shell">
+            <p class="marquee-title">Technologies que j'utilise<br>principalement</p>
+            <div class="marquee-track-wrap">
+                <div class="marquee-content marquee-anim brand-marquee">
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-javascript-plain colored"></i></span><span>JavaScript</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-php-plain colored"></i></span><span>PHP</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-python-plain colored"></i></span><span>Python</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-react-original colored"></i></span><span>React</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-nodejs-plain colored"></i></span><span>Node.js</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-electron-original colored"></i></span><span>Electron</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-mysql-plain colored"></i></span><span>MySQL</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-docker-plain colored"></i></span><span>Docker</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-javascript-plain colored"></i></span><span>JavaScript</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-php-plain colored"></i></span><span>PHP</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-python-plain colored"></i></span><span>Python</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-react-original colored"></i></span><span>React</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-nodejs-plain colored"></i></span><span>Node.js</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-electron-original colored"></i></span><span>Electron</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-mysql-plain colored"></i></span><span>MySQL</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-docker-plain colored"></i></span><span>Docker</span></div>
+                </div>
+            </div>
             </div>
         </div>
 
@@ -1031,6 +941,8 @@
 
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script type="module" src="js/hero-video-loop.js"></script>
 
     <!-- Main Script Module -->
     <script type="module" src="js/main.js?v=3.8"></script>
