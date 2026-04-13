@@ -15,6 +15,7 @@
 
 import { i18n } from './i18n.js';
 import { config } from './config.js';
+import { SpaceStars } from './particles.js';
 import {
     runWhenIdle,
     shouldAutoEnablePerfMode,
@@ -56,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
             window.top.location = window.self.location;
         }
     } catch (_) { /* cross-origin frame — CSP frame-ancestors handles this */ }
+
+    // ── SPACE STAR BACKGROUND ──
+    let starsInstance = null;
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        starsInstance = new SpaceStars('star-canvas');
+    }
 
     // i18n
     const langButtons = document.querySelectorAll('.lang-btn');
@@ -345,6 +352,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('perfToggle'),
         shouldAutoEnablePerfMode(config.perf)
     );
+    // Pause/resume stars when perf mode toggles
+    if (starsInstance) {
+        document.getElementById('perfToggle')?.addEventListener('click', () => {
+            if (document.body.classList.contains('perf-mode')) starsInstance.pause();
+            else starsInstance.resume();
+        });
+        if (document.body.classList.contains('perf-mode')) starsInstance.pause();
+    }
     initAccessibilityMode(document.getElementById('accessibilityToggle'));
     initUltraCompactMode();
 

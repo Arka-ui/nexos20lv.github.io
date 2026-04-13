@@ -105,11 +105,8 @@
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-outline" id="cursorRing"></div>
 
-    <!-- Canvas Background (Old) -->
-    <!-- <canvas id="bg-canvas"></canvas> -->
-
-    <!-- Mesh Background (New) -->
-    <div class="mesh"></div>
+    <!-- Space Star Canvas Background -->
+    <canvas id="star-canvas" aria-hidden="true"></canvas>
 
     <video
         id="hero-video"
@@ -197,10 +194,12 @@
         <section class="hero">
             <div class="hero-blur-shape" aria-hidden="true"></div>
             <div class="hero-content">
-                <div class="hero-tag reveal" id="hero-availability" data-i18n="hero.status.loading" role="status" aria-live="polite" aria-atomic="true"><i
-                        class="bi bi-arrow-repeat spin"></i> Synchronisation du statut...</div>
+                <div class="hero-tag reveal" id="hero-availability" role="status" aria-live="polite" aria-atomic="true">
+                    <i class="bi bi-arrow-repeat spin sparkle"></i>
+                    <span data-i18n="hero.status.loading">Synchronisation du statut...</span>
+                </div>
                 <div class="hero-tag reveal" id="live-visitors" aria-live="polite">
-                    <i class="bi bi-people-fill"></i>
+                    <i class="bi bi-people-fill sparkle"></i>
                     <span id="live-visitors-text" data-i18n="visitors.loading">Visiteurs en ligne: ...</span>
                 </div>
                 <h1 class="reveal ai-hero-title">
@@ -256,7 +255,7 @@
         <section id="about" class="section container">
             <div class="bio-grid">
                 <div class="reveal">
-                    <span class="section-tag" data-i18n="sections.about.tag">01 / À PROPOS</span>
+                    <span class="section-tag reveal"><i class="bi bi-stars sparkle"></i> <span data-i18n="sections.about.tag">01 / À PROPOS</span></span>
                     <p class="section-seo" data-i18n="seo.about">Développeur full-stack en France, je conçois des
                         applications web et desktop robustes, maintenables et orientées performance.</p>
                     <p class="big-text">
@@ -334,7 +333,7 @@
         </section>
 
         <section id="experience" class="section container">
-            <div class="section-tag reveal" data-i18n="sections.experience.tag">02 / EXPÉRIENCE</div>
+            <div class="section-tag reveal"><i class="bi bi-stars sparkle"></i> <span data-i18n="sections.experience.tag">02 / EXPÉRIENCE</span></div>
             <h2 class="section-title reveal" data-i18n="sections.experience.title">Mon parcours</h2>
             <p class="section-seo reveal" data-i18n="seo.experience">Parcours orienté ingénierie logicielle,
                 architecture d'applications, livraison continue et projets concrets en environnement réel.</p>
@@ -414,7 +413,7 @@
 
         <section id="projects" class="section container">
             <div class="section-header reveal">
-                <span class="section-tag" data-i18n="sections.projects.tag">03 / PROJETS</span>
+                <span class="section-tag reveal"><i class="bi bi-stars sparkle"></i> <span data-i18n="sections.projects.tag">03 / PROJETS</span></span>
                 <h2 class="section-title" data-i18n="sections.projects.title">Ce que j'ai construit</h2>
                 <p class="section-seo" data-i18n="seo.projects">Sélection de projets web, desktop et outils dev avec
                     focus UX, performance, observabilité et qualité de code.</p>
@@ -713,7 +712,7 @@
 
         <section id="contact" class="footer-cta container">
             <div class="contact-inner reveal">
-                <span class="section-tag" data-i18n="sections.contact.tag">04 / CONTACT</span>
+                <span class="section-tag reveal"><i class="bi bi-stars sparkle"></i> <span data-i18n="sections.contact.tag">04 / CONTACT</span></span>
                 <h2 class="section-title" data-i18n="contact.title">Un projet en tête ?</h2>
                 <p class="section-seo" data-i18n="seo.contact">Disponible pour collaborations web/desktop,
                     optimisation produit, automatisation et maintenance d'applications existantes.</p>
