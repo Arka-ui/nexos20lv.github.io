@@ -5,6 +5,25 @@
  */
 
 /**
+ * Throttle function to limit callback frequency during high-frequency events (scroll, mousemove).
+ * @param {Function} func - Function to throttle
+ * @param {number} limit - Time in milliseconds between invocations
+ * @returns {Function} Throttled function
+ */
+export function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => {
+                inThrottle = false;
+            }, limit);
+        }
+    };
+}
+
+/**
  * Initializes and animates the loading screen with progress bar and log entries.
  * @param {Function} t - Translation function for loader messages.
  */
@@ -125,7 +144,7 @@ export function initScrollRevealAndNavSpy() {
 
     reveals.forEach((element) => revealObserver.observe(element));
 
-    window.addEventListener('scroll', () => {
+    const handleNavSpy = () => {
         let current = '';
         const scrollPos = window.scrollY + 150;
 
@@ -141,7 +160,9 @@ export function initScrollRevealAndNavSpy() {
                 link.classList.add('active');
             }
         });
-    });
+    };
+
+    window.addEventListener('scroll', throttle(handleNavSpy, 100), { passive: true });
 }
 
 /**
@@ -254,13 +275,15 @@ export function initHeaderScroll() {
     const header = document.querySelector('header');
     if (!header) return;
 
-    window.addEventListener('scroll', () => {
+    const handleHeaderScroll = () => {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-    });
+    };
+
+    window.addEventListener('scroll', throttle(handleHeaderScroll, 100), { passive: true });
 }
 
 /**
@@ -425,10 +448,12 @@ export function initBackToTop() {
     const btn = document.querySelector('.back-to-top');
     if (!btn) return;
 
-    window.addEventListener('scroll', () => {
+    const handleBackToTop = () => {
         const threshold = document.documentElement.scrollHeight * 0.3;
         btn.classList.toggle('visible', window.scrollY > threshold);
-    }, { passive: true });
+    };
+
+    window.addEventListener('scroll', throttle(handleBackToTop, 150), { passive: true });
 
     btn.addEventListener('click', (e) => {
         e.preventDefault();

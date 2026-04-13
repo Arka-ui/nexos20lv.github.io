@@ -20,6 +20,12 @@
     --text-main:  #e2d9f3;
     --text-muted: #9ca3af;   /* gray-400 — matches space-portfolio */
 
+    /* Modern color additions */
+    --success:     #86efac;
+    --warning:     #fcd34d;
+    --info:        #93c5fd;
+    --danger:      #f87171;
+
     --border: rgba(112, 66, 248, 0.22);
     --glow:   rgba(112, 66, 248, 0.4);
 
@@ -54,10 +60,16 @@
 
     /* Motion */
     --ease-smooth:      cubic-bezier(0.2, 0.8, 0.2, 1);
+    --ease-bounce:      cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-sharp:       cubic-bezier(0.4, 0, 0.6, 1);
     --transition-fast:  0.2s;
     --transition-base:  0.3s;
 
     /* Elevation & Glass system — space theme */
+    --shadow-xs:   0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md:   0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-lg:   0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
     --shadow-card: 0 10px 40px rgba(42, 14, 97, 0.4), 0 1px 0 rgba(112, 66, 248, 0.08);
     --glow-hover:  0 0 24px rgba(112, 66, 248, 0.45), 0 0 60px rgba(112, 66, 248, 0.15);
     --glass-bg:    rgba(3, 0, 20, 0.37);
@@ -78,6 +90,10 @@
     --card-shadow:         0 10px 30px rgba(0, 0, 0, 0.4);
     --card-shadow-hover:   0 0 30px rgba(112, 66, 248, 0.3), 0 20px 60px rgba(42, 14, 97, 0.5);
     --card-border-gradient: linear-gradient(135deg, rgba(112, 66, 248, 0.3), transparent 40%, rgba(112, 66, 248, 0.1) 60%, rgba(112, 66, 248, 0.3));
+
+    /* Modern gradient overlays */
+    --gradient-primary:   linear-gradient(135deg, var(--space-purple) 0%, var(--space-cyan) 100%);
+    --gradient-hover:     linear-gradient(135deg, var(--space-purple-light) 0%, var(--space-cyan) 100%);
 }
 
 /* Reset & Base */
@@ -339,6 +355,7 @@ a {
     background: var(--space-cyan);
     transform: translate(-50%, -50%);
     transition: transform .1s;
+    will-change: transform;
 }
 .cursor-outline {
     position: fixed; top: 0; left: 0; z-index: 9999;

@@ -1,172 +1,459 @@
 /* =====================================
- * SCROLL ANIMATIONS — Space Portfolio Style
+ * MODERN ANIMATIONS SYSTEM — Optimized & Fluid
  * ===================================== */
 
-/* ── KEYFRAMES ── */
+/* ── UNIFIED TIMING SYSTEM ── */
+:root {
+    --anim-duration-fast: 0.3s;
+    --anim-duration-base: 0.5s;
+    --anim-duration-slow: 0.8s;
+    --anim-stagger-base: 60ms;
+}
+
+/* ── ENTRANCE ANIMATIONS ── */
+
 @keyframes fadeIn {
     from { opacity: 0; }
-    to   { opacity: 1; }
+    to { opacity: 1; }
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-40px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes slideLeft {
-    from { opacity: 0; transform: translateX(40px); }
-    to   { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideRight {
-    from { opacity: 0; transform: translateX(-40px); }
-    to   { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-/* Space-portfolio style: large slide from left/right/top */
 @keyframes slideInFromLeft {
-    from { opacity: 0; transform: translateX(-100px); }
-    to   { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideInFromRight {
-    from { opacity: 0; transform: translateX(100px); }
-    to   { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideInFromTop {
-    from { opacity: 0; transform: translateY(-100px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes scaleUp {
-    from { opacity: 0; transform: scale(0.9); }
-    to   { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes scaleDown {
-    from { opacity: 0; transform: scale(1.1); }
-    to   { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(1.15);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes rotateIn {
-    from { opacity: 0; transform: rotate(-10deg) scale(0.95); }
-    to   { opacity: 1; transform: rotate(0deg) scale(1); }
+    from {
+        opacity: 0;
+        transform: rotate(-8deg) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
 }
 
 @keyframes bounceIn {
-    0%   { opacity: 0; transform: scale(0.3); }
-    50%  { opacity: 1; transform: scale(1.05); }
-    70%  { transform: scale(0.9); }
-    100% { transform: scale(1); }
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+    75% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
-/* Shimmer sweep for cards (like space-portfolio card hover) */
+/* ── MODERN ENTRANCE EFFECTS ── */
+
+@keyframes blurIn {
+    from {
+        opacity: 0;
+        filter: blur(8px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes glowIn {
+    from {
+        opacity: 0;
+        filter: brightness(0.6);
+        box-shadow: 0 0 0 rgba(112, 66, 248, 0);
+    }
+    to {
+        opacity: 1;
+        filter: brightness(1);
+        box-shadow: 0 0 20px rgba(112, 66, 248, 0.4);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes expandWidth {
+    from {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+/* ── HOVER/INTERACTION ANIMATIONS ── */
+
 @keyframes shimmer {
     from { transform: translateX(-120%); }
-    to   { transform: translateX(120%); }
+    to { transform: translateX(120%); }
 }
 
-/* Sparkle pulse for welcome-box icons */
+@keyframes floatUp {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes floatHeavy {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(112, 66, 248, 0.4);
+        filter: brightness(1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(112, 66, 248, 0.8);
+        filter: brightness(1.1);
+    }
+}
+
 @keyframes sparklePulse {
-    0%, 100% { filter: drop-shadow(0 0 4px rgba(180,155,255,0.6));  opacity: 1; }
-    50%       { filter: drop-shadow(0 0 10px rgba(180,155,255,1)); opacity: 0.8; }
-}
-.welcome-box .sparkle {
-    animation: sparklePulse 2.8s ease-in-out infinite;
+    0%, 100% {
+        text-shadow: 0 0 8px rgba(180, 155, 255, 0.8);
+        opacity: 1;
+    }
+    50% {
+        text-shadow: 0 0 16px rgba(180, 155, 255, 1);
+        opacity: 0.85;
+    }
 }
 
-/* ─────────────────────────────────────────
- * data-animate SYSTEM
- * ───────────────────────────────────────── */
+@keyframes borderGlow {
+    0%, 100% {
+        border-color: rgba(112, 66, 248, 0.4);
+    }
+    50% {
+        border-color: rgba(112, 66, 248, 0.9);
+    }
+}
+
+@keyframes breathe {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+}
+
+@keyframes rotateFast {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotateReverse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+/* ── SCROLL/CONTINUOUS ANIMATIONS ── */
+
+@keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes marqueeScrollReverse {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes subtleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+}
+
+@keyframes pulseGently {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* ── BACKGROUND ANIMATIONS ── */
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* ──────────────────────────────────────────
+ * DATA-ANIMATE SYSTEM (Scroll-triggered)
+ * ────────────────────────────────────────── */
+
 [data-animate] {
     opacity: 0;
+    will-change: opacity, transform;
 }
 
+/* Fade Animations */
 [data-animate].animate-in[data-animate="fade-in"] {
-    animation: fadeIn 0.6s var(--ease-smooth) forwards;
+    animation: fadeIn var(--anim-duration-base) var(--ease-smooth) forwards;
 }
+
+/* Slide Animations */
 [data-animate].animate-in[data-animate="slide-up"] {
-    animation: slideUp 0.6s var(--ease-smooth) forwards;
+    animation: slideUp var(--anim-duration-base) var(--ease-smooth) forwards;
 }
+
 [data-animate].animate-in[data-animate="slide-down"] {
-    animation: slideDown 0.6s var(--ease-smooth) forwards;
+    animation: slideDown var(--anim-duration-base) var(--ease-smooth) forwards;
 }
+
 [data-animate].animate-in[data-animate="slide-left"] {
-    animation: slideLeft 0.6s var(--ease-smooth) forwards;
+    animation: slideLeft var(--anim-duration-base) var(--ease-smooth) forwards;
 }
+
 [data-animate].animate-in[data-animate="slide-right"] {
-    animation: slideRight 0.6s var(--ease-smooth) forwards;
+    animation: slideRight var(--anim-duration-base) var(--ease-smooth) forwards;
 }
+
+/* Scale Animations */
 [data-animate].animate-in[data-animate="scale-up"] {
-    animation: scaleUp 0.6s var(--ease-smooth) forwards;
+    animation: scaleUp var(--anim-duration-base) var(--ease-smooth) forwards;
 }
+
 [data-animate].animate-in[data-animate="scale-down"] {
-    animation: scaleDown 0.6s var(--ease-smooth) forwards;
+    animation: scaleDown var(--anim-duration-base) var(--ease-smooth) forwards;
 }
+
+/* Modern Entrance Effects */
+[data-animate].animate-in[data-animate="blur-in"] {
+    animation: blurIn var(--anim-duration-base) var(--ease-smooth) forwards;
+}
+
+[data-animate].animate-in[data-animate="glow-in"] {
+    animation: glowIn var(--anim-duration-slow) var(--ease-smooth) forwards;
+}
+
+[data-animate].animate-in[data-animate="pop-in"] {
+    animation: popIn var(--anim-duration-base) var(--ease-bounce) forwards;
+}
+
 [data-animate].animate-in[data-animate="rotate-in"] {
-    animation: rotateIn 0.6s var(--ease-smooth) forwards;
+    animation: rotateIn var(--anim-duration-base) var(--ease-smooth) forwards;
 }
+
 [data-animate].animate-in[data-animate="bounce-in"] {
-    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    animation: bounceIn var(--anim-duration-slow) var(--ease-bounce) forwards;
 }
 
-/* Stagger effect */
-[data-animate][data-stagger] {
-    --stagger-delay: calc(var(--stagger-index, 0) * 0.1s);
-    animation-delay: var(--stagger-delay);
+/* Stagger Effect for Multiple Elements */
+[data-animate][data-stagger-index] {
+    animation-delay: calc(var(--anim-stagger-base) * var(--data-stagger-index, 0));
 }
 
-/* ─────────────────────────────────────────
- * SPACE SLIDE-IN CLASSES  (framer-motion equivalent)
- * Used by .reveal and hero elements
- * ───────────────────────────────────────── */
-.slide-from-left {
+/* ──────────────────────────────────────────
+ * ELEMENT-SPECIFIC ANIMATIONS
+ * ────────────────────────────────────────── */
+
+/* Welcome Box Sparkle */
+.welcome-box .sparkle {
+    animation: sparklePulse 2.4s ease-in-out infinite;
+    will-change: text-shadow;
+}
+
+/* Carousel Shimmer */
+.carousel-item {
+    will-change: transform, opacity;
+}
+
+.carousel-item::after {
+    animation: shimmer 0.6s ease on-hover;
+}
+
+.carousel-item:hover::after {
+    animation: shimmer 0.6s ease forwards;
+}
+
+/* Marquee Animations */
+.marquee-anim {
+    animation: marqueeScroll 30s linear infinite;
+    will-change: transform;
+}
+
+.marquee-anim.reverse {
+    animation: marqueeScrollReverse 30s linear infinite;
+}
+
+/* Reveal Elements */
+.reveal {
     opacity: 0;
-    transform: translateX(-100px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.slide-from-left.visible {
-    opacity: 1;
-    transform: translateX(0);
+    will-change: opacity, transform;
 }
 
-.slide-from-right {
-    opacity: 0;
-    transform: translateX(100px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.slide-from-right.visible {
-    opacity: 1;
-    transform: translateX(0);
+.reveal.visible {
+    animation: slideUp var(--anim-duration-base) var(--ease-smooth) forwards;
 }
 
-.slide-from-top {
-    opacity: 0;
-    transform: translateY(-100px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    transition-delay: 0.5s;
+body.motion-ready .motion-section .reveal {
+    transition: all var(--anim-duration-slow) var(--ease-smooth);
+    animation-delay: calc(var(--reveal-index, 0) * var(--anim-stagger-base));
 }
-.slide-from-top.visible {
+
+/* Motion Stagger Class - Unified System */
+.motion-stagger {
+    opacity: 0;
+    transform: translateY(20px);
+    will-change: opacity, transform;
+}
+
+.motion-stagger.motion-visible {
     opacity: 1;
     transform: translateY(0);
+    transition: all var(--anim-duration-base) var(--ease-smooth) ease-out;
 }
 
+.motion-stagger[data-stagger-index] {
+    transition-delay: calc(var(--anim-stagger-base) * var(--data-stagger-index, 0));
+}
+
+/* ──────────────────────────────────────────
+ * ACCESSIBILITY: Respect prefers-reduced-motion
+ * ────────────────────────────────────────── */
+
 @media (prefers-reduced-motion: reduce) {
-    [data-animate] {
-        animation: none !important;
-        opacity: 1 !important;
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
-    .slide-from-left,
-    .slide-from-right,
-    .slide-from-top {
+
+    [data-animate],
+    .motion-stagger,
+    .reveal,
+    .welcome-box .sparkle,
+    .marquee-anim {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .motion-stagger,
+    .reveal {
         opacity: 1 !important;
         transform: none !important;
-        transition: none !important;
     }
 }
