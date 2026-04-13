@@ -55,6 +55,8 @@ export function initCustomCursor() {
     if (dot && window.matchMedia('(pointer: fine)').matches && !document.body.classList.contains('native-cursor')) {
         let mx = 0;
         let my = 0;
+        let ringX = 0;
+        let ringY = 0;
 
         document.addEventListener('mousemove', (event) => {
             mx = event.clientX;
@@ -64,10 +66,37 @@ export function initCustomCursor() {
         const animate = () => {
             dot.style.left = `${mx}px`;
             dot.style.top = `${my}px`;
+
+            // Smooth ring tracking with lerp
+            ringX += (mx - ringX) * 0.08;
+            ringY += (my - ringY) * 0.08;
+
+            if (ring) {
+                ring.style.left = `${ringX}px`;
+                ring.style.top = `${ringY}px`;
+            }
+
             requestAnimationFrame(animate);
         };
 
         animate();
+
+        // Ring expansion on interactive element hover
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea, [role="button"]');
+        interactiveElements.forEach((el) => {
+            el.addEventListener('mouseenter', () => {
+                if (ring) {
+                    ring.style.width = '50px';
+                    ring.style.height = '50px';
+                }
+            });
+            el.addEventListener('mouseleave', () => {
+                if (ring) {
+                    ring.style.width = '38px';
+                    ring.style.height = '38px';
+                }
+            });
+        });
     }
 
     return { dot, ring };
@@ -80,6 +109,11 @@ export function initScrollRevealAndNavSpy() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     const reveals = document.querySelectorAll('.reveal');
+
+    // Add stagger indices to all reveals
+    reveals.forEach((element, index) => {
+        element.style.setProperty('--reveal-index', String(index));
+    });
 
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {

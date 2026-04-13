@@ -282,8 +282,8 @@ a {
 }
 
 @keyframes scanline {
-    from { transform: translateY(-100%); }
-    to   { transform: translateY(100%); }
+    from { transform: translateY(-100%); opacity: 0.8; }
+    to   { transform: translateY(100%); opacity: 0; }
 }
 
 .terminal-line {

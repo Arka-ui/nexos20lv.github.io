@@ -74,6 +74,7 @@
 .nav-drawer-close:focus-visible {
     outline: 2px solid var(--violet);
     outline-offset: 3px;
+    box-shadow: 0 0 16px rgba(112, 66, 248, 0.35), 0 0 4px rgba(112, 66, 248, 0.2);
 }
 
 /* ----------------
@@ -141,7 +142,7 @@ body.motion-ready .logo::after {
     filter: blur(10px);
     opacity: 0;
     transform: scale(0.8);
-    animation: logoAura 3.2s ease-in-out infinite;
+    animation: logoAura 3.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
     pointer-events: none;
     z-index: -1;
 }
