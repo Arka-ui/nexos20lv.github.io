@@ -30,8 +30,8 @@
     <!-- Security Policy (meta fallback). Real security headers must be set by the HTTP server. -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self';
     script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=' https://cdn.jsdelivr.net https://api.lanyard.rest;
-    style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net;
-    font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net;
+    style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net https://api.fontshare.com;
+    font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://fonts.bunny.net;
     img-src 'self' data: https://cdn.discordapp.com https://cdn.discordapp.net https://media.discordapp.net https://avatars.githubusercontent.com https://api.github.com https://opengraph.githubassets.com https://s.wordpress.com https://i.scdn.co https://mosaic.scdn.co;
     connect-src 'self' https://cdn.jsdelivr.net wss://api.lanyard.rest wss://*.supabase.co https://api.github.com https://*.supabase.co https://discord.com;
     frame-src https://conferencesorientationpdz.eclozionmc.ovh https://nexaria.netlib.re;
@@ -43,6 +43,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.3/index.css">
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -57,6 +59,7 @@
     <link rel="stylesheet" href="css/base.css?v=2.2">
     <link rel="stylesheet" href="css/components.css?v=3.6">
     <link rel="stylesheet" href="css/animations.css?v=1.0">
+    <link rel="stylesheet" href="css/hero-style.css?v=1.0">
 
     <script type="application/ld+json">
 {
@@ -80,7 +83,7 @@
 </head>
 
 <body>
-    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+    <a href="#main-content" class="skip-link" data-i18n="common.skipToContent">Aller au contenu principal</a>
 
     <!-- Reading Progress Bar -->
     <div id="reading-progress"></div>
@@ -108,40 +111,37 @@
     <!-- Mesh Background (New) -->
     <div class="mesh"></div>
 
+    <video
+        id="hero-video"
+        class="hero-video"
+        muted
+        playsinline
+        preload="auto"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4"
+        aria-hidden="true"
+    ></video>
+
     <header>
         <div class="container">
             <nav>
                 <a href="#" class="logo">
-                    <img src="assets/logo.svg" alt="Pierre Bouteman" height="52" width="auto" class="logo-img"
+                    <img src="assets/logo.svg" alt="Pierre Bouteman" height="32" width="auto" class="logo-img"
                         loading="eager" decoding="async" fetchpriority="high">
                 </a>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a href="#about"><i class="bi bi-person-fill"></i> <span data-i18n="nav.about">À
-                                    propos</span></a></li>
-                        <li><a href="#experience"><i class="bi bi-briefcase-fill"></i> <span
-                                    data-i18n="nav.experience">Expérience</span></a></li>
-                        <li><a href="#projects"><i class="bi bi-code-slash"></i> <span
-                                    data-i18n="nav.projects">Projets</span></a></li>
-                        <li><a href="#contact"><i class="bi bi-envelope-at-fill"></i> <span
-                                    data-i18n="nav.contact">Contact</span></a></li>
+                        <li><a href="#about"><span data-i18n="nav.about">À propos</span></a></li>
+                        <li><a href="#experience"><span data-i18n="nav.experience">Expérience</span></a></li>
+                        <li><a href="#projects"><span data-i18n="nav.projects">Projets</span></a></li>
+                        <li><a href="#contact"><span data-i18n="nav.contact">Contact</span></a></li>
                     </ul>
                     <div class="nav-actions">
-                        <button type="button" class="perf-btn" id="perfToggle" title="Toggle High Performance Mode">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                            </svg>
-                        </button>
-                        <button type="button" class="perf-btn" id="accessibilityToggle" title="Toggle accessibility mode" aria-pressed="false">
-                            <i class="bi bi-universal-access-circle" aria-hidden="true"></i>
-                        </button>
-                        <div class="lang-switch" role="group" aria-label="Language switcher">
+                        <div class="lang-switch" role="group" aria-label="Language switcher" data-i18n-aria-label="common.languageSwitcher">
                             <button type="button" class="lang-btn active" data-lang="fr">FR</button>
                             <button type="button" class="lang-btn" data-lang="en">EN</button>
                         </div>
                     </div>
-                    <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navDrawer">
+                    <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Ouvrir le menu" data-i18n-aria-label="common.openMenu" aria-expanded="false" aria-controls="navDrawer">
                         <span class="hamburger-bar"></span>
                         <span class="hamburger-bar"></span>
                         <span class="hamburger-bar"></span>
@@ -151,10 +151,10 @@
         </div>
     </header>
 
-    <div class="nav-drawer" id="navDrawer" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
+    <div class="nav-drawer" id="navDrawer" role="dialog" aria-modal="true" aria-label="Menu de navigation" data-i18n-aria-label="nav.drawerAria" aria-hidden="true">
         <div class="nav-drawer-overlay" id="navDrawerOverlay"></div>
         <div class="nav-drawer-panel">
-            <button type="button" class="nav-drawer-close" id="navDrawerClose" aria-label="Fermer le menu">×</button>
+            <button type="button" class="nav-drawer-close" id="navDrawerClose" aria-label="Fermer le menu" data-i18n-aria-label="common.closeMenu">×</button>
             <ul class="nav-drawer-links">
                 <li><a href="#about"><i class="bi bi-person-fill"></i> <span data-i18n="nav.about">À propos</span></a></li>
                 <li><a href="#experience"><i class="bi bi-briefcase-fill"></i> <span data-i18n="nav.experience">Expérience</span></a></li>
@@ -162,7 +162,7 @@
                 <li><a href="#contact"><i class="bi bi-envelope-at-fill"></i> <span data-i18n="nav.contact">Contact</span></a></li>
             </ul>
             <div class="nav-drawer-lang">
-                <div class="lang-switch" role="group" aria-label="Language switcher">
+                <div class="lang-switch" role="group" aria-label="Language switcher" data-i18n-aria-label="common.languageSwitcher">
                     <button type="button" class="lang-btn active" data-lang="fr">FR</button>
                     <button type="button" class="lang-btn" data-lang="en">EN</button>
                 </div>
@@ -178,7 +178,7 @@
             </button>
             <div class="card-header">
                 <div class="avatar-container">
-                    <img id="discord-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar"
+                    <img id="discord-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" data-i18n-alt="common.avatarAlt"
                         loading="lazy" decoding="async" fetchpriority="low">
                     <div id="status-indicator"></div>
                 </div>
@@ -195,6 +195,7 @@
 
 
         <section class="hero">
+            <div class="hero-blur-shape" aria-hidden="true"></div>
             <div class="hero-content">
                 <div class="hero-tag reveal" id="hero-availability" data-i18n="hero.status.loading" role="status" aria-live="polite" aria-atomic="true"><i
                         class="bi bi-arrow-repeat spin"></i> Synchronisation du statut...</div>
@@ -202,7 +203,7 @@
                     <i class="bi bi-people-fill"></i>
                     <span id="live-visitors-text" data-i18n="visitors.loading">Visiteurs en ligne: ...</span>
                 </div>
-                <h1 class="reveal">
+                <h1 class="reveal ai-hero-title">
                     <span class="line dim" data-i18n="hero.title.prefix">Développeur</span>
                     <span class="line glow-word" data-i18n="hero.title.highlight">Full-Stack</span>
                     <span class="line dim" data-i18n="hero.title.suffix">& Créatif</span>
@@ -221,115 +222,33 @@
             </div>
         </section>
 
-        <!-- Marquee Skills -->
+        <!-- Marquee Logos -->
         <div class="marquee">
-            <div class="marquee-content marquee-anim">
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"
-                    rel="noopener noreferrer" class="skill-item"><i class="devicon-javascript-plain colored"></i><span
-                        class="skill-name">JavaScript</span></a>
-                <a href="https://www.electronjs.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-electron-original colored"></i><span class="skill-name">Electron</span></a>
-                <a href="https://www.php.net/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-php-plain colored"></i><span class="skill-name">PHP</span>
-                </a>
-                <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-tailwindcss-plain colored"></i><span class="skill-name">Tailwind</span></a>
-                <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-mysql-plain colored"></i><span class="skill-name">MySQL</span>
-                </a>
-                <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-docker-plain colored"></i><span class="skill-name">Docker</span></a>
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-github-original"></i><span class="skill-name">GitHub</span>
-                </a>
-                <a href="https://supabase.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-supabase-plain colored"></i><span class="skill-name">Supabase</span></a>
-                <a href="https://www.smashingmagazine.com/category/ui/" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="bi bi-layout-wtf colored"></i><span class="skill-name">UI
-                        Engineering</span></a>
-                <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-fastapi-plain colored"></i><span class="skill-name">FastAPI</span></a>
-                <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-python-plain colored"></i><span class="skill-name">Python</span></a>
-                <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-react-original colored"></i><span class="skill-name">React</span></a>
-                <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-nodejs-plain colored"></i><span class="skill-name">Node.js</span></a>
-                <a href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-vite-plain colored"></i><span class="skill-name">Vite</span>
-                </a>
-                <a href="https://godotengine.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-godot-plain colored"></i><span class="skill-name">Godot</span>
-                </a>
-                <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-csharp-plain colored"></i><span class="skill-name">C#</span>
-                </a>
-                <a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-wordpress-plain colored"></i><span class="skill-name">WordPress</span></a>
-                <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-vercel-original vercel-icon"></i><span class="skill-name">Vercel</span></a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-html5-plain colored"></i><span class="skill-name">HTML5</span>
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-css3-plain colored"></i><span class="skill-name">CSS3</span>
-                </a>
-                <a href="https://sass-lang.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-sass-original colored"></i><span class="skill-name">Sass</span></a>
-
-                <!-- Clone for seamless loop -->
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"
-                    rel="noopener noreferrer" class="skill-item"><i class="devicon-javascript-plain colored"></i><span
-                        class="skill-name">JavaScript</span></a>
-                <a href="https://www.electronjs.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-electron-original colored"></i><span class="skill-name">Electron</span></a>
-                <a href="https://www.php.net/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-php-plain colored"></i><span class="skill-name">PHP</span>
-                </a>
-                <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-tailwindcss-plain colored"></i><span class="skill-name">Tailwind</span></a>
-                <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-mysql-plain colored"></i><span class="skill-name">MySQL</span>
-                </a>
-                <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-docker-plain colored"></i><span class="skill-name">Docker</span></a>
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-github-original"></i><span class="skill-name">GitHub</span>
-                </a>
-                <a href="https://supabase.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-supabase-plain colored"></i><span class="skill-name">Supabase</span></a>
-                <a href="https://www.smashingmagazine.com/category/ui/" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="bi bi-layout-wtf colored"></i><span class="skill-name">UI
-                        Engineering</span></a>
-                <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-fastapi-plain colored"></i><span class="skill-name">FastAPI</span></a>
-                <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-python-plain colored"></i><span class="skill-name">Python</span></a>
-                <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-react-original colored"></i><span class="skill-name">React</span></a>
-                <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-nodejs-plain colored"></i><span class="skill-name">Node.js</span></a>
-                <a href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-vite-plain colored"></i><span class="skill-name">Vite</span>
-                </a>
-                <a href="https://godotengine.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-godot-plain colored"></i><span class="skill-name">Godot</span>
-                </a>
-                <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-csharp-plain colored"></i><span class="skill-name">C#</span>
-                </a>
-                <a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-wordpress-plain colored"></i><span class="skill-name">WordPress</span></a>
-                <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-vercel-original vercel-icon"></i><span class="skill-name">Vercel</span></a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-html5-plain colored"></i><span class="skill-name">HTML5</span>
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer"
-                    class="skill-item"><i class="devicon-css3-plain colored"></i><span class="skill-name">CSS3</span>
-                </a>
-                <a href="https://sass-lang.com/" target="_blank" rel="noopener noreferrer" class="skill-item"><i
-                        class="devicon-sass-original colored"></i><span class="skill-name">Sass</span></a>
+            <div class="marquee-shell">
+            <p class="marquee-title">
+                <span data-i18n="marquee.title.line1">Technologies que j'utilise</span><br>
+                <span data-i18n="marquee.title.line2">principalement</span>
+            </p>
+            <div class="marquee-track-wrap">
+                <div class="marquee-content marquee-anim brand-marquee">
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-javascript-plain colored"></i></span><span>JavaScript</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-php-plain colored"></i></span><span>PHP</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-python-plain colored"></i></span><span>Python</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-react-original colored"></i></span><span>React</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-nodejs-plain colored"></i></span><span>Node.js</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-electron-original colored"></i></span><span>Electron</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-mysql-plain colored"></i></span><span>MySQL</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-docker-plain colored"></i></span><span>Docker</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-javascript-plain colored"></i></span><span>JavaScript</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-php-plain colored"></i></span><span>PHP</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-python-plain colored"></i></span><span>Python</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-react-original colored"></i></span><span>React</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-nodejs-plain colored"></i></span><span>Node.js</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-electron-original colored"></i></span><span>Electron</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-mysql-plain colored"></i></span><span>MySQL</span></div>
+                <div class="brand-item"><span class="liquid-glass brand-icon" aria-hidden="true"><i class="devicon-docker-plain colored"></i></span><span>Docker</span></div>
+                </div>
+            </div>
             </div>
         </div>
 
@@ -393,17 +312,17 @@
                             <path
                                 d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                         </svg>
-                        <span class="mono github-metrics-title">GITHUB
+                        <span class="mono github-metrics-title" data-i18n="github.metricsTitle">GITHUB
                             METRICS</span>
                     </div>
                     <div class="gh-stats-grid">
                         <div class="gh-stat-item">
                             <span class="gh-stat-value" id="gh-repos">--</span>
-                            <span class="gh-stat-label">Repos</span>
+                            <span class="gh-stat-label" data-i18n="github.repos">Repos</span>
                         </div>
                         <div class="gh-stat-item">
                             <span class="gh-stat-value" id="gh-stars">--</span>
-                            <span class="gh-stat-label">Stars</span>
+                            <span class="gh-stat-label" data-i18n="github.stars">Stars</span>
                         </div>
                     </div>
                     <div class="gh-languages">
@@ -429,7 +348,7 @@
                     <div class="tl-role" data-i18n="experience.1.title">Développeur Full-Stack</div>
                     <button type="button" class="tl-toggle" aria-expanded="false">
                         <i class="bi bi-chevron-down"></i>
-                        <span>Voir</span>
+                        <span data-i18n="experience.toggle.view">Voir</span>
                     </button>
                     <div class="tl-desc" data-i18n="experience.1.desc">Développement d'applications complexes comme Home
                         Assistant Desktop et Nexaria Launcher. Focus sur la performance et l'expérience utilisateur.
@@ -444,7 +363,7 @@
                     <div class="tl-role" data-i18n="experience.2.title">Lycéen | Première STI2D</div>
                     <button type="button" class="tl-toggle" aria-expanded="false">
                         <i class="bi bi-chevron-down"></i>
-                        <span>Voir</span>
+                        <span data-i18n="experience.toggle.view">Voir</span>
                     </button>
                     <div class="tl-desc" data-i18n="experience.2.desc">Actuellement en classe de Première STI2D pour
                         approfondir mes connaissances technologiques.</div>
@@ -458,7 +377,7 @@
                     <div class="tl-role" data-i18n="experience.4.title">Stagiaire Seconde</div>
                     <button type="button" class="tl-toggle" aria-expanded="false">
                         <i class="bi bi-chevron-down"></i>
-                        <span>Voir</span>
+                        <span data-i18n="experience.toggle.view">Voir</span>
                     </button>
                     <div class="tl-desc" data-i18n="experience.4.desc">Stage d'observation et d'immersion dans le milieu
                         de la maintenance et du service informatique.</div>
@@ -472,7 +391,7 @@
                     <div class="tl-role" data-i18n="experience.5.title">Stagiaire 3ème</div>
                     <button type="button" class="tl-toggle" aria-expanded="false">
                         <i class="bi bi-chevron-down"></i>
-                        <span>Voir</span>
+                        <span data-i18n="experience.toggle.view">Voir</span>
                     </button>
                     <div class="tl-desc" data-i18n="experience.5.desc">Premier contact avec le monde professionnel de
                         l'informatique.</div>
@@ -486,7 +405,7 @@
                     <div class="tl-role" data-i18n="experience.3.title">Collégien</div>
                     <button type="button" class="tl-toggle" aria-expanded="false">
                         <i class="bi bi-chevron-down"></i>
-                        <span>Voir</span>
+                        <span data-i18n="experience.toggle.view">Voir</span>
                     </button>
                     <div class="tl-desc" data-i18n="experience.3.desc">Études secondaires terminées avec succès.</div>
                 </div>
@@ -501,7 +420,7 @@
                     focus UX, performance, observabilité et qualité de code.</p>
             </div>
 
-            <div class="client-mode-toolbar reveal" role="group" aria-label="Client mode filters">
+            <div class="client-mode-toolbar reveal" role="group" aria-label="Client mode filters" data-i18n-aria-label="projects.clientMode.ariaLabel">
                 <span class="client-mode-label" data-i18n="projects.clientMode.title">Mode client :</span>
                 <div class="client-mode-filters">
                     <button type="button" class="client-filter-btn active" data-client-filter="all" data-i18n="projects.clientMode.all">Tous</button>
@@ -759,7 +678,7 @@
         <!-- Project Details Modal (Custom Overlay) -->
         <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
             <div class="modal-content" tabindex="-1">
-                <button class="close-modal" aria-label="Fermer la fenêtre projet">×</button>
+                <button class="close-modal" aria-label="Fermer la fenêtre projet" data-i18n-aria-label="projects.closeModalAria">×</button>
                 <div class="modal-body-content">
                     <div class="modal-header">
                         <i id="modal-icon" class="bi bi-code-square"></i>
@@ -779,12 +698,12 @@
         <!-- Skill Details Modal -->
         <div id="skill-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="skill-modal-title" aria-hidden="true">
             <div class="modal-content skill-modal-content" tabindex="-1">
-                <button class="close-modal" id="close-skill-modal" aria-label="Fermer la fenêtre compétence">×</button>
+                <button class="close-modal" id="close-skill-modal" aria-label="Fermer la fenêtre compétence" data-i18n-aria-label="skills.closeModalAria">×</button>
                 <div class="modal-body-content">
                     <div class="modal-header">
                         <i id="skill-modal-icon" class="bi bi-code-square"></i>
-                        <span id="skill-modal-meta" class="mono modal-meta-text">TECH STACK</span>
-                        <h2 id="skill-modal-title">Compétence</h2>
+                        <span id="skill-modal-meta" class="mono modal-meta-text" data-i18n="skills.modalMeta">TECH STACK</span>
+                        <h2 id="skill-modal-title" data-i18n="skills.modalTitle">Compétence</h2>
                     </div>
                     <div id="skill-modal-desc" class="modal-description"></div>
                 </div>
@@ -838,14 +757,14 @@
                             </a>
                             <a href="https://discord.gg/aQREDsZqv4" target="_blank" rel="noopener noreferrer"
                                 class="contact-link">
-                                <i class="bi bi-shield-shaded icon"></i> Mon serveur Discord
+                                <i class="bi bi-shield-shaded icon"></i> <span data-i18n="contact.discordServer">Mon serveur Discord</span>
                             </a>
                         </div>
 
                         <!-- Résa Rapide Modal -->
                         <button type="button" class="btn btn-secondary btn-booking-toggle" id="booking-toggle-btn">
                             <i class="bi bi-calendar-check"></i>
-                            <span data-i18n="contact.booking.title">Résa rapide</span>
+                            <span data-i18n="contact.booking.openQuick">Résa rapide</span>
                         </button>
 
                         <!-- Quick Templates -->
@@ -862,7 +781,7 @@
 
                 <div class="donation-row">
                     <a href="https://buymeacoffee.com/nexos20" target="_blank" rel="noopener noreferrer"
-                        class="btn btn-secondary" title="Support me on Buy Me A Coffee">☕ Buy Me A Coffee</a>
+                        class="btn btn-secondary" title="Support me on Buy Me A Coffee" data-i18n-title="donation.title">☕ <span data-i18n="donation.cta">Buy Me A Coffee</span></a>
                 </div>
 
                 <footer>
@@ -879,7 +798,7 @@
     <!-- Booking Modal -->
     <div id="booking-modal" class="booking-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="booking-dialog-title" aria-hidden="true">
         <div class="booking-modal-dialog">
-            <button type="button" class="booking-close-btn" aria-label="Fermer la modal">
+            <button type="button" class="booking-close-btn" aria-label="Fermer la modal" data-i18n-aria-label="contact.booking.closeModalAria">
                 <i class="bi bi-x-lg"></i>
             </button>
             <div class="booking-modal-content">
@@ -929,28 +848,28 @@
                             <div class="datetime-picker">
                                 <!-- Date Picker -->
                                 <div class="date-picker-wrapper">
-                                    <label class="picker-label" data-i18n="contact.booking.selectedDate">Choisir une date</label>
+                                    <label class="picker-label" data-i18n="contact.booking.chooseDate">Choisir une date</label>
                                     <div class="calendar-container">
                                         <div class="calendar-header">
-                                            <button type="button" class="calendar-nav prev" aria-label="Mois précédent">
+                                            <button type="button" class="calendar-nav prev" aria-label="Mois précédent" data-i18n-aria-label="contact.booking.prevMonthAria">
                                                 <i class="bi bi-chevron-left"></i>
                                             </button>
                                             <div class="calendar-month-year">
                                                 <span class="calendar-month"></span>
                                                 <span class="calendar-year"></span>
                                             </div>
-                                            <button type="button" class="calendar-nav next" aria-label="Mois suivant">
+                                            <button type="button" class="calendar-nav next" aria-label="Mois suivant" data-i18n-aria-label="contact.booking.nextMonthAria">
                                                 <i class="bi bi-chevron-right"></i>
                                             </button>
                                         </div>
                                         <div class="calendar-weekdays">
-                                            <div class="weekday">L</div>
-                                            <div class="weekday">M</div>
-                                            <div class="weekday">M</div>
-                                            <div class="weekday">J</div>
-                                            <div class="weekday">V</div>
-                                            <div class="weekday">S</div>
-                                            <div class="weekday">D</div>
+                                            <div class="weekday" data-i18n="contact.booking.weekdays.mon">L</div>
+                                            <div class="weekday" data-i18n="contact.booking.weekdays.tue">M</div>
+                                            <div class="weekday" data-i18n="contact.booking.weekdays.wed">M</div>
+                                            <div class="weekday" data-i18n="contact.booking.weekdays.thu">J</div>
+                                            <div class="weekday" data-i18n="contact.booking.weekdays.fri">V</div>
+                                            <div class="weekday" data-i18n="contact.booking.weekdays.sat">S</div>
+                                            <div class="weekday" data-i18n="contact.booking.weekdays.sun">D</div>
                                         </div>
                                         <div class="calendar-days"></div>
                                     </div>
@@ -959,7 +878,7 @@
 
                                 <!-- Time Picker -->
                                 <div class="time-picker-wrapper">
-                                    <label class="picker-label" data-i18n="contact.booking.selectedTime">Choisir une heure</label>
+                                    <label class="picker-label" data-i18n="contact.booking.chooseTime">Choisir une heure</label>
                                     <div class="time-grid"></div>
                                     <input type="hidden" id="booking-time" name="time" required />
                                 </div>
@@ -1016,11 +935,11 @@
                 <div class="terminal-dots">
                     <span></span><span></span><span></span>
                 </div>
-                <div class="terminal-title mono" id="terminal-title">SYSTEM_TERMINAL_V3</div>
-                <button class="close-terminal">×</button>
+                <div class="terminal-title mono" id="terminal-title" data-i18n="terminal.title">SYSTEM_TERMINAL_V3</div>
+                <button class="close-terminal" aria-label="Close terminal" data-i18n-aria-label="terminal.closeAria">×</button>
             </div>
             <div id="terminal-content" class="terminal-output mono">
-                <div class="terminal-welcome">Type 'help' for available commands.</div>
+                <div class="terminal-welcome" data-i18n="terminal.welcome">Type 'help' for available commands.</div>
             </div>
             <div class="terminal-input-row mono">
                 <span class="prompt">></span>
@@ -1032,9 +951,11 @@
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <script type="module" src="js/hero-video-loop.js"></script>
+
     <!-- Main Script Module -->
     <script type="module" src="js/main.js?v=3.8"></script>
 
-<a href="#" class="back-to-top" aria-label="Retour en haut">↑</a>
+<a href="#" class="back-to-top" aria-label="Retour en haut" data-i18n-aria-label="common.backToTop">↑</a>
 </body>
 </html>
